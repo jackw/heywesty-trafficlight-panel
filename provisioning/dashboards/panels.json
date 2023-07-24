@@ -1,0 +1,243 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series1"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 70
+                    },
+                    {
+                      "color": "green",
+                      "value": 90
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 3,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "text": "Default value of text input option"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 1
+        }
+      ],
+      "title": "Traffic Light Panel",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 21,
+        "x": 3,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "text": "Default value of text input option"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 10
+        }
+      ],
+      "title": "Traffic Light Panel Multiple Series",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "id": 9,
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 5
+        }
+      ],
+      "title": "Panel Title",
+      "trafficLightSettings": {
+        "digits": 1,
+        "fontColor": "black",
+        "fontSize": "12px",
+        "greenThreshold": 80,
+        "invertScale": false,
+        "lightsPerLine": 5,
+        "linkTargetBlank": false,
+        "linkTooltip": "",
+        "linkUrl": "",
+        "max": 100,
+        "redThreshold": 20,
+        "renderLink": false,
+        "showTrend": true,
+        "showValue": true,
+        "sortLights": false,
+        "spreadControls": false,
+        "transformationDict": "source1=target1;source2=target2",
+        "units": "",
+        "useDiffAsColor": false,
+        "width": 20
+      },
+      "type": "snuids-trafficlights-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2022-01-27T20:00:00.000Z",
+    "to": "2022-01-31T23:00:00.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Traffic Lights Example",
+  "uid": "O4tc_E6Gz",
+  "version": 4,
+  "weekStart": ""
+}
