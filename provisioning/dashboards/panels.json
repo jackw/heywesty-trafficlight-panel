@@ -147,7 +147,26 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series1"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Link me somewhere",
+                    "url": "http://www.google.co.uk"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 12,
@@ -238,6 +257,6 @@
   "timezone": "",
   "title": "Traffic Lights Example",
   "uid": "O4tc_E6Gz",
-  "version": 4,
+  "version": 7,
   "weekStart": ""
 }

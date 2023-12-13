@@ -1,7 +1,13 @@
-type SeriesSize = 'sm' | 'md' | 'lg';
+export enum SortOptions {
+  None = 'none',
+  Asc = 'ascending',
+  Desc = 'descending',
+}
 
-export interface SimpleOptions {
-  text: string;
-  showSeriesCount: boolean;
-  seriesCountSize: SeriesSize;
+export interface TrafficLightOptions {
+  minLightWidth: number;
+  showValue: boolean;
+  showTrend: boolean;
+  sortLights: SortOptions;
+  horizontal: boolean;
 }
