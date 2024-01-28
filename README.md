@@ -1,6 +1,5 @@
 <p align="center">
-<img width="1000px" src="./docs/heywesty-traffic-lights.jpg#gh-dark-mode-only" />
-<img width="1000px" src="./docs/heywesty-traffic-lights-light.jpg#gh-light-mode-only" />
+<img src="./docs/heywesty-traffic-lights.gif" />
 </p>
 
 <h1 align="center">Grafana Traffic Light Panel Plugin</h1>
@@ -12,6 +11,10 @@ Like a Gauge only more colourful! 🚦
 See [this readme](./src/README.md) for usage.
 
 ## Contributing
+
+Got ideas or feedback? Your contributions help make this plugin better. Share your thoughts and code improvements on GitHub.
+
+## Creating PRs
 
 1. Clone the repository
 2. Create a dev branch
@@ -69,3 +72,7 @@ See [this readme](./src/README.md) for usage.
 
    npm run lint:fix
    ```
+
+## License
+
+This plugin is licensed under the Apache-2.0 license.
