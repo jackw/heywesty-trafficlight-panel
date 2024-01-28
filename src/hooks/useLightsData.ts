@@ -1,7 +1,9 @@
 import {
   DataFrame,
+  FieldType,
   GetFieldDisplayValuesOptions,
   LinkModel,
+  ThresholdsConfig,
   getActiveThreshold,
   getFieldDisplayValues,
 } from '@grafana/data';
@@ -11,6 +13,7 @@ import { basicTrend } from 'utils';
 
 export enum LightsDataResultStatus {
   unsupported = 'unsupported',
+  incorrectThresholds = 'incorrectThresholds',
   nodata = 'nodata',
   success = 'success',
 }
@@ -43,6 +46,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
   const { theme, data, fieldConfig, replaceVariables, timeZone, sortLights } = options;
 
   return useMemo(() => {
+    let status = LightsDataResultStatus.nodata;
     if (noData(data)) {
       return {
         values: [
@@ -53,11 +57,23 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
             hasLinks: false,
           },
         ],
-        status: LightsDataResultStatus.nodata,
+        status,
       };
     }
 
-    // TODO: add unsupported scenario here. E.g. Thresholds are incorrect.
+    if (!isSupported(data)) {
+      return {
+        values: [
+          {
+            title: '',
+            value: '',
+            trend: { color: 'transparent', value: 0 },
+            hasLinks: false,
+          },
+        ],
+        status: LightsDataResultStatus.unsupported,
+      };
+    }
 
     const fieldDisplayValues = getFieldDisplayValues({
       fieldConfig: fieldConfig,
@@ -69,6 +85,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
     });
 
     const values = fieldDisplayValues.map((displayValue) => {
+      const thresholdsValid = validateThresholds(displayValue.field.thresholds);
       const activeThreshold = getActiveThreshold(displayValue.display.numeric, displayValue.field.thresholds?.steps);
       const { title, text, suffix, prefix } = displayValue.display;
       const colors = displayValue.field.thresholds?.steps.slice(1).map((threshold, i) => {
@@ -81,6 +98,12 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
 
       const trendValue = basicTrend(displayValue.view?.dataFrame.fields[1].values.toArray());
       const trendColor = theme.visualization.getColorByName(getTrendColor(trendValue));
+
+      if (!thresholdsValid) {
+        status = LightsDataResultStatus.incorrectThresholds;
+      } else {
+        status = LightsDataResultStatus.success;
+      }
 
       return {
         title,
@@ -98,7 +121,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
     });
     return {
       values: sortLights === SortOptions.None ? values : sortByValue(values, sortLights),
-      status: LightsDataResultStatus.success,
+      status: status,
     };
   }, [theme, data, fieldConfig, replaceVariables, timeZone, sortLights]);
 }
@@ -110,6 +133,20 @@ function sortByValue(arr: LightsDataValues[], sortOrder: SortOptions): LightsDat
     } else {
       return b.value.localeCompare(a.value);
     }
+  });
+}
+
+function isSupported(data?: DataFrame[]): boolean {
+  if (!data || data.length === 0) {
+    return false;
+  }
+
+  return data.every((d) => {
+    const field = d.fields.find((f) => {
+      return f.type === FieldType.number;
+    });
+
+    return Boolean(field);
   });
 }
 
@@ -126,4 +163,13 @@ function getTrendColor(value: number) {
     default:
       return '#73BF69';
   }
+}
+
+function validateThresholds(thresholds?: ThresholdsConfig) {
+  const numberOfSteps = thresholds?.steps.length;
+  if (!numberOfSteps || numberOfSteps < 4) {
+    return false;
+  }
+
+  return true;
 }

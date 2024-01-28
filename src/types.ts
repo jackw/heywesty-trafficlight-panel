@@ -10,4 +10,5 @@ export interface TrafficLightOptions {
   showTrend: boolean;
   sortLights: SortOptions;
   horizontal: boolean;
+  singleRow: boolean;
 }

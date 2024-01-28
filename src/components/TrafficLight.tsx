@@ -16,7 +16,7 @@ export function TrafficLight({ colors = [], bgColor = 'grey', onClick, horizonta
       style={{ height: '100%', width: '100%' }}
       onClick={onClick}
     >
-      <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '136px center' }}>
+      <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
         <path
           fill={bgColor}
           d="M264 32C264 14.38 249.62.9 232 .9H40C22.38.9 8 15.28 8 32c0 84.616 2.996 256 2.996 378.987 12.38 57.75 63.63 101 125 101s112.6-43.25 124.1-101C264 282.12 264 105.121 264 32ZM136 416c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48Zm0-128c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48Zm0-128c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48Z"
