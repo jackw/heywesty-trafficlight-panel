@@ -1,6 +1,6 @@
 {
   "name": "trafficlight",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React based traffic light goodness",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
