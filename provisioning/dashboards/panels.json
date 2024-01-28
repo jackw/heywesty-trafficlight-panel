@@ -36,10 +36,10 @@
         "defaults": {
           "mappings": [],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
-                "color": "blue",
+                "color": "red",
                 "value": null
               },
               {
@@ -48,49 +48,16 @@
               },
               {
                 "color": "#EAB839",
-                "value": 50
+                "value": 33
               },
               {
-                "color": "#6ED0E0",
-                "value": 80
+                "color": "green",
+                "value": 66
               }
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "A-series1"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 0
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 70
-                    },
-                    {
-                      "color": "green",
-                      "value": 90
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 12,
@@ -100,8 +67,14 @@
       },
       "id": 6,
       "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
         "seriesCountSize": "sm",
         "showSeriesCount": false,
+        "showTrend": false,
+        "showValue": false,
+        "singleRow": false,
+        "sortLights": "none",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -114,7 +87,133 @@
           "seriesCount": 1
         }
       ],
-      "title": "Traffic Light Panel",
+      "title": "Traffic Light",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 33
+              },
+              {
+                "color": "green",
+                "value": 66
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 3,
+        "x": 3,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "showTrend": false,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none",
+        "text": "Default value of text input option"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 1
+        }
+      ],
+      "title": "Traffic Light with value",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 33
+              },
+              {
+                "color": "green",
+                "value": 66
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 4,
+        "x": 6,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
+        "seriesCountSize": "sm",
+        "showSeriesCount": false,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none",
+        "text": "Default value of text input option"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 1
+        }
+      ],
+      "title": "Traffic Light with value and trend",
       "type": "heywesty-trafficlight-panel"
     },
     {
@@ -141,43 +240,30 @@
                 "value": 40
               },
               {
-                "color": "#6ED0E0",
+                "color": "green",
                 "value": 70
               }
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "A-series1"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Link me somewhere",
-                    "url": "http://www.google.co.uk"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 12,
-        "w": 21,
-        "x": 3,
+        "w": 14,
+        "x": 10,
         "y": 0
       },
       "id": 7,
       "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
         "seriesCountSize": "sm",
         "showSeriesCount": false,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -190,7 +276,7 @@
           "seriesCount": 10
         }
       ],
-      "title": "Traffic Light Panel Multiple Series",
+      "title": "Traffic Light grid layout",
       "type": "heywesty-trafficlight-panel"
     },
     {
@@ -198,13 +284,51 @@
         "type": "testdata",
         "uid": "P814D78962B0F8AC2"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 9,
+        "w": 24,
         "x": 0,
         "y": 12
       },
       "id": 9,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": true,
+        "sortLights": "none"
+      },
       "targets": [
         {
           "datasource": {
@@ -213,33 +337,583 @@
           },
           "refId": "A",
           "scenarioId": "random_walk",
-          "seriesCount": 5
+          "seriesCount": 20
         }
       ],
-      "title": "Panel Title",
-      "trafficLightSettings": {
-        "digits": 1,
-        "fontColor": "black",
-        "fontSize": "12px",
-        "greenThreshold": 80,
-        "invertScale": false,
-        "lightsPerLine": 5,
-        "linkTargetBlank": false,
-        "linkTooltip": "",
-        "linkUrl": "",
-        "max": 100,
-        "redThreshold": 20,
-        "renderLink": false,
+      "title": "Traffic Light single row layout",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 15,
+      "options": {
+        "horizontal": true,
+        "minLightWidth": 100,
         "showTrend": true,
         "showValue": true,
-        "sortLights": false,
-        "spreadControls": false,
-        "transformationDict": "source1=target1;source2=target2",
-        "units": "",
-        "useDiffAsColor": false,
-        "width": 20
+        "singleRow": false,
+        "sortLights": "none"
       },
-      "type": "snuids-trafficlights-panel"
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 20
+        }
+      ],
+      "title": "Traffic Light horizontal",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 30
+      },
+      "id": 10,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none"
+      },
+      "title": "Traffic Light incorrect thresholds",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 30
+      },
+      "id": 13,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "lines": 10,
+          "refId": "A",
+          "scenarioId": "annotations"
+        }
+      ],
+      "title": "Traffic Light no data",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 30
+      },
+      "id": 14,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 75,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none"
+      },
+      "targets": [
+        {
+          "csvContent": "time, value\n10000000000, 'a'",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Traffic Light no data",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-red",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series1"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-orange",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-yellow",
+                      "value": 0
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series3"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-green",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series4"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-blue",
+                      "value": 0
+                    },
+                    {
+                      "color": "blue",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-blue",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series5"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "super-light-purple",
+                      "value": 0
+                    },
+                    {
+                      "color": "purple",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-purple",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 16,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 6
+        }
+      ],
+      "title": "Traffic Light threshold overrides",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Go to google.com",
+              "url": "https://www.google.com"
+            },
+            {
+              "targetBlank": true,
+              "title": "Go to yahoo.com",
+              "url": "https://www.yahoo.com"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A-series3"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Go to duckduckgo",
+                    "url": "https://duckduckgo.com"
+                  },
+                  {
+                    "targetBlank": true,
+                    "title": "Go to bing.com",
+                    "url": "https://www.bing.com"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 17,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 6
+        }
+      ],
+      "title": "Traffic Light datalinks overrides",
+      "type": "heywesty-trafficlight-panel"
     }
   ],
   "refresh": "",
@@ -257,6 +931,6 @@
   "timezone": "",
   "title": "Traffic Lights Example",
   "uid": "O4tc_E6Gz",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }

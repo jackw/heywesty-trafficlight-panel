@@ -4,17 +4,48 @@
   "name": "Traffic Light",
   "id": "heywesty-trafficlight-panel",
   "info": {
-    "keywords": ["panel"],
-    "description": "React based traffic light goodness",
+    "keywords": ["panel", "traffic light"],
+    "description": "React based traffic light panel for Grafana",
     "author": {
-      "name": "Heywesty"
+      "name": "Jack Westbrook",
+      "url": "https://heywesty.com"
     },
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
-    "links": [],
-    "screenshots": [],
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/jackw/heywesty-trafficlight-panel"
+      },
+      {
+        "name": "Docs",
+        "url": "https://github.com/jackw/heywesty-trafficlight-panel/blob/main/src/README.md"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/jackw/heywesty-trafficlight-panel/blob/main/LICENSE"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Showcase",
+        "path": "img/screenshots/traffic-lights.png"
+      },
+      {
+        "name": "Grid Layout",
+        "path": "img/screenshots/traffic-lights-grid-layout.png"
+      },
+      {
+        "name": "Single Row Layout",
+        "path": "img/screenshots/traffic-lights-single-row.png"
+      },
+      {
+        "name": "Threshold Overrides",
+        "path": "img/screenshots/traffic-lights-threshold-overrides.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },

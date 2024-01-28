@@ -8,7 +8,7 @@ A traffic light for your data to help you interpret complex information at a gla
 
 ## Requirements
 
-Grafana >=10.0.0
+Grafana >=9.5.3
 
 ## Features
 
@@ -33,13 +33,14 @@ The traffic light panel uses the built in Grafana thresholds to assign lights to
 
 1. **Define Thresholds:** In the plugin settings, define thresholds that categorize your data. A basic thresholds example for a traffic light looks like:
 
-   ![thresholds example](https://raw.githubusercontent.com/jackw/heywesty-trafficlight-panel/main/docs/thresholds-example.png)
+   <img width="300px" src="https://raw.githubusercontent.com/jackw/heywesty-trafficlight-panel/main/docs/thresholds-example.png" />
 
 2. **Assign Colors:** Assign colors to each threshold range. These colors will be used to represent the corresponding data values in the traffic lights.
 3. **Preview and Adjust:** After setting the thresholds, preview them on your dashboard. Adjust the thresholds and colors as necessary to accurately reflect the status indicated by your data.
+4. **Data Links:** Optionally [add datalinks](https://grafana.com/docs/grafana/latest/panels-visualizations/configure-data-links/) to make the traffic light panel navigate elsewhere on click.
 
 > [!TIP]
-> Make use of overrides if you'd like to set each traffic light to a different colour scheme.
+> Make use of threshold overrides if you'd like to set traffic lights with different colour schemes.
 
 ## Options
 
@@ -63,4 +64,8 @@ Check the datasource is returning data from the query.
 
 ### This data format is unsupported.
 
-Right now the plugin support any data source that returns data frame(s) containing one numeric field.
+The plugin supports any data source that returns data frame(s) containing one numeric field.
+
+### Thresholds are incorrectly set.
+
+Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain base and three other values.
