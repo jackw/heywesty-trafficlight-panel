@@ -1,9 +1,9 @@
 <!-- This README file is going to be the one displayed on the Grafana.com website for your plugin. Uncomment and replace the content here before publishing.
 
 Remove any remaining comments before publishing as these may be displayed on Grafana.com -->
-# trafficlight
+# Heywesty Traffic light panel
 
-React based traffic light goodness
+React based traffic light goodness.
 
 <!-- To help maximize the impact of your README and improve usability for users, we propose the following loose structure:
 
