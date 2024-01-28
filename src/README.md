@@ -68,4 +68,4 @@ The plugin supports any data source that returns data frame(s) containing one nu
 
 ### Thresholds are incorrectly set.
 
-Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain base and three other values.
+Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain `base`` and three other values. One for each light.
