@@ -17,7 +17,7 @@ Grafana >=9.5.3
 - **Trend Display:** Show or hide the trend color to provide an additional layer of information.
 - **Sorting Options:** Sort the traffic lights based on values in ascending, descending, or series (none) order.
 - **Orientation Flexibility:** Choose between a vertical or horizontal layout for the traffic lights.
-- **Grid/Single Row Layout:** Ability to layout lights using an automatci grid or place all lights in a single row.
+- **Grid/Single Row Layout:** Ability to layout lights on a grid or in a single row.
 
 ## Installation
 
@@ -68,4 +68,4 @@ The plugin supports any data source that returns data frame(s) containing one nu
 
 ### Thresholds are incorrectly set.
 
-Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain `base`` and three other values. One for each light.
+Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain `base` and three other values. One for each light.
