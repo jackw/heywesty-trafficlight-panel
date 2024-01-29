@@ -5,6 +5,10 @@ on:
     tags:
       - 'v*' # Run workflow on version tags, e.g. v1.0.0.
 
+# necessary to create releases
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
