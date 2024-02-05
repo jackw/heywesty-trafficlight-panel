@@ -12,7 +12,7 @@ export function ThresholdsAssistant({ thresholds }: { thresholds?: ThresholdsCon
       <div className={styles.grid}>
         <div className={styles.trafficLight} />
         {validSteps.map((step, i) => (
-          <ThresholdFeedback isValid={step.isValid} index={i} />
+          <ThresholdFeedback isValid={step.isValid} index={i} key={i} />
         ))}
       </div>
     </Alert>
@@ -77,7 +77,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   label: css({
     display: 'flex',
     alignItems: 'center',
-    fontSize: theme.typography.size.sm,
+    fontSize: theme.typography.bodySmall.fontSize
   }),
   valid: css({
     backgroundColor: theme.colors.success.main,
