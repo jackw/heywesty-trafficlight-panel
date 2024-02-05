@@ -7,6 +7,7 @@ import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils';
 import { TrafficLight } from './TrafficLight';
+import { ThresholdsAssistant } from './ThresholdsAssistant';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
 
@@ -23,7 +24,7 @@ export function TrafficLightPanel({
   const theme = useTheme2();
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, data.series.length);
   const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
-  const { values, status } = useLightsData({
+  const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
     replaceVariables,
     theme,
@@ -51,7 +52,7 @@ export function TrafficLightPanel({
   if (status === LightsDataResultStatus.incorrectThresholds) {
     return (
       <div style={styles.centeredContent}>
-        <h4>Thresholds are incorrectly set.</h4>
+        <ThresholdsAssistant thresholds={invalidThresholds} />
       </div>
     );
   }
@@ -63,10 +64,10 @@ export function TrafficLightPanel({
         height,
       }}
     >
-      {/* @ts-ignore TODO: fix up styles. */}
+      {/* @ts-ignore TODO: fix conditional styles errors. */}
       <div style={styles.containerStyle}>
         {values.map((light) => (
-          // @ts-ignore TODO: fix up styles.
+          // @ts-ignore TODO: fix conditional styles errors.
           <div key={light.title} style={styles.itemStyle}>
             {light.hasLinks && light.getLinks !== undefined ? (
               <DataLinksContextMenu links={light.getLinks} style={{ flexGrow: 1 }}>

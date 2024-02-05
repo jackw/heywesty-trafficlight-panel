@@ -38,6 +38,7 @@ export type LightsDataValues = {
 export type LightsDataResult = {
   values: LightsDataValues[];
   status: LightsDataResultStatus;
+  invalidThresholds?: ThresholdsConfig;
 };
 
 type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions'> & { sortLights: SortOptions };
@@ -47,6 +48,8 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
 
   return useMemo(() => {
     let status = LightsDataResultStatus.nodata;
+    let invalidThresholds = undefined;
+
     if (noData(data)) {
       return {
         values: [
@@ -88,11 +91,10 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
       const thresholdsValid = validateThresholds(displayValue.field.thresholds);
       const activeThreshold = getActiveThreshold(displayValue.display.numeric, displayValue.field.thresholds?.steps);
       const { title, text, suffix, prefix } = displayValue.display;
-      const colors = displayValue.field.thresholds?.steps.slice(1).map((threshold, i) => {
-        const isNegative = displayValue.display.numeric < 0 && i === 0;
+      const colors = displayValue.field.thresholds?.steps.map((threshold, i) => {
         return {
           color: theme.visualization.getColorByName(threshold.color),
-          active: isNegative ? true : threshold.value === activeThreshold.value,
+          active: threshold.value === activeThreshold.value,
         };
       });
 
@@ -101,6 +103,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
 
       if (!thresholdsValid) {
         status = LightsDataResultStatus.incorrectThresholds;
+        invalidThresholds = displayValue.field.thresholds;
       } else {
         status = LightsDataResultStatus.success;
       }
@@ -119,9 +122,11 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
         getLinks: displayValue.getLinks,
       };
     });
+
     return {
       values: sortLights === SortOptions.None ? values : sortByValue(values, sortLights),
-      status: status,
+      invalidThresholds,
+      status,
     };
   }, [theme, data, fieldConfig, replaceVariables, timeZone, sortLights]);
 }
@@ -167,7 +172,7 @@ function getTrendColor(value: number) {
 
 function validateThresholds(thresholds?: ThresholdsConfig) {
   const numberOfSteps = thresholds?.steps.length;
-  if (!numberOfSteps || numberOfSteps < 4) {
+  if (!numberOfSteps || numberOfSteps < 3) {
     return false;
   }
 

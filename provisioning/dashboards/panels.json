@@ -43,10 +43,6 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 0
-              },
-              {
                 "color": "#EAB839",
                 "value": 33
               },
@@ -106,16 +102,12 @@
                 "value": null
               },
               {
-                "color": "red",
+                "color": "orange",
                 "value": 0
               },
               {
-                "color": "orange",
-                "value": 33
-              },
-              {
                 "color": "green",
-                "value": 66
+                "value": 33
               }
             ]
           }
@@ -167,10 +159,6 @@
               {
                 "color": "red",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
               },
               {
                 "color": "orange",
@@ -228,12 +216,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
                 "color": "red",
-                "value": 0
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -298,10 +282,6 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 0
-              },
-              {
                 "color": "#EAB839",
                 "value": 50
               },
@@ -360,10 +340,6 @@
               {
                 "color": "red",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -579,7 +555,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "red",
@@ -610,11 +587,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-red",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "red",
@@ -641,11 +615,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-orange",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "orange",
@@ -672,11 +643,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-yellow",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "yellow",
@@ -703,11 +671,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-green",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "green",
@@ -734,11 +699,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-blue",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "blue",
@@ -765,11 +727,8 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red"
-                    },
-                    {
                       "color": "super-light-purple",
-                      "value": 0
+                      "value": null
                     },
                     {
                       "color": "purple",
@@ -842,11 +801,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red"
-              },
-              {
                 "color": "red",
-                "value": 0
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -931,6 +887,6 @@
   "timezone": "",
   "title": "Traffic Lights Example",
   "uid": "O4tc_E6Gz",
-  "version": 8,
+  "version": 4,
   "weekStart": ""
 }
