@@ -9,7 +9,7 @@ import {
 } from '@grafana/data';
 import { useMemo } from 'react';
 import { SortOptions } from 'types';
-import { basicTrend } from 'utils';
+import { basicTrend } from 'utils/utils';
 
 export enum LightsDataResultStatus {
   unsupported = 'unsupported',

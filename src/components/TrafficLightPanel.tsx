@@ -5,7 +5,7 @@ import { TrafficLightOptions } from 'types';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 
 import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
-import { calculateRowsAndColumns } from 'utils';
+import { calculateRowsAndColumns } from 'utils/utils';
 import { TrafficLight } from './TrafficLight';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
 
