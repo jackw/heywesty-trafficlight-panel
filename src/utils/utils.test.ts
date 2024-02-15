@@ -1,5 +1,4 @@
-import { calculateRowsAndColumns } from './utils';
-import { basicTrend } from './utils';
+import { calculateRowsAndColumns, basicTrend } from './utils';
 
 describe('calculateRowsAndColumns', () => {
   it('should calculate the correct number of rows and columns', () => {
@@ -60,4 +59,3 @@ describe('basicTrend', () => {
     expect(result).toBe(0);
   });
 });
-
