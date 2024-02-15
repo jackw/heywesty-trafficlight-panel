@@ -73,7 +73,8 @@ export function TrafficLightPanel({
               <DataLinksContextMenu links={light.getLinks} style={{ flexGrow: 1 }}>
                 {(api) => (
                   <TrafficLight
-                    bgColor={theme.isDark ? theme.colors.background.secondary : theme.colors.secondary.shade}
+                    bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
+                    emptyColor={theme.isDark ? theme.colors.background.canvas : '#AAAAAF'}
                     colors={light.colors}
                     onClick={api.openMenu}
                     horizontal={options.horizontal}
@@ -82,7 +83,8 @@ export function TrafficLightPanel({
               </DataLinksContextMenu>
             ) : (
               <TrafficLight
-                bgColor={theme.isDark ? theme.colors.background.secondary : theme.colors.secondary.shade}
+                bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
+                emptyColor={theme.isDark ? theme.colors.background.canvas : '#AAAAAF'}
                 colors={light.colors}
                 horizontal={options.horizontal}
               />
