@@ -11,4 +11,11 @@ export interface TrafficLightOptions {
   sortLights: SortOptions;
   horizontal: boolean;
   singleRow: boolean;
+  style: TrafficLightStyles;
+}
+
+export enum TrafficLightStyles {
+  Default = 'default',
+  Rounded = 'rounded',
+  SideLights = 'sidelights',
 }

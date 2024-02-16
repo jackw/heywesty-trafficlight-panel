@@ -6,10 +6,18 @@ import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 
 import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
-import { TrafficLight } from './TrafficLight';
+import { TrafficLightRounded } from './TrafficLightRounded';
+import { TrafficLightDefault } from './TrafficLightDefault';
+import { TrafficLightSideLights } from './TrafficLightSideLights';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
+
+const TrafficLightsComponentMap = {
+  default: TrafficLightDefault,
+  rounded: TrafficLightRounded,
+  sidelights: TrafficLightSideLights,
+};
 
 export function TrafficLightPanel({
   data,
@@ -20,7 +28,7 @@ export function TrafficLightPanel({
   fieldConfig,
   timeZone,
 }: TrafficLightPanelProps) {
-  const { minLightWidth, sortLights, showValue, showTrend, singleRow } = options;
+  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style } = options;
   const theme = useTheme2();
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, data.series.length);
   const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
@@ -32,6 +40,7 @@ export function TrafficLightPanel({
     timeZone,
     sortLights,
   });
+  const Component = TrafficLightsComponentMap[style];
 
   if (status === LightsDataResultStatus.nodata) {
     return (
@@ -72,9 +81,9 @@ export function TrafficLightPanel({
             {light.hasLinks && light.getLinks !== undefined ? (
               <DataLinksContextMenu links={light.getLinks} style={{ flexGrow: 1 }}>
                 {(api) => (
-                  <TrafficLight
+                  <Component
                     bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
-                    emptyColor={theme.isDark ? theme.colors.background.canvas : '#AAAAAF'}
+                    emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
                     colors={light.colors}
                     onClick={api.openMenu}
                     horizontal={options.horizontal}
@@ -82,9 +91,9 @@ export function TrafficLightPanel({
                 )}
               </DataLinksContextMenu>
             ) : (
-              <TrafficLight
+              <Component
                 bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
-                emptyColor={theme.isDark ? theme.colors.background.canvas : '#AAAAAF'}
+                emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
                 colors={light.colors}
                 horizontal={options.horizontal}
               />
