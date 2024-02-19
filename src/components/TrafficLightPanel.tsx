@@ -72,6 +72,7 @@ export function TrafficLightPanel({
         width,
         height,
       }}
+      data-testid="heywesty-traffic-light"
     >
       {/* @ts-ignore TODO: fix conditional styles errors. */}
       <div style={styles.containerStyle}>
