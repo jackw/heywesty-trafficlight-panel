@@ -34,6 +34,7 @@ export function TrafficLightRounded({
         {colors[2]?.active && (
           <g>
             <path
+              data-testid="traffic-light-go"
               fill={colors[2].color}
               d="M85.714 389.095c0 27.762 22.524 50.286 50.286 50.286s50.286-22.524 50.286-50.286S163.762 338.81 136 338.81s-50.286 22.523-50.286 50.285Z"
               style={{
@@ -61,6 +62,7 @@ export function TrafficLightRounded({
         {colors[1]?.active && (
           <g>
             <path
+              data-testid="traffic-light-ready"
               fill={colors[1].color}
               d="M85.714 255c0 27.762 22.524 50.286 50.286 50.286s50.286-22.524 50.286-50.286-22.524-50.286-50.286-50.286S85.714 227.238 85.714 255Z"
               style={{
@@ -88,6 +90,7 @@ export function TrafficLightRounded({
         {colors[0]?.active && (
           <g>
             <path
+              data-testid="traffic-light-stop"
               fill={colors[0].color}
               d="M85.714 120.905c0 27.762 22.524 50.285 50.286 50.285s50.286-22.523 50.286-50.285c0-27.762-22.524-50.286-50.286-50.286s-50.286 22.524-50.286 50.286Z"
               style={{
