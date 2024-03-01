@@ -71,11 +71,16 @@ jobs:
             echo "has-e2e=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Install Playwright Browsers
+        if: steps.check-for-e2e.outputs.has-e2e == 'true'
+        run: npx playwright install --with-deps
+
       - name: Start grafana docker
         if: steps.check-for-e2e.outputs.has-e2e == 'true'
         run: docker-compose up -d
 
       - name: Wait for grfana server
+        if: steps.check-for-e2e.outputs.has-e2e == 'true'
         uses: nev7n/wait_for_response@v1
         with:
           url: 'http://localhost:3000/'
