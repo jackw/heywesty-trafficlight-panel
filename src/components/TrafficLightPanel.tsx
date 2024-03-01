@@ -44,7 +44,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.nodata) {
     return (
-      <div style={styles.centeredContent}>
+      <div data-testid="feedback-message-container" style={styles.centeredContent}>
         <h4>The query returned no data.</h4>
       </div>
     );
@@ -52,7 +52,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.unsupported) {
     return (
-      <div style={styles.centeredContent}>
+      <div data-testid="feedback-message-container" style={styles.centeredContent}>
         <h4>This data format is unsupported.</h4>
       </div>
     );

@@ -11,10 +11,10 @@ test('Panel displays threshold assistant when thresholds incorrectly set', async
   await expect(thresholdsAssistant).toBeVisible();
   const invalidThresholds = await thresholdsAssistant.getByText('Threshold not configured');
 
-  await expect(await invalidThresholds.count()).toBe(1);
+  await expect(await invalidThresholds).toHaveCount(1);
   await page.getByRole('button', { name: /Remove Threshold 1/i }).click();
 
-  await expect(await invalidThresholds.count()).toBe(2);
+  await expect(await invalidThresholds).toHaveCount(2);
   await page.getByRole('button', { name: /add Threshold/i }).click();
   await page.getByRole('button', { name: /add Threshold/i }).click();
 
@@ -32,8 +32,7 @@ test('Panel displays no data message when no data is returned', async ({ panelEd
   await page.keyboard.press('Enter');
 
   await expect(panelEditPage.getVisualizationName()).toHaveText('Traffic Light');
-  const noDataMessage = await page.getByText('The query returned no data.');
-  await expect(noDataMessage).toBeVisible();
+  await expect(await page.getByTestId('feedback-message-container')).toHaveText('The query returned no data.');
   await expect(page.getByTestId('heywesty-traffic-light')).not.toBeVisible();
 });
 
@@ -56,7 +55,6 @@ test('Panel displays unsupported message when data format is unsupported', async
   await panelEditPage.getByTestIdOrAriaLabel('Refresh dashboard').click();
 
   await expect(panelEditPage.getVisualizationName()).toHaveText('Traffic Light');
-  const unsupportedMessage = await page.getByText('This data format is unsupported.');
-  await expect(unsupportedMessage).toBeVisible();
+  await expect(await page.getByTestId('feedback-message-container')).toHaveText('This data format is unsupported.');
   await expect(page.getByTestId('heywesty-traffic-light')).not.toBeVisible();
 });

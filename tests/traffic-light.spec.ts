@@ -13,7 +13,7 @@ test('Panel displays a traffic light when thresholds are correctly set', async (
   await panelEditPage.getByTestIdOrAriaLabel(selectors.components.CodeEditor.container).click();
   await page.keyboard.insertText(`time, value
 10000000000, 100`);
-  await panelEditPage.getByTestIdOrAriaLabel('Refresh dashboard').click();
+  panelEditPage.refreshPanel();
   const trafficLightPanel = await page.getByTestId('heywesty-traffic-light');
   await expect(trafficLightPanel).toBeVisible();
   await expect(trafficLightPanel.getByTestId('traffic-light-go')).toBeVisible();
@@ -23,7 +23,7 @@ test('Panel displays a traffic light when thresholds are correctly set', async (
   await page.keyboard.press('Backspace');
   await page.keyboard.insertText(`time, value
 10000000000, 85`);
-  await panelEditPage.getByTestIdOrAriaLabel('Refresh dashboard').click();
+  panelEditPage.refreshPanel();
   await expect(trafficLightPanel.getByTestId('traffic-light-ready')).toBeVisible();
 
   await panelEditPage.getByTestIdOrAriaLabel(selectors.components.CodeEditor.container).click();
@@ -31,6 +31,6 @@ test('Panel displays a traffic light when thresholds are correctly set', async (
   await page.keyboard.press('Backspace');
   await page.keyboard.insertText(`time, value
 10000000000, 50`);
-  await panelEditPage.getByTestIdOrAriaLabel('Refresh dashboard').click();
+  panelEditPage.refreshPanel();
   await expect(trafficLightPanel.getByTestId('traffic-light-stop')).toBeVisible();
 });
