@@ -75,6 +75,14 @@ jobs:
         if: steps.check-for-e2e.outputs.has-e2e == 'true'
         run: docker-compose up -d
 
+      - name: Wait for grfana server
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:3000/'
+          responseCode: 200
+          timeout: 60000
+          interval: 500
+
       - name: Run e2e tests
         if: steps.check-for-e2e.outputs.has-e2e == 'true'
         run: npm run test:playwright
