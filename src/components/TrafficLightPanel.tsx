@@ -30,8 +30,6 @@ export function TrafficLightPanel({
 }: TrafficLightPanelProps) {
   const { minLightWidth, sortLights, showValue, showTrend, singleRow, style } = options;
   const theme = useTheme2();
-  const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, data.series.length);
-  const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
   const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
     replaceVariables,
@@ -41,6 +39,8 @@ export function TrafficLightPanel({
     sortLights,
   });
   const Component = TrafficLightsComponentMap[style];
+  const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
+  const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
 
   if (status === LightsDataResultStatus.nodata) {
     return (
