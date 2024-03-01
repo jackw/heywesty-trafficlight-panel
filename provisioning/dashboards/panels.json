@@ -71,6 +71,7 @@
         "showValue": false,
         "singleRow": false,
         "sortLights": "none",
+        "style": "default",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -130,6 +131,7 @@
         "showValue": true,
         "singleRow": false,
         "sortLights": "none",
+        "style": "rounded",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -189,6 +191,7 @@
         "showValue": true,
         "singleRow": false,
         "sortLights": "none",
+        "style": "sidelights",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -248,6 +251,7 @@
         "showValue": true,
         "singleRow": false,
         "sortLights": "none",
+        "style": "default",
         "text": "Default value of text input option"
       },
       "targets": [
@@ -307,7 +311,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": true,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {
@@ -367,7 +372,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {
@@ -411,7 +417,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 8,
         "x": 0,
         "y": 30
@@ -423,7 +429,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "title": "Traffic Light incorrect thresholds",
       "type": "heywesty-trafficlight-panel"
@@ -456,7 +463,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 8,
         "x": 8,
         "y": 30
@@ -468,7 +475,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {
@@ -512,7 +520,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 8,
         "x": 16,
         "y": 30
@@ -524,7 +532,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {
@@ -749,7 +758,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 38
       },
       "id": 16,
       "options": {
@@ -758,7 +767,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {
@@ -846,7 +856,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 38
       },
       "id": 17,
       "options": {
@@ -855,7 +865,8 @@
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
-        "sortLights": "none"
+        "sortLights": "none",
+        "style": "default"
       },
       "targets": [
         {

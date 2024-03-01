@@ -43,6 +43,13 @@ export function basicTrend(data?: number[]) {
 }
 
 export function calculateRowsAndColumns(containerWidth: number, itemWidth: number, itemCount: number) {
+  if (itemCount === 0) {
+    return { rows: 0, cols: 0 };
+  }
+  if (containerWidth < itemWidth) {
+    return { rows: 1, cols: itemCount };
+  }
+
   const itemsPerRow = Math.floor(containerWidth / itemWidth);
   const rows = Math.ceil(itemCount / itemsPerRow);
   const cols = Math.ceil(itemCount / rows);

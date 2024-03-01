@@ -5,11 +5,19 @@ import { TrafficLightOptions } from 'types';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 
 import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
-import { calculateRowsAndColumns } from 'utils';
-import { TrafficLight } from './TrafficLight';
+import { calculateRowsAndColumns } from 'utils/utils';
+import { TrafficLightRounded } from './TrafficLightRounded';
+import { TrafficLightDefault } from './TrafficLightDefault';
+import { TrafficLightSideLights } from './TrafficLightSideLights';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
+
+const TrafficLightsComponentMap = {
+  default: TrafficLightDefault,
+  rounded: TrafficLightRounded,
+  sidelights: TrafficLightSideLights,
+};
 
 export function TrafficLightPanel({
   data,
@@ -20,10 +28,8 @@ export function TrafficLightPanel({
   fieldConfig,
   timeZone,
 }: TrafficLightPanelProps) {
-  const { minLightWidth, sortLights, showValue, showTrend, singleRow } = options;
+  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style } = options;
   const theme = useTheme2();
-  const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, data.series.length);
-  const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
   const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
     replaceVariables,
@@ -32,10 +38,13 @@ export function TrafficLightPanel({
     timeZone,
     sortLights,
   });
+  const Component = TrafficLightsComponentMap[style];
+  const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
+  const styles = getStyles({ rows, cols, singleRow, minLightWidth, theme });
 
   if (status === LightsDataResultStatus.nodata) {
     return (
-      <div style={styles.centeredContent}>
+      <div data-testid="feedback-message-container" style={styles.centeredContent}>
         <h4>The query returned no data.</h4>
       </div>
     );
@@ -43,7 +52,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.unsupported) {
     return (
-      <div style={styles.centeredContent}>
+      <div data-testid="feedback-message-container" style={styles.centeredContent}>
         <h4>This data format is unsupported.</h4>
       </div>
     );
@@ -63,6 +72,7 @@ export function TrafficLightPanel({
         width,
         height,
       }}
+      data-testid="heywesty-traffic-light"
     >
       {/* @ts-ignore TODO: fix conditional styles errors. */}
       <div style={styles.containerStyle}>
@@ -72,8 +82,9 @@ export function TrafficLightPanel({
             {light.hasLinks && light.getLinks !== undefined ? (
               <DataLinksContextMenu links={light.getLinks} style={{ flexGrow: 1 }}>
                 {(api) => (
-                  <TrafficLight
-                    bgColor={theme.isDark ? theme.colors.background.secondary : theme.colors.secondary.shade}
+                  <Component
+                    bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
+                    emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
                     colors={light.colors}
                     onClick={api.openMenu}
                     horizontal={options.horizontal}
@@ -81,8 +92,9 @@ export function TrafficLightPanel({
                 )}
               </DataLinksContextMenu>
             ) : (
-              <TrafficLight
-                bgColor={theme.isDark ? theme.colors.background.secondary : theme.colors.secondary.shade}
+              <Component
+                bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
+                emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
                 colors={light.colors}
                 horizontal={options.horizontal}
               />
