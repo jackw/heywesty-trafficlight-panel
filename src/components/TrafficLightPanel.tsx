@@ -128,7 +128,7 @@ function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: T
 
   return (
     <div
-      data-testid={TEST_IDS.trafficLightValue}
+    data-testid={TEST_IDS.trafficLightValueContainer}
       style={{
         alignItems: 'center',
         backgroundColor: showTrend
@@ -140,9 +140,9 @@ function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: T
         padding: theme.spacing(0.25),
       }}
     >
-      {showLegend && <span>{light.title}</span>}
+      {showLegend && <span data-testid={TEST_IDS.trafficLightLegend}>{light.title}</span>}
       {showValue && (
-        <strong>
+        <strong data-testid={TEST_IDS.trafficLightValue}>
           {light.prefix}
           {light.value}
           {light.suffix}
