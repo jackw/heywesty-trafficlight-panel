@@ -1,15 +1,14 @@
-import React from 'react';
 import { GrafanaTheme2, PanelProps } from '@grafana/data';
-
-import { TrafficLightOptions } from 'types';
+import React from 'react';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
-
+import { TrafficLightOptions } from 'types';
 import { LightsDataResultStatus, LightsDataValues, useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
-import { TrafficLightRounded } from './TrafficLightRounded';
-import { TrafficLightDefault } from './TrafficLightDefault';
-import { TrafficLightSideLights } from './TrafficLightSideLights';
+import { TEST_IDS } from '../constants';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
+import { TrafficLightDefault } from './TrafficLightDefault';
+import { TrafficLightRounded } from './TrafficLightRounded';
+import { TrafficLightSideLights } from './TrafficLightSideLights';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
 
@@ -45,7 +44,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.nodata) {
     return (
-      <div data-testid="feedback-message-container" style={styles.centeredContent}>
+      <div data-testid={TEST_IDS.feedbackMsgContainer} style={styles.centeredContent}>
         <h4>The query returned no data.</h4>
       </div>
     );
@@ -53,7 +52,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.unsupported) {
     return (
-      <div data-testid="feedback-message-container" style={styles.centeredContent}>
+      <div data-testid={TEST_IDS.feedbackMsgContainer} style={styles.centeredContent}>
         <h4>This data format is unsupported.</h4>
       </div>
     );
@@ -73,7 +72,7 @@ export function TrafficLightPanel({
         width,
         height,
       }}
-      data-testid="heywesty-traffic-light"
+      data-testid={TEST_IDS.trafficLight}
     >
       {/* @ts-ignore TODO: fix conditional styles errors. */}
       <div style={styles.containerStyle}>
@@ -123,8 +122,13 @@ interface TrafficLightValueProps {
 }
 
 function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: TrafficLightValueProps) {
+  if (!showValue && !showLegend && !showTrend) {
+    return null;
+  }
+
   return (
     <div
+      data-testid={TEST_IDS.trafficLightValue}
       style={{
         alignItems: 'center',
         backgroundColor: showTrend
