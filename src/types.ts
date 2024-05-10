@@ -7,11 +7,13 @@ export enum SortOptions {
 export interface TrafficLightOptions {
   minLightWidth: number;
   showValue: boolean;
+  showLegend: boolean;
   showTrend: boolean;
   sortLights: SortOptions;
   horizontal: boolean;
   singleRow: boolean;
   style: TrafficLightStyles;
+  reverseColors: boolean;
 }
 
 export enum TrafficLightStyles {

@@ -18,6 +18,12 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         description: 'Place all lights in a single row',
         defaultValue: false,
       })
+      .addBooleanSwitch({
+        path: 'reverseColors',
+        name: 'Reverse light colors',
+        description: 'Reverse the order of the light colors',
+        defaultValue: false,
+      })
       .addRadio({
         path: 'sortLights',
         name: 'Sort lights',
@@ -35,6 +41,12 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         path: 'showValue',
         name: 'Show value',
         description: 'Show or hide the value',
+        defaultValue: true,
+      })
+      .addBooleanSwitch({
+        path: 'showLegend',
+        name: 'Show legend',
+        description: 'Show or hide the legend (query name)',
         defaultValue: true,
       })
       .addBooleanSwitch({

@@ -1,15 +1,14 @@
-import React from 'react';
 import { GrafanaTheme2, PanelProps } from '@grafana/data';
-
-import { TrafficLightOptions } from 'types';
+import React from 'react';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
-
-import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
+import { TrafficLightOptions } from 'types';
+import { LightsDataResultStatus, LightsDataValues, useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
-import { TrafficLightRounded } from './TrafficLightRounded';
-import { TrafficLightDefault } from './TrafficLightDefault';
-import { TrafficLightSideLights } from './TrafficLightSideLights';
+import { TEST_IDS } from '../constants';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
+import { TrafficLightDefault } from './TrafficLightDefault';
+import { TrafficLightRounded } from './TrafficLightRounded';
+import { TrafficLightSideLights } from './TrafficLightSideLights';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
 
@@ -28,7 +27,7 @@ export function TrafficLightPanel({
   fieldConfig,
   timeZone,
 }: TrafficLightPanelProps) {
-  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style } = options;
+  const { minLightWidth, sortLights, showLegend, showValue, showTrend, singleRow, style, reverseColors } = options;
   const theme = useTheme2();
   const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
@@ -37,6 +36,7 @@ export function TrafficLightPanel({
     data: data.series,
     timeZone,
     sortLights,
+    reverseColors,
   });
   const Component = TrafficLightsComponentMap[style];
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
@@ -44,7 +44,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.nodata) {
     return (
-      <div data-testid="feedback-message-container" style={styles.centeredContent}>
+      <div data-testid={TEST_IDS.feedbackMsgContainer} style={styles.centeredContent}>
         <h4>The query returned no data.</h4>
       </div>
     );
@@ -52,7 +52,7 @@ export function TrafficLightPanel({
 
   if (status === LightsDataResultStatus.unsupported) {
     return (
-      <div data-testid="feedback-message-container" style={styles.centeredContent}>
+      <div data-testid={TEST_IDS.feedbackMsgContainer} style={styles.centeredContent}>
         <h4>This data format is unsupported.</h4>
       </div>
     );
@@ -72,7 +72,7 @@ export function TrafficLightPanel({
         width,
         height,
       }}
-      data-testid="heywesty-traffic-light"
+      data-testid={TEST_IDS.trafficLight}
     >
       {/* @ts-ignore TODO: fix conditional styles errors. */}
       <div style={styles.containerStyle}>
@@ -99,29 +99,55 @@ export function TrafficLightPanel({
                 horizontal={options.horizontal}
               />
             )}
-            {showValue && (
-              <div
-                style={{
-                  alignItems: 'center',
-                  backgroundColor: showTrend
-                    ? `color-mix(in srgb, ${light.trend.color} 20%, ${theme.colors.background.primary})`
-                    : 'transparent',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <span>{light.title}</span>
-                <strong>
-                  {light.prefix}
-                  {light.value}
-                  {light.suffix}
-                </strong>
-              </div>
-            )}
+            <TrafficLightValue
+              showValue={showValue}
+              showLegend={showLegend}
+              showTrend={showTrend}
+              light={light}
+              theme={theme}
+            />
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+interface TrafficLightValueProps {
+  showValue: boolean;
+  showLegend: boolean;
+  showTrend: boolean;
+  light: LightsDataValues;
+  theme: GrafanaTheme2;
+}
+
+function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: TrafficLightValueProps) {
+  if (!showValue && !showLegend && !showTrend) {
+    return null;
+  }
+
+  return (
+    <div
+    data-testid={TEST_IDS.trafficLightValueContainer}
+      style={{
+        alignItems: 'center',
+        backgroundColor: showTrend
+          ? `color-mix(in srgb, ${light.trend.color} 20%, ${theme.colors.background.primary})`
+          : 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: theme.spacing(0.25),
+      }}
+    >
+      {showLegend && <span data-testid={TEST_IDS.trafficLightLegend}>{light.title}</span>}
+      {showValue && (
+        <strong data-testid={TEST_IDS.trafficLightValue}>
+          {light.prefix}
+          {light.value}
+          {light.suffix}
+        </strong>
+      )}
     </div>
   );
 }
