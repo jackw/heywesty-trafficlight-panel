@@ -44,6 +44,12 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         defaultValue: true,
       })
       .addBooleanSwitch({
+        path: 'showLegend',
+        name: 'Show legend',
+        description: 'Show or hide the legend (query name)',
+        defaultValue: true,
+      })
+      .addBooleanSwitch({
         path: 'showTrend',
         name: 'Show trend',
         description: 'Show or hide the trend color',

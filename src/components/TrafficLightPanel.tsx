@@ -4,7 +4,7 @@ import { GrafanaTheme2, PanelProps } from '@grafana/data';
 import { TrafficLightOptions } from 'types';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 
-import { LightsDataResultStatus, useLightsData } from 'hooks/useLightsData';
+import { LightsDataResultStatus, LightsDataValues, useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
 import { TrafficLightRounded } from './TrafficLightRounded';
 import { TrafficLightDefault } from './TrafficLightDefault';
@@ -28,7 +28,7 @@ export function TrafficLightPanel({
   fieldConfig,
   timeZone,
 }: TrafficLightPanelProps) {
-  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style, reverseColors } = options;
+  const { minLightWidth, sortLights, showLegend, showValue, showTrend, singleRow, style, reverseColors } = options;
   const theme = useTheme2();
   const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
@@ -100,29 +100,50 @@ export function TrafficLightPanel({
                 horizontal={options.horizontal}
               />
             )}
-            {showValue && (
-              <div
-                style={{
-                  alignItems: 'center',
-                  backgroundColor: showTrend
-                    ? `color-mix(in srgb, ${light.trend.color} 20%, ${theme.colors.background.primary})`
-                    : 'transparent',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <span>{light.title}</span>
-                <strong>
-                  {light.prefix}
-                  {light.value}
-                  {light.suffix}
-                </strong>
-              </div>
-            )}
+            <TrafficLightValue
+              showValue={showValue}
+              showLegend={showLegend}
+              showTrend={showTrend}
+              light={light}
+              theme={theme}
+            />
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+interface TrafficLightValueProps {
+  showValue: boolean;
+  showLegend: boolean;
+  showTrend: boolean;
+  light: LightsDataValues;
+  theme: GrafanaTheme2;
+}
+
+function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: TrafficLightValueProps) {
+  return (
+    <div
+      style={{
+        alignItems: 'center',
+        backgroundColor: showTrend
+          ? `color-mix(in srgb, ${light.trend.color} 20%, ${theme.colors.background.primary})`
+          : 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: theme.spacing(0.25),
+      }}
+    >
+      {showLegend && <span>{light.title}</span>}
+      {showValue && (
+        <strong>
+          {light.prefix}
+          {light.value}
+          {light.suffix}
+        </strong>
+      )}
     </div>
   );
 }
