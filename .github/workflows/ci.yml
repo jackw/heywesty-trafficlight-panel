@@ -79,7 +79,7 @@ jobs:
         if: steps.check-for-e2e.outputs.has-e2e == 'true'
         run: docker-compose up -d
 
-      - name: Wait for grfana server
+      - name: Wait for grafana server
         if: steps.check-for-e2e.outputs.has-e2e == 'true'
         uses: nev7n/wait_for_response@v1
         with:
