@@ -41,10 +41,13 @@ export type LightsDataResult = {
   invalidThresholds?: ThresholdsConfig;
 };
 
-type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions'> & { sortLights: SortOptions };
+type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions'> & {
+  sortLights: SortOptions;
+  reverseColors: boolean;
+};
 
 export function useLightsData(options: UseLightsData): LightsDataResult {
-  const { theme, data, fieldConfig, replaceVariables, timeZone, sortLights } = options;
+  const { theme, data, fieldConfig, replaceVariables, timeZone, sortLights, reverseColors } = options;
 
   return useMemo(() => {
     let status = LightsDataResultStatus.nodata;
@@ -91,7 +94,9 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
       const thresholdsValid = validateThresholds(displayValue.field.thresholds);
       const activeThreshold = getActiveThreshold(displayValue.display.numeric, displayValue.field.thresholds?.steps);
       const { title, text, suffix, prefix } = displayValue.display;
-      const colors = displayValue.field.thresholds?.steps.map((threshold, i) => {
+      const thresholdSteps = displayValue.field.thresholds?.steps ?? [];
+      const maybeReversedThresholdSteps = reverseColors ? thresholdSteps.slice().reverse() : thresholdSteps;
+      const colors = maybeReversedThresholdSteps.map((threshold) => {
         return {
           color: theme.visualization.getColorByName(threshold.color),
           active: threshold.value === activeThreshold.value,
@@ -128,7 +133,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
       invalidThresholds,
       status,
     };
-  }, [theme, data, fieldConfig, replaceVariables, timeZone, sortLights]);
+  }, [theme, data, fieldConfig, replaceVariables, timeZone, sortLights, reverseColors]);
 }
 
 function sortByValue(arr: LightsDataValues[], sortOrder: SortOptions): LightsDataValues[] {

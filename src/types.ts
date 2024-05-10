@@ -12,6 +12,7 @@ export interface TrafficLightOptions {
   horizontal: boolean;
   singleRow: boolean;
   style: TrafficLightStyles;
+  reverseColors: boolean;
 }
 
 export enum TrafficLightStyles {

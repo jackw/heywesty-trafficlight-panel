@@ -18,6 +18,12 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         description: 'Place all lights in a single row',
         defaultValue: false,
       })
+      .addBooleanSwitch({
+        path: 'reverseColors',
+        name: 'Reverse light colors',
+        description: 'Reverse the order of the light colors',
+        defaultValue: false,
+      })
       .addRadio({
         path: 'sortLights',
         name: 'Sort lights',

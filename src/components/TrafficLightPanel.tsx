@@ -28,7 +28,7 @@ export function TrafficLightPanel({
   fieldConfig,
   timeZone,
 }: TrafficLightPanelProps) {
-  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style } = options;
+  const { minLightWidth, sortLights, showValue, showTrend, singleRow, style, reverseColors } = options;
   const theme = useTheme2();
   const { values, status, invalidThresholds } = useLightsData({
     fieldConfig,
@@ -37,6 +37,7 @@ export function TrafficLightPanel({
     data: data.series,
     timeZone,
     sortLights,
+    reverseColors,
   });
   const Component = TrafficLightsComponentMap[style];
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
