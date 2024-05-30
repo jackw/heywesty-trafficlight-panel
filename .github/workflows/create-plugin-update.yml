@@ -60,4 +60,4 @@ jobs:
           # Create a pull request
           gh pr create --title "Update Grafana Plugin to $CURRENT_VERSION" --body "This PR updates the Grafana plugin to version $CURRENT_VERSION. Please check the changes thoroughly before merging."
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
