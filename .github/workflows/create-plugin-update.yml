@@ -32,9 +32,9 @@ jobs:
         id: compare-versions
         run: |
           if [ "$CURRENT_VERSION" != "$CONFIG_VERSION" ]; then
-            echo "::set-output name=update_needed::true"
+            echo "update_needed=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=update_needed::false"
+            echo "update_needed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Update the package and create PR
