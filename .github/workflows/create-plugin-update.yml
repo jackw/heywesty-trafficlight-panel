@@ -1,0 +1,63 @@
+name: Check and Update Create Plugin configs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check_for_updates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get current version of the package
+        id: get-current-version
+        run: echo "CURRENT_VERSION=$(npx @grafana/create-plugin@latest --version)" >> $GITHUB_OUTPUT
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Get version from .config/.cprc.json
+        id: get-config-version
+        run: |
+          CONFIG_VERSION=$(jq -r '.version' .config/.cprc.json)
+          echo "CONFIG_VERSION=${CONFIG_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Compare versions
+        id: compare-versions
+        run: |
+          if [ "$CURRENT_VERSION" != "$CONFIG_VERSION" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update the package and create PR
+        if: steps.compare-versions.outputs.update_needed == 'true'
+        run: |
+          # Run the update command
+          npx @grafana/create-plugin update
+
+          # Configure Git user
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create a new branch for the update
+          git checkout -b update-grafana-plugin-${CURRENT_VERSION}
+
+          # Commit the changes
+          git add .
+          git commit -m "Update Grafana plugin to version $CURRENT_VERSION"
+
+          # Push the branch
+          git push origin update-grafana-plugin-${CURRENT_VERSION}
+
+          # Create a pull request
+          gh pr create --title "Update Grafana Plugin to $CURRENT_VERSION" --body "This PR updates the Grafana plugin to version $CURRENT_VERSION. Please check the changes thoroughly before merging."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
