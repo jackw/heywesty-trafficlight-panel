@@ -52,7 +52,7 @@ jobs:
           token: ${{ secrets.GH_PAT_TOKEN }}
           branch: update-grafana-create-plugin-${{ env.LATEST_VERSION }}
           delete-branch: true
-          commit-message: 'chore: run create-plugin update for version ${{ env.LATEST_VERSION }} [skip-ci]'
+          commit-message: 'chore: run create-plugin update for version ${{ env.LATEST_VERSION }}'
           title: 'Update Grafana Create Plugin configs to ${{ env.LATEST_VERSION }}'
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           body: |
