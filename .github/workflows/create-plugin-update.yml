@@ -39,12 +39,17 @@ jobs:
             echo "update_needed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Update the configs and create PR
+      - name: Update the configs
+        if: steps.compare-versions.outputs.update_needed == 'true'
+        run: |
+          npx -y @grafana/create-plugin@latest update
+
+      - name: Create PR
         uses: peter-evans/create-pull-request@v6
         if: steps.compare-versions.outputs.update_needed == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: update-grafana-create-plugin-${LATEST_VERSION}
+          branch: update-grafana-create-plugin-${{ LATEST_VERSION }}
           delete-branch: true
           commit-message: 'chore: run create-plugin update for version $LATEST_VERSION [skip-ci]'
           title: 'Update Grafana Create Plugin configs to $LATEST_VERSION'
