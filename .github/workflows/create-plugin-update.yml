@@ -43,6 +43,7 @@ jobs:
         if: steps.compare-versions.outputs.update_needed == 'true'
         run: |
           npx -y @grafana/create-plugin@latest update
+          npm install
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
@@ -55,6 +56,6 @@ jobs:
           title: 'Update Grafana Create Plugin configs to ${{ env.LATEST_VERSION }}'
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           body: |
-            This PR updates the Grafana create-plugin configurations to version $LATEST_VERSION.
+            This PR updates the Grafana create-plugin configurations to version ${{ env.LATEST_VERSION }}.
 
             Please review the changes thoroughly before merging.
