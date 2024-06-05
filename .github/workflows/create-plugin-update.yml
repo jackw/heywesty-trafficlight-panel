@@ -21,6 +21,8 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
 
       - name: Get version from .config/.cprc.json
         id: get-config-version
@@ -37,27 +39,17 @@ jobs:
             echo "update_needed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Update the package and create PR
+      - name: Update the configs and create PR
+        uses: peter-evans/create-pull-request@v6
         if: steps.compare-versions.outputs.update_needed == 'true'
-        run: |
-          # Run the update command
-          npx @grafana/create-plugin update
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-grafana-create-plugin-${LATEST_VERSION}
+          delete-branch: true
+          commit-message: 'chore: run create-plugin update for version $LATEST_VERSION [skip-ci]'
+          title: 'Update Grafana Create Plugin configs to $LATEST_VERSION'
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          body: |
+            This PR updates the Grafana create-plugin configurations to version $LATEST_VERSION.
 
-          # Configure Git user
-          git config user.name "jackw"
-          git config user.email "73201+jackw@users.noreply.github.com"
-
-          # Create a new branch for the update
-          git checkout -b update-grafana-plugin-${LATEST_VERSION}
-
-          # Commit the changes
-          git add .
-          git commit -m "Update Grafana plugin to version $LATEST_VERSION"
-
-          # Push the branch
-          git push origin update-grafana-plugin-${LATEST_VERSION}
-
-          # Create a pull request
-          gh pr create --title "Update Grafana Plugin to $LATEST_VERSION" --body "This PR updates the Grafana plugin to version $LATEST_VERSION. Please check the changes thoroughly before merging."
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+            Please review the changes thoroughly before merging.
