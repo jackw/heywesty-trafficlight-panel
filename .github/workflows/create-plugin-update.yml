@@ -50,12 +50,14 @@ jobs:
         if: steps.compare-versions.outputs.update_needed == 'true'
         with:
           token: ${{ secrets.GH_PAT_TOKEN }}
-          branch: update-grafana-create-plugin-${{ env.LATEST_VERSION }}
+          branch: update-grafana-create-plugin
           delete-branch: true
-          commit-message: 'chore: run create-plugin update for version ${{ env.LATEST_VERSION }}'
-          title: 'Update Grafana Create Plugin configs to ${{ env.LATEST_VERSION }}'
+          commit-message: 'chore: update configuration to create-plugin ${{ env.LATEST_VERSION }}'
+          title: 'Chore: Bump @grafana/create-plugin configuration to ${{ env.LATEST_VERSION }}'
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           body: |
-            This PR updates the Grafana create-plugin configurations to version ${{ env.LATEST_VERSION }}.
+            Bumps [`@grafana/create-plugin`](https://github.com/grafana/plugin-tools/tree/main/packages/create-plugin) configuration from ${{ env.CONFIG_VERSION }} to ${{ env.LATEST_VERSION }}.
 
+            **Notes for reviewer:**
+            This is an auto-generated PR which ran `npx -y @grafana/create-plugin@latest update`.
             Please review the changes thoroughly before merging.
