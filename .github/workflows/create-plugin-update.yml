@@ -60,4 +60,5 @@ jobs:
 
             **Notes for reviewer:**
             This is an auto-generated PR which ran `npx -y @grafana/create-plugin@latest update`.
+            Please consult the create-plugin [CHANGELOG.md](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/CHANGELOG.md) to understand what may have changed.
             Please review the changes thoroughly before merging.
