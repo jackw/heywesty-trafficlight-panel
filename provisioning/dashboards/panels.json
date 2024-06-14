@@ -65,7 +65,9 @@
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
         "seriesCountSize": "sm",
+        "showLegend": true,
         "showSeriesCount": false,
         "showTrend": false,
         "showValue": false,
@@ -125,7 +127,9 @@
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
         "seriesCountSize": "sm",
+        "showLegend": true,
         "showSeriesCount": false,
         "showTrend": false,
         "showValue": true,
@@ -185,7 +189,9 @@
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
         "seriesCountSize": "sm",
+        "showLegend": true,
         "showSeriesCount": false,
         "showTrend": true,
         "showValue": true,
@@ -245,7 +251,9 @@
       "options": {
         "horizontal": false,
         "minLightWidth": 100,
+        "reverseColors": false,
         "seriesCountSize": "sm",
+        "showLegend": true,
         "showSeriesCount": false,
         "showTrend": true,
         "showValue": true,
@@ -308,6 +316,8 @@
       "options": {
         "horizontal": false,
         "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": true,
@@ -361,7 +371,7 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 24,
+        "w": 12,
         "x": 0,
         "y": 21
       },
@@ -369,6 +379,8 @@
       "options": {
         "horizontal": true,
         "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -387,6 +399,210 @@
         }
       ],
       "title": "Traffic Light horizontal",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "id": 18,
+      "options": {
+        "horizontal": true,
+        "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": true,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 20
+        }
+      ],
+      "title": "Traffic Light horizontal",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "id": 19,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "reverseColors": true,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 10
+        }
+      ],
+      "title": "Traffic Light reversed colors",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 30
+      },
+      "id": 20,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": true,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "targets": [
+        {
+          "csvContent": "time, value\n100000000, 1",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "${A}+10",
+          "hide": false,
+          "reducer": "last",
+          "refId": "B",
+          "settings": {
+            "mode": "dropNN"
+          },
+          "type": "math"
+        }
+      ],
+      "title": "Traffic Light expressions",
       "type": "heywesty-trafficlight-panel"
     },
     {
@@ -420,12 +636,14 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 30
+        "y": 39
       },
       "id": 10,
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -466,12 +684,14 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 30
+        "y": 39
       },
       "id": 13,
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -523,12 +743,14 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 30
+        "y": 39
       },
       "id": 14,
       "options": {
         "horizontal": false,
         "minLightWidth": 75,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -758,12 +980,14 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 38
+        "y": 47
       },
       "id": 16,
       "options": {
         "horizontal": false,
         "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -856,12 +1080,14 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 38
+        "y": 47
       },
       "id": 17,
       "options": {
         "horizontal": false,
         "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
         "showTrend": true,
         "showValue": true,
         "singleRow": false,
@@ -898,6 +1124,6 @@
   "timezone": "",
   "title": "Traffic Lights Example",
   "uid": "O4tc_E6Gz",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
