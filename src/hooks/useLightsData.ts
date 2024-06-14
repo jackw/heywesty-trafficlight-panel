@@ -103,7 +103,10 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
         };
       });
 
-      const trendValue = basicTrend(displayValue.view?.dataFrame.fields[1].values.toArray());
+      const fieldValues =
+        displayValue.view?.dataFrame.fields[1]?.values.toArray() ||
+        displayValue.view?.dataFrame.fields[0]?.values.toArray();
+      const trendValue = basicTrend(fieldValues);
       const trendColor = theme.visualization.getColorByName(getTrendColor(trendValue));
 
       if (!thresholdsValid) {
