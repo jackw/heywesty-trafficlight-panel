@@ -8,6 +8,10 @@ on:
 jobs:
   check_for_updates:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
       - name: Setup Node.js
@@ -21,8 +25,6 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
 
       - name: Get version from .config/.cprc.json
         id: get-config-version
@@ -49,7 +51,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: steps.compare-versions.outputs.update_needed == 'true'
         with:
-          token: ${{ secrets.GH_PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-grafana-create-plugin
           delete-branch: true
           commit-message: 'chore: update configuration to create-plugin ${{ env.LATEST_VERSION }}'
