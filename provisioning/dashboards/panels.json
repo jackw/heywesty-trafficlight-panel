@@ -620,6 +620,69 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 2
+              },
+              {
+                "color": "#73BF69",
+                "value": 4
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 21,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": true,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "targets": [
+        {
+          "csvContent": "\"Name\",\"Value\"\n\"Blob Storage\", 1\n\"Exported Storage\", 4\n\"Hangfire\", 3\n\"Imported Storage\", 5\n\"SQL server db\", 1",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Traffic Light expressions",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "green",
                 "value": null
               },
@@ -636,7 +699,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 39
+        "y": 47
       },
       "id": 10,
       "options": {
@@ -684,7 +747,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 39
+        "y": 47
       },
       "id": 13,
       "options": {
@@ -743,7 +806,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 39
+        "y": 47
       },
       "id": 14,
       "options": {
@@ -786,8 +849,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "red",
@@ -818,8 +880,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-red",
-                      "value": null
+                      "color": "super-light-red"
                     },
                     {
                       "color": "red",
@@ -846,8 +907,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-orange",
-                      "value": null
+                      "color": "super-light-orange"
                     },
                     {
                       "color": "orange",
@@ -874,8 +934,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-yellow",
-                      "value": null
+                      "color": "super-light-yellow"
                     },
                     {
                       "color": "yellow",
@@ -902,8 +961,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-green",
-                      "value": null
+                      "color": "super-light-green"
                     },
                     {
                       "color": "green",
@@ -930,8 +988,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-blue",
-                      "value": null
+                      "color": "super-light-blue"
                     },
                     {
                       "color": "blue",
@@ -958,8 +1015,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-purple",
-                      "value": null
+                      "color": "super-light-purple"
                     },
                     {
                       "color": "purple",
@@ -980,7 +1036,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 47
+        "y": 55
       },
       "id": 16,
       "options": {
@@ -1035,8 +1091,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -1080,7 +1135,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 47
+        "y": 55
       },
       "id": 17,
       "options": {
@@ -1117,13 +1172,13 @@
     "list": []
   },
   "time": {
-    "from": "2022-01-27T20:00:00.000Z",
-    "to": "2022-01-31T23:00:00.000Z"
+    "from": "now-1h",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Traffic Lights Example",
   "uid": "O4tc_E6Gz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
