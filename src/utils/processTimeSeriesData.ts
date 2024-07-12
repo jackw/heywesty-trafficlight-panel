@@ -1,6 +1,7 @@
 import { GrafanaTheme2, DataFrame, InterpolateFunction, getFieldDisplayValues, FieldConfigSource } from '@grafana/data';
 import { validateThresholds, basicTrend, getTrendColor, getColors } from './utils';
 import { LightsDataResultStatus, LightsDataResult } from '../types';
+import { DEFAULT_VALUES } from '../constants';
 
 export function processTimeSeriesData(
   fieldConfig: FieldConfigSource<any>,
@@ -10,6 +11,10 @@ export function processTimeSeriesData(
   timeZone: string | undefined,
   reverseColors: boolean
 ): LightsDataResult {
+  if (!data || data.length === 0) {
+    return DEFAULT_VALUES;
+  }
+
   let status = LightsDataResultStatus.nodata;
   let invalidThresholds;
   const fieldDisplayValues = getFieldDisplayValues({

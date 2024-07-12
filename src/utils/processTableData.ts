@@ -8,6 +8,10 @@ export function processTableData(
   data: DataFrame[] | undefined,
   reverseColors: boolean
 ): LightsDataResult {
+  if (!data || data.length === 0) {
+    return DEFAULT_VALUES;
+  }
+
   let status = LightsDataResultStatus.nodata;
   let invalidThresholds;
   const numericField = data![0].fields.find((f: Field) => f.type === FieldType.number);
