@@ -1,8 +1,8 @@
 import { GrafanaTheme2, PanelProps } from '@grafana/data';
 import React from 'react';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
-import { TrafficLightOptions } from 'types';
-import { LightsDataResultStatus, LightsDataValues, useLightsData } from 'hooks/useLightsData';
+import { LightsDataResultStatus, LightsDataValues, TrafficLightOptions } from '../types';
+import { useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
 import { TEST_IDS } from '../constants';
 import { ThresholdsAssistant } from './ThresholdsAssistant';
@@ -128,7 +128,7 @@ function TrafficLightValue({ showValue, showLegend, showTrend, light, theme }: T
 
   return (
     <div
-    data-testid={TEST_IDS.trafficLightValueContainer}
+      data-testid={TEST_IDS.trafficLightValueContainer}
       style={{
         alignItems: 'center',
         backgroundColor: showTrend

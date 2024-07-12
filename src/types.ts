@@ -1,3 +1,5 @@
+import { GetFieldDisplayValuesOptions, LinkModel, ThresholdsConfig } from '@grafana/data';
+
 export enum SortOptions {
   None = 'none',
   Asc = 'ascending',
@@ -21,3 +23,38 @@ export enum TrafficLightStyles {
   Rounded = 'rounded',
   SideLights = 'sidelights',
 }
+
+export enum LightsDataResultStatus {
+  unsupported = 'unsupported',
+  incorrectThresholds = 'incorrectThresholds',
+  nodata = 'nodata',
+  success = 'success',
+}
+
+export type LightsDataValues = {
+  title?: string;
+  value: string;
+  prefix?: string;
+  suffix?: string;
+  colors?: Array<{
+    color: string;
+    active: boolean;
+  }>;
+  trend: {
+    color: string;
+    value: number;
+  };
+  hasLinks: boolean;
+  getLinks?: () => Array<LinkModel<any>>;
+};
+
+export type LightsDataResult = {
+  values: LightsDataValues[];
+  status: LightsDataResultStatus;
+  invalidThresholds?: ThresholdsConfig;
+};
+
+export type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions'> & {
+  sortLights: SortOptions;
+  reverseColors: boolean;
+};

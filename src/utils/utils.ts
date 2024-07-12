@@ -1,3 +1,7 @@
+import { DataFrame, FieldType, getActiveThreshold, ThresholdsConfig } from '@grafana/data';
+
+import { LightsDataValues, SortOptions } from '../types';
+
 export function basicTrend(data?: number[]) {
   const diff: {
     increasing: number[];
@@ -55,4 +59,73 @@ export function calculateRowsAndColumns(containerWidth: number, itemWidth: numbe
   const cols = Math.ceil(itemCount / rows);
 
   return { rows, cols };
+}
+
+export function sortByValue(arr: LightsDataValues[], sortOrder: SortOptions): LightsDataValues[] {
+  return arr.sort((a, b) => {
+    if (sortOrder === SortOptions.Asc) {
+      return a.value.localeCompare(b.value);
+    } else {
+      return b.value.localeCompare(a.value);
+    }
+  });
+}
+
+export function isSupported(data?: DataFrame[]): boolean {
+  if (!data || data.length === 0) {
+    return false;
+  }
+
+  return data.every((d) => {
+    const field = d.fields.find((f) => {
+      return f.type === FieldType.number;
+    });
+
+    return Boolean(field);
+  });
+}
+
+export function isTimeSeries(data?: DataFrame[]): boolean {
+  return Boolean(data?.some((d) => d.fields.some((f) => f.type === FieldType.time)));
+}
+
+export function noData(data?: DataFrame[]): boolean {
+  return !data || data.length === 0;
+}
+
+export function getTrendColor(value: number) {
+  switch (value) {
+    case -1:
+      return 'red';
+    case 0:
+      return 'transparent';
+    default:
+      return '#73BF69';
+  }
+}
+
+export function validateThresholds(thresholds?: ThresholdsConfig) {
+  const numberOfSteps = thresholds?.steps.length;
+  if (!numberOfSteps || numberOfSteps < 3) {
+    return false;
+  }
+
+  return true;
+}
+
+export function getColors(
+  value: number,
+  reverseColors: boolean,
+  getColorByName: (name: string) => string,
+  thresholds?: ThresholdsConfig
+) {
+  const activeThreshold = getActiveThreshold(value, thresholds?.steps);
+  const thresholdSteps = thresholds?.steps ?? [];
+  const maybeReversedThresholdSteps = reverseColors ? thresholdSteps.slice().reverse() : thresholdSteps;
+  return maybeReversedThresholdSteps.map((threshold) => {
+    return {
+      color: getColorByName(threshold.color),
+      active: threshold.value === activeThreshold.value,
+    };
+  });
 }
