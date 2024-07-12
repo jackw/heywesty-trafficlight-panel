@@ -1,6 +1,6 @@
 import { DEFAULT_VALUES } from '../constants';
 import { useMemo } from 'react';
-import { LightsDataResult, SortOptions, UseLightsData } from 'types';
+import { LightsDataResult, LightsDataResultStatus, SortOptions, UseLightsData } from 'types';
 import { processTableData } from 'utils/processTableData';
 import { processTimeSeriesData } from 'utils/processTimeSeriesData';
 import { isSupported, isTimeSeries, noData, sortByValue } from 'utils/utils';
@@ -13,7 +13,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
     }
 
     if (!isSupported(data)) {
-      return DEFAULT_VALUES;
+      return {...DEFAULT_VALUES, status: LightsDataResultStatus.unsupported};
     }
 
     // Support for both time series and table data.

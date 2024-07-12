@@ -72,6 +72,29 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
   await expect(trafficLightValueContainer).not.toBeVisible();
 });
 
+test('Table data: panel displays a traffic light for each row', async ({ panelEditPage, page, selectors }) => {
+  await panelEditPage.setVisualization('Traffic Light');
+  await page.getByRole('button', { name: /add Threshold/i }).click();
+  await panelEditPage.getQueryEditorRow('A').getByText('Scenario').click();
+  await page.keyboard.insertText('CSV Content');
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => (window as any).monaco);
+  await panelEditPage.getByGrafanaSelector(selectors.components.CodeEditor.container).click();
+  await page.keyboard.insertText(`"Name","Value"
+"Blob Storage", 100
+"Exported Storage", 40
+"Hangfire", 30
+"Imported Storage", 50
+"SQL server db", 10`);
+  panelEditPage.refreshPanel();
+  const trafficLightPanel = await page.getByTestId(TEST_IDS.trafficLight);
+  await expect(trafficLightPanel).toBeVisible();
+  await expect(trafficLightPanel.getByTestId(TEST_IDS.go)).toBeVisible();
+  const trafficLightPanelValues = await page.getByTestId(TEST_IDS.trafficLightValue).all();
+  await expect(trafficLightPanelValues.length).toBe(5);
+
+});
+
 async function getBackgroundColor(el: Locator) {
   return el.evaluate((el) => {
     return window.getComputedStyle(el).getPropertyValue('background-color');
