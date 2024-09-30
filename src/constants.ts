@@ -15,6 +15,7 @@ const EMPTY_VALUE: LightsDataValues = {
   title: '',
   value: '',
   numericValue: NaN,
+  colors: [],
   trend: { color: 'transparent', value: 0 },
   hasLinks: false,
 };
