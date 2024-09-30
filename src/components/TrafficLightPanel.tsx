@@ -1,7 +1,7 @@
 import { GrafanaTheme2, PanelProps } from '@grafana/data';
 import React from 'react';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
-import { LightsDataResultStatus, LightsDataValues, TrafficLightOptions } from '../types';
+import { LightsDataResultStatus, LightsDataValues, TrafficLightOptions, TrafficLightStyles } from '../types';
 import { useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
 import { TEST_IDS } from '../constants';
@@ -9,6 +9,7 @@ import { ThresholdsAssistant } from './ThresholdsAssistant';
 import { TrafficLightDefault } from './TrafficLightDefault';
 import { TrafficLightRounded } from './TrafficLightRounded';
 import { TrafficLightSideLights } from './TrafficLightSideLights';
+import { TrafficLightDynamic } from './TrafficLightDynamic';
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
 
@@ -16,6 +17,7 @@ const TrafficLightsComponentMap = {
   default: TrafficLightDefault,
   rounded: TrafficLightRounded,
   sidelights: TrafficLightSideLights,
+  dynamic: TrafficLightDynamic,
 };
 
 export function TrafficLightPanel({
@@ -58,7 +60,7 @@ export function TrafficLightPanel({
     );
   }
 
-  if (status === LightsDataResultStatus.incorrectThresholds) {
+  if (status === LightsDataResultStatus.incorrectThresholds && style !== TrafficLightStyles.Dynamic) {
     return (
       <div style={styles.centeredContent}>
         <ThresholdsAssistant thresholds={invalidThresholds} />
