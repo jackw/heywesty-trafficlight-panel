@@ -65,6 +65,7 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
             { value: TrafficLightStyles.Default, label: 'Default' },
             { value: TrafficLightStyles.Rounded, label: 'Rounded' },
             { value: TrafficLightStyles.SideLights, label: 'Side lights' },
+            { value: TrafficLightStyles.Dynamic, label: 'Dynamic' },
           ],
         },
       })
