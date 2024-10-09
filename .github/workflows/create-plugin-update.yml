@@ -6,59 +6,9 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  check_for_updates:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Get latest version of the package
-        id: get-latest-version
-        run: echo "LATEST_VERSION=$(npx -y @grafana/create-plugin@latest version)" >> "$GITHUB_ENV"
-
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
-
-      - name: Get version from .config/.cprc.json
-        id: get-config-version
-        run: |
-          CONFIG_VERSION=$(jq -r '.version' .config/.cprc.json)
-          echo "CONFIG_VERSION=${CONFIG_VERSION}" >> "$GITHUB_ENV"
-
-      - name: Compare versions
-        id: compare-versions
-        run: |
-          if [ "$LATEST_VERSION" != "$CONFIG_VERSION" ]; then
-            echo "update_needed=true" >> $GITHUB_OUTPUT
-          else
-            echo "update_needed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Update the configs
-        if: steps.compare-versions.outputs.update_needed == 'true'
-        run: |
-          npx -y @grafana/create-plugin@latest update
-          npm install
-
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v6
-        if: steps.compare-versions.outputs.update_needed == 'true'
+      - uses: grafana/plugin-actions/create-plugin-update@jackw/create-plugin-update
         with:
           token: ${{ secrets.GH_PAT_TOKEN }}
-          branch: update-grafana-create-plugin
-          delete-branch: true
-          commit-message: 'chore: update configuration to create-plugin ${{ env.LATEST_VERSION }}'
-          title: 'Chore: Bump @grafana/create-plugin configuration to ${{ env.LATEST_VERSION }}'
-          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          body: |
-            Bumps [`@grafana/create-plugin`](https://github.com/grafana/plugin-tools/tree/main/packages/create-plugin) configuration from ${{ env.CONFIG_VERSION }} to ${{ env.LATEST_VERSION }}.
-
-            **Notes for reviewer:**
-            This is an auto-generated PR which ran `npx -y @grafana/create-plugin@latest update`.
-            Please consult the create-plugin [CHANGELOG.md](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/CHANGELOG.md) to understand what may have changed.
-            Please review the changes thoroughly before merging.
