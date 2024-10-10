@@ -23,7 +23,7 @@ export function processTableData(
   }
 
   const values = numericField.values.toArray().map((value: number, idx) => {
-    const { text, suffix, prefix } = numericField!.display!(value);
+    const { text, suffix, prefix, numeric } = numericField!.display!(value);
     const title = stringField.values.toArray()[idx];
     const colors = getColors(value, reverseColors, theme.visualization.getColorByName, numericField.config.thresholds);
     if (!thresholdsValid) {
@@ -36,6 +36,7 @@ export function processTableData(
     return {
       title,
       value: text,
+      numericValue: numeric,
       prefix,
       suffix,
       colors,
