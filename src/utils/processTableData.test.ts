@@ -140,6 +140,7 @@ describe('processTableData', () => {
         {
           title: 'Blob Storage',
           value: '1',
+          numericValue: 1,
           prefix: undefined,
           suffix: undefined,
           colors: [
@@ -154,6 +155,7 @@ describe('processTableData', () => {
         {
           title: 'Exported Storage',
           value: '4',
+          numericValue: 4,
           prefix: undefined,
           suffix: undefined,
           colors: [

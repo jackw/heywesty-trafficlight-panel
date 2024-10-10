@@ -192,6 +192,7 @@ describe('processTimeSeriesData', () => {
           title: 'A-series',
           trend: { color: '#F2495C', value: -1 },
           value: '91.5',
+          numericValue: 91.53216537627421,
         },
       ],
     });
