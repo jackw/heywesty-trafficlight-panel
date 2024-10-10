@@ -14,6 +14,7 @@ export const TEST_IDS = {
 const EMPTY_VALUE: LightsDataValues = {
   title: '',
   value: '',
+  numericValue: NaN,
   trend: { color: 'transparent', value: 0 },
   hasLinks: false,
 };

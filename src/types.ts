@@ -34,6 +34,7 @@ export enum LightsDataResultStatus {
 export type LightsDataValues = {
   title?: string;
   value: string;
+  numericValue: number;
   prefix?: string;
   suffix?: string;
   colors?: Array<{

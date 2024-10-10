@@ -64,9 +64,9 @@ export function calculateRowsAndColumns(containerWidth: number, itemWidth: numbe
 export function sortByValue(arr: LightsDataValues[], sortOrder: SortOptions): LightsDataValues[] {
   return arr.sort((a, b) => {
     if (sortOrder === SortOptions.Asc) {
-      return a.value.localeCompare(b.value);
+      return a.numericValue - b.numericValue;
     } else {
-      return b.value.localeCompare(a.value);
+      return b.numericValue - a.numericValue;
     }
   });
 }

@@ -28,7 +28,7 @@ export function processTimeSeriesData(
 
   const values = fieldDisplayValues.map((displayValue) => {
     const thresholdsValid = validateThresholds(displayValue.field.thresholds);
-    const { title, text, suffix, prefix } = displayValue.display;
+    const { title, text, suffix, prefix, numeric } = displayValue.display;
     const colors = getColors(
       displayValue.display.numeric,
       reverseColors,
@@ -52,6 +52,7 @@ export function processTimeSeriesData(
     return {
       title,
       value: text,
+      numericValue: numeric,
       prefix,
       suffix,
       colors,
