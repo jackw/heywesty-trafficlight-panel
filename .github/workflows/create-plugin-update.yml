@@ -3,15 +3,12 @@ name: Check and Update Create Plugin configs
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
-
-# necessary to create pull requests
-permissions:
-  contents: write
-  pull-requests: write
+    - cron: '0 0 * * 0'
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: grafana/plugin-actions/create-plugin-update@jackw/create-plugin-update
+        with:
+          token: ${{ secrets.GH_PAT_TOKEN }}
