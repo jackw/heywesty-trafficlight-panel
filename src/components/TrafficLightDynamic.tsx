@@ -20,6 +20,8 @@ export function TrafficLightDynamic({
   const minGap = 4;
   const maxGap = 24;
   const numberOfLights = colors.length;
+  const x = 52;
+  const lightWidth = 168;
   const { height, yPosition } = calculateLightPositions(totalAvailableHeight, minGap, maxGap, numberOfLights);
 
   return (
@@ -31,7 +33,6 @@ export function TrafficLightDynamic({
       onClick={onClick}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
-        <rect x="52" y="57.0952" width="168" height="398" fill={emptyColor} />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -42,9 +43,9 @@ export function TrafficLightDynamic({
         {colors.map((light, index) => (
           <g key={index}>
             <rect
-              x="52"
+              x={x}
               y={yPosition[index]}
-              width="168"
+              width={lightWidth}
               height={height}
               rx="8"
               fill={light.active ? light.color : emptyColor}
@@ -56,6 +57,16 @@ export function TrafficLightDynamic({
                   : {}
               }
             />
+            {light.active && (
+              <ellipse
+                cx={x + lightWidth - 16}
+                cy={yPosition[index] + 16}
+                rx={8}
+                ry={8}
+                fill="white"
+                fillOpacity="0.35"
+              />
+            )}
           </g>
         ))}
       </g>
