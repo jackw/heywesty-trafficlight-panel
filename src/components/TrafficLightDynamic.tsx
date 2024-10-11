@@ -1,6 +1,5 @@
 import React from 'react';
 import { Colors } from 'types';
-import { clamp } from 'utils/utils';
 
 type TrafficLightProps = {
   colors: Colors[];
@@ -17,26 +16,11 @@ export function TrafficLightDynamic({
   onClick,
   horizontal = false,
 }: TrafficLightProps) {
-  const maxViewHeight = 512;
-  const verticalMargin = 20;
-  const lightBoundary = maxViewHeight - 2 * verticalMargin;
-
-  const maxLightRadius = 50;
-  const minLightRadius = 10;
-  const minGap = 5;
-  const lightCount = colors.length;
-
-  // Initial guess then ensure light radius is within bounds
-  let calculatedLightRadius = lightBoundary / (2 * lightCount + (lightCount - 1));
-  calculatedLightRadius = clamp(calculatedLightRadius, minLightRadius, maxLightRadius);
-
-  // Calculate the gap to ensure lights are always larger than the gap
-  let calculatedGap = calculatedLightRadius / 2;
-  calculatedGap = clamp(calculatedGap, minGap, calculatedLightRadius - minGap);
-
-  const lightRadius = clamp(calculatedLightRadius, calculatedGap + minGap, maxLightRadius);
-  const totalLightsHeight = lightCount * (2 * lightRadius) + (lightCount - 1) * calculatedGap;
-  const centerY = (maxViewHeight - totalLightsHeight) / 2;
+  const totalAvailableHeight = 406;
+  const minGap = 4;
+  const maxGap = 24;
+  const numberOfLights = colors.length;
+  const { height, yPosition } = calculateLightPositions(totalAvailableHeight, minGap, maxGap, numberOfLights);
 
   return (
     <svg
@@ -47,70 +31,62 @@ export function TrafficLightDynamic({
       onClick={onClick}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
+        <rect x="52" y="57.0952" width="168" height="398" fill={emptyColor} />
         <path
-          fill={bgColor}
           fillRule="evenodd"
-          d="M46 13c-11.046 0-20 8.954-20 20v446.095c0 11.046 8.954 20 20 20h180c11.046 0 20-8.954 20-20V33c0-11.046-8.954-20-20-20H46Z"
           clipRule="evenodd"
+          d="M46 13C34.9543 13 26 21.9543 26 33V479.095C26 490.141 34.9543 499.095 46 499.095H226C237.046 499.095 246 490.141 246 479.095V33C246 21.9543 237.046 13 226 13H46Z"
+          fill={bgColor}
         />
+
         {colors.map((light, index) => (
-          <Light
-            key={index}
-            index={index}
-            cy={centerY + lightRadius + index * (2 * lightRadius + calculatedGap)}
-            lightRadius={lightRadius}
-            light={light}
-            emptyColor={emptyColor}
-          />
+          <g key={index}>
+            <rect
+              x="52"
+              y={yPosition[index]}
+              width="168"
+              height={height}
+              rx="8"
+              fill={light.active ? light.color : emptyColor}
+              style={
+                light.active
+                  ? {
+                      filter: `drop-shadow(0 0 16px ${light.color})`,
+                    }
+                  : {}
+              }
+            />
+          </g>
         ))}
       </g>
     </svg>
   );
 }
 
-function Light({
-  index,
-  cy,
-  lightRadius,
-  light,
-  emptyColor,
-}: {
-  index: number;
-  cy: number;
-  lightRadius: number;
-  light: { color: string; active: boolean };
-  emptyColor: string;
-}) {
-  const cx = 136;
+function calculateLightPositions(
+  totalHeight: number,
+  minGap: number,
+  maxGap: number,
+  numberOfLights: number,
+  startOffset = 57
+) {
+  const numGaps = numberOfLights - 1;
+  const initialGapSize = maxGap / (numberOfLights * 0.5);
+  const gapSize = Math.max(minGap, Math.min(maxGap, initialGapSize));
+  const totalGapHeight = gapSize * numGaps;
+  const remainingHeightForLights = totalHeight - totalGapHeight;
+  const lightHeight = remainingHeightForLights / numberOfLights;
 
-  return (
-    <g key={index}>
-      {light.active ? (
-        <g>
-          <ellipse
-            cx={cx}
-            cy={cy}
-            rx={lightRadius}
-            ry={lightRadius}
-            fill={light.color}
-            style={{
-              filter: `drop-shadow(0 0 16px ${light.color})`,
-            }}
-          />
+  let currentYPosition = startOffset;
+  const yPositions: number[] = [];
 
-          <ellipse
-            cx={cx + lightRadius * 0.3}
-            cy={cy - lightRadius * 0.45}
-            fill="#fff"
-            fillOpacity=".35"
-            rx={lightRadius / 4}
-            ry={lightRadius / 2.5}
-            transform={`rotate(-45 153.81 ${cx + lightRadius * 0.3} ${cy - lightRadius * 0.45})`}
-          />
-        </g>
-      ) : (
-        <ellipse data-testid={`light-${index}`} cx={136} cy={cy} rx={lightRadius} ry={lightRadius} fill={emptyColor} />
-      )}
-    </g>
-  );
+  for (let i = 0; i < numberOfLights; i++) {
+    yPositions.push(currentYPosition);
+    currentYPosition += lightHeight + gapSize;
+  }
+
+  return {
+    height: lightHeight,
+    yPosition: yPositions,
+  };
 }
