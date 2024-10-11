@@ -63,12 +63,47 @@ describe('basicTrend', () => {
 
 describe('sortByValue', () => {
   const data: LightsDataValues[] = [
-    { title: 'Light 1', value: '532', numericValue: 532, hasLinks: false, trend: { color: 'red', value: 1 } },
-    { title: 'Light 2', value: '9', numericValue: 9, hasLinks: false, trend: { color: 'green', value: 1 } },
-    { title: 'Light 3', value: '91', numericValue: 91, hasLinks: false, trend: { color: 'yellow', value: 1 } },
-    { title: 'Light 4', value: '524', numericValue: 524, hasLinks: false, trend: { color: 'blue', value: 1 } },
-    { title: 'Light 5', value: '8', numericValue: 8, hasLinks: false, trend: { color: 'orange', value: 1 } },
-    { title: 'Light 6', value: '6', numericValue: 6, hasLinks: false, trend: { color: 'purple', value: 1 } },
+    {
+      title: 'Light 1',
+      value: '532',
+      numericValue: 532,
+      hasLinks: false,
+      colors: [],
+      trend: { color: 'red', value: 1 },
+    },
+    { title: 'Light 2', value: '9', numericValue: 9, hasLinks: false, colors: [], trend: { color: 'green', value: 1 } },
+    {
+      title: 'Light 3',
+      value: '91',
+      numericValue: 91,
+      hasLinks: false,
+      colors: [],
+      trend: { color: 'yellow', value: 1 },
+    },
+    {
+      title: 'Light 4',
+      value: '524',
+      numericValue: 524,
+      hasLinks: false,
+      colors: [],
+      trend: { color: 'blue', value: 1 },
+    },
+    {
+      title: 'Light 5',
+      value: '8',
+      numericValue: 8,
+      hasLinks: false,
+      colors: [],
+      trend: { color: 'orange', value: 1 },
+    },
+    {
+      title: 'Light 6',
+      value: '6',
+      numericValue: 6,
+      hasLinks: false,
+      colors: [],
+      trend: { color: 'purple', value: 1 },
+    },
   ];
 
   it('should sort by ascending numericValue', () => {

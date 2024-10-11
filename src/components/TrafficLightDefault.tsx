@@ -1,8 +1,9 @@
 import React from 'react';
 import { TEST_IDS } from '../constants';
+import { Colors } from 'types';
 
 type TrafficLightProps = {
-  colors: any;
+  colors: Colors[];
   bgColor?: string;
   emptyColor?: string;
   onClick?: React.MouseEventHandler<SVGSVGElement>;

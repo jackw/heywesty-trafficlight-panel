@@ -22,6 +22,7 @@ export enum TrafficLightStyles {
   Default = 'default',
   Rounded = 'rounded',
   SideLights = 'sidelights',
+  Dynamic = 'dynamic',
 }
 
 export enum LightsDataResultStatus {
@@ -31,16 +32,18 @@ export enum LightsDataResultStatus {
   success = 'success',
 }
 
+export type Colors = {
+  color: string;
+  active: boolean;
+};
+
 export type LightsDataValues = {
   title?: string;
   value: string;
   numericValue: number;
   prefix?: string;
   suffix?: string;
-  colors?: Array<{
-    color: string;
-    active: boolean;
-  }>;
+  colors: Colors[];
   trend: {
     color: string;
     value: number;
