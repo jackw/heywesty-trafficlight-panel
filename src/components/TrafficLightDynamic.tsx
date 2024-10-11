@@ -1,5 +1,6 @@
 import React from 'react';
 import { Colors } from 'types';
+import { clamp } from 'utils/utils';
 
 type TrafficLightProps = {
   colors: Colors[];
@@ -83,7 +84,7 @@ function calculateLightPositions(
 ) {
   const numGaps = numberOfLights - 1;
   const initialGapSize = maxGap / (numberOfLights * 0.5);
-  const gapSize = Math.max(minGap, Math.min(maxGap, initialGapSize));
+  const gapSize = clamp(initialGapSize, minGap, maxGap);
   const totalGapHeight = gapSize * numGaps;
   const remainingHeightForLights = totalHeight - totalGapHeight;
   const lightHeight = remainingHeightForLights / numberOfLights;
