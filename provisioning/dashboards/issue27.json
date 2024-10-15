@@ -1,0 +1,109 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "foo",
+              "url": "bar"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 45
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "horizontal": false,
+        "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "singleRow": false,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "P4C36DE0A46B5463F"
+          },
+          "rawFrameContent": "[\n  {\n    \"fields\": [\n      {\n        \"name\": \"serial_number\",\n        \"type\": \"string\",\n        \"config\": {\n          \"filterable\": true\n        },\n        \"values\": [\n          \"NA\",\n          \"1984\"\n        ]\n      },\n      {\n        \"name\": \"Average\",\n        \"type\": \"number\",\n        \"config\": {},\n        \"values\": [\n          null,\n          26.103846036470852\n        ]\n      }\n    ],\n    \"refId\": \"A\"\n  }\n]",
+          "refId": "A",
+          "scenarioId": "raw_frame"
+        }
+      ],
+      "title": "Panel Title",
+      "type": "heywesty-trafficlight-panel"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Issue 27",
+  "uid": "de0kkrcjn9q80d",
+  "version": 3,
+  "weekStart": ""
+}

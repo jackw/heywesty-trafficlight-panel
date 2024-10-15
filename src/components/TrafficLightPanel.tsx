@@ -68,6 +68,16 @@ export function TrafficLightPanel({
     );
   }
 
+  values.map((light) => {
+    if (light.hasLinks && light.getLinks !== undefined) {
+      try {
+        light.getLinks();
+      } catch (error) {
+        console.error('Error getting links', error);
+      }
+    }
+  });
+
   return (
     <div
       style={{
@@ -81,19 +91,18 @@ export function TrafficLightPanel({
         {values.map((light) => (
           // @ts-ignore TODO: fix conditional styles errors.
           <div key={light.title} style={styles.itemStyle}>
-            {light.hasLinks && light.getLinks !== undefined ? (
-              <DataLinksContextMenu links={light.getLinks} style={{ flexGrow: 1 }}>
-                {(api) => (
-                  <Component
-                    bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
-                    emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
-                    colors={light.colors}
-                    onClick={api.openMenu}
-                    horizontal={options.horizontal}
-                  />
-                )}
-              </DataLinksContextMenu>
-            ) : (
+            {light.hasLinks && light.getLinks !== undefined ? null : (
+              // <DataLinksContextMenu links={() => light.getLinks!() || []} style={{ flexGrow: 1 }}>
+              //   {(api) => (
+              //     <Component
+              //       bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
+              //       emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
+              //       colors={light.colors}
+              //       onClick={api.openMenu}
+              //       horizontal={options.horizontal}
+              //     />
+              //   )}
+              // </DataLinksContextMenu>
               <Component
                 bgColor={theme.isDark ? theme.colors.background.secondary : '#C5C5C8'}
                 emptyColor={theme.isDark ? theme.colors.background.primary : '#AAAAAF'}
