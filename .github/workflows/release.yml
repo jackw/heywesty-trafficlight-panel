@@ -7,11 +7,12 @@ on:
     tags:
       - 'v*' # Run workflow on version tags, e.g. v1.0.0.
 
-permissions:
-  contents: write
+permissions: read-all
 
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,4 +22,5 @@ jobs:
         with:
           # Make sure to save the token in your repository secrets
           policy_token: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
-          # Usage of GRAFANA_API_KEY is deprecated, prefer `policy_token` option above
+        # Usage of GRAFANA_API_KEY is deprecated, prefer `policy_token` option above
+        # grafana_token: $

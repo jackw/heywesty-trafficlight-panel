@@ -50,7 +50,7 @@ test('Panel displays unsupported message when data format is unsupported', async
   await panelEditPage.getByGrafanaSelector(selectors.components.CodeEditor.container).click();
   await page.keyboard.insertText(`time, value
 10000000000, 'a'`);
-  await panelEditPage.getByGrafanaSelector('Refresh dashboard').click();
+  await panelEditPage.getByGrafanaSelector(selectors.components.RefreshPicker.runButtonV2).click();
 
   await expect(panelEditPage.getVisualizationName()).toHaveText('Traffic Light');
   await expect(await page.getByTestId(TEST_IDS.feedbackMsgContainer)).toHaveText('This data format is unsupported.');
