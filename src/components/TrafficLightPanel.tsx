@@ -1,15 +1,48 @@
-import { GrafanaTheme2, PanelProps } from '@grafana/data';
-import React from 'react';
+import { GrafanaTheme2, PanelProps, ThresholdsConfig } from '@grafana/data';
+import React, { lazy, Suspense } from 'react';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
-import { LightsDataResultStatus, LightsDataValues, TrafficLightOptions, TrafficLightStyles } from '../types';
+import {
+  LightsDataResultStatus,
+  LightsDataValues,
+  TrafficLightOptions,
+  TrafficLightProps,
+  TrafficLightStyles,
+} from '../types';
 import { useLightsData } from 'hooks/useLightsData';
 import { calculateRowsAndColumns } from 'utils/utils';
 import { TEST_IDS } from '../constants';
-import { ThresholdsAssistant } from './ThresholdsAssistant';
-import { TrafficLightDefault } from './TrafficLightDefault';
-import { TrafficLightRounded } from './TrafficLightRounded';
-import { TrafficLightSideLights } from './TrafficLightSideLights';
-import { TrafficLightDynamic } from './TrafficLightDynamic';
+
+const LazyThresholdsAssistant = lazy(() => import('./ThresholdsAssistant'));
+const LazyTrafficLightDefault = lazy(() => import('./TrafficLightDefault'));
+const LazyTrafficLightRounded = lazy(() => import('./TrafficLightRounded'));
+const LazyTrafficLightSideLights = lazy(() => import('./TrafficLightSideLights'));
+const LazyTrafficLightDynamic = lazy(() => import('./TrafficLightDynamic'));
+
+const ThresholdsAssistant = ({ thresholds }: { thresholds?: ThresholdsConfig }) => (
+  <Suspense fallback={null}>
+    <LazyThresholdsAssistant thresholds={thresholds} />
+  </Suspense>
+);
+const TrafficLightDefault = (props: TrafficLightProps) => (
+  <Suspense fallback={null}>
+    <LazyTrafficLightDefault {...props} />
+  </Suspense>
+);
+const TrafficLightRounded = (props: TrafficLightProps) => (
+  <Suspense fallback={null}>
+    <LazyTrafficLightRounded {...props} />
+  </Suspense>
+);
+const TrafficLightSideLights = (props: TrafficLightProps) => (
+  <Suspense fallback={null}>
+    <LazyTrafficLightSideLights {...props} />
+  </Suspense>
+);
+const TrafficLightDynamic = (props: TrafficLightProps) => (
+  <Suspense fallback={null}>
+    <LazyTrafficLightDynamic {...props} />
+  </Suspense>
+);
 
 interface TrafficLightPanelProps extends PanelProps<TrafficLightOptions> {}
 
