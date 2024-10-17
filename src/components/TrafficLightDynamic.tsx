@@ -1,16 +1,8 @@
 import React from 'react';
-import { Colors } from 'types';
+import { TrafficLightProps } from 'types';
 import { clamp } from 'utils/utils';
 
-type TrafficLightProps = {
-  colors: Colors[];
-  bgColor?: string;
-  emptyColor?: string;
-  onClick?: React.MouseEventHandler<SVGSVGElement>;
-  horizontal: boolean;
-};
-
-export function TrafficLightDynamic({
+export default function TrafficLightDynamic({
   colors = [],
   bgColor = 'grey',
   emptyColor = 'black',
