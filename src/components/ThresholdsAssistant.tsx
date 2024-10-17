@@ -3,7 +3,7 @@ import { GrafanaTheme2, ThresholdsConfig } from '@grafana/data';
 import { Alert, Icon, useStyles2 } from '@grafana/ui';
 import React from 'react';
 
-export function ThresholdsAssistant({ thresholds }: { thresholds?: ThresholdsConfig }) {
+export default function ThresholdsAssistant({ thresholds }: { thresholds?: ThresholdsConfig }) {
   const validSteps = validateThresholds(thresholds!);
   const styles = useStyles2(getStyles);
   return (
