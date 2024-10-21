@@ -1,4 +1,4 @@
-name: Compare Stats and Comment on PR
+name: Bundle Stats
 
 on:
   pull_request:
