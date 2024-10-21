@@ -122,6 +122,7 @@ jobs:
         with:
           name: main-branch-stats
           path: stats.json
+          overwrite: true
 
   resolve-versions:
     name: Resolve e2e images
