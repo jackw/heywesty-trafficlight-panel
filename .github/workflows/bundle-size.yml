@@ -34,7 +34,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: main-branch-stats
-          github-token: ${{ secrets.GH_PAT_TOKEN }}
           run-id: 11436425509
 
       - name: Generate stats report and comment on PR
