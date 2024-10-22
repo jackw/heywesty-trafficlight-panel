@@ -18,14 +18,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.jsgit
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'npm'
 
+      - name: Get main stats artifact run-id
+        id: 'main-stats-info'
+        run: |
+          MAIN_STATS_RUN_ID=$(gh api /repos/${{ github.repository }}/actions/artifacts --jq ".artifacts[] | select(.name == \"main-branch-stats\") | .workflow_run.id")
+          echo "run-id=${MAIN_STATS_RUN_ID}" >> $GITHUB_OUTPUT
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project to generate PR stats
         run: npm run build -- --profile --json pr-stats.json
@@ -34,13 +40,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: main-branch-stats
+          path: main-branch-stats
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # TODO: get this from the api.
-          run-id: 11436425509
+          run-id: ${{ steps.main-stats-info.outputs.run-id }}
 
       - name: Generate stats report and comment on PR
         uses: actions/github-script@v6
         with:
           script: |
             const script = require('.github/scripts/compareStats.js')
-            await script({github, context, core}, "stats.json", "pr-stats.json")
+            await script({github, context, core}, "main-branch-stats/stats.json", "pr-stats.json")
