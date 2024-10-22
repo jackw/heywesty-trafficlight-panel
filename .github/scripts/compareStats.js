@@ -278,17 +278,23 @@ module.exports = async ({ core, context, github }, mainStatsFile, prStatsFile) =
       issue_number: prNumber,
     });
 
-    let previousCommentId;
-    for (const { body, id } of comments) {
-      if (body?.includes(prMessageSymbol)) {
-        previousCommentId = id;
+    const [previousComment, ...restComments] = comments.filter(
+      (comment) => comment.body && comment.body.includes(prMessageSymbol)
+    );
+
+    if (restComments.length > 1) {
+      for (const comment of restComments) {
+        await github.rest.issues.deleteComment({
+          ...repo,
+          comment_id: comment.id,
+        });
       }
     }
 
-    if (previousCommentId) {
+    if (previousComment) {
       await github.rest.issues.updateComment({
         ...repo,
-        comment_id: previousCommentId,
+        comment_id: previousComment.id,
         body: commentBody,
       });
     } else {
