@@ -26,6 +26,8 @@ jobs:
 
       - name: Get main stats artifact run-id
         id: 'main-stats-info'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           MAIN_STATS_RUN_ID=$(gh api /repos/${{ github.repository }}/actions/artifacts --jq ".artifacts[] | select(.name == \"main-branch-stats\") | .workflow_run.id")
           echo "run-id=${MAIN_STATS_RUN_ID}" >> $GITHUB_OUTPUT
@@ -41,7 +43,7 @@ jobs:
         with:
           name: main-branch-stats
           path: main-branch-stats
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
           run-id: ${{ steps.main-stats-info.outputs.run-id }}
 
       - name: Generate stats report and comment on PR
