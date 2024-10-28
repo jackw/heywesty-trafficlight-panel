@@ -19,7 +19,7 @@ Grafana >=9.5.3
 - **Value Display:** Option to show or hide the values associated with each light.
 - **Legend Display:** Option to show or hide the legend (query name) associated with each light.
 - **Trend Display:** Show or hide the trend color to provide an additional layer of information.
-- **Traffic Light Style:** Pick a style of traffic light.
+- **Traffic Light Style:** Pick a style of traffic light. If you want a custom number of lights use dynamic.
 - **Orientation Flexibility:** Choose between a vertical or horizontal layout for the traffic lights.
 
 ## Installation
@@ -34,16 +34,17 @@ This plugin can be installed using one of the following methods:
 
 The traffic light panel uses the built in Grafana thresholds to assign lights to values.
 
-1. **Define Thresholds:** In the plugin settings, define thresholds that categorize your data. A basic thresholds example for a traffic light looks like:
+1. **Choose a traffic light style:** In the panel settings, select a light style. Dynamic allows you to add any number of lights based on the threshold settings. All other light styles require 3 thresholds to be set.
+2. **Define Thresholds:** In the panel settings, define thresholds that categorize your data. A basic thresholds example for a traffic light looks like:
 
    <img width="300px" src="https://raw.githubusercontent.com/jackw/heywesty-trafficlight-panel/main/docs/thresholds-example.png" />
 
-2. **Assign Colors:** Assign colors to each threshold range. These colors will be used to represent the corresponding data values in the traffic lights.
-3. **Preview and Adjust:** After setting the thresholds, preview them on your dashboard. Adjust the thresholds and colors as necessary to accurately reflect the status indicated by your data.
-4. **Data Links:** Optionally [add datalinks](https://grafana.com/docs/grafana/latest/panels-visualizations/configure-data-links/) to make the traffic light panel navigate elsewhere on click.
+3. **Assign Colors:** Assign colors to each threshold range. These colors will be used to represent the corresponding data values in the traffic lights.
+4. **Preview and Adjust:** After setting the thresholds, preview them on your dashboard. Adjust the thresholds and colors as necessary to accurately reflect the status indicated by your data.
+5. **Data Links:** Optionally [add datalinks](https://grafana.com/docs/grafana/latest/panels-visualizations/configure-data-links/) to make the traffic light panel navigate elsewhere on click.
 
 > [!TIP]
-> Make use of threshold overrides if you'd like to set traffic lights with different colour schemes.
+> Make use of threshold overrides if you'd like to set traffic lights with different colour schemes. If you're using dynamic lights you can also set different numbers of lights.
 
 ## Options
 
@@ -55,12 +56,12 @@ Getting started is as simple as adding the panel to your dashboard and tweaking 
 1. **Show Value:** Choose whether to display the numerical values with each light. True by default.
 1. **Show Legend:** Choose whether to display the numerical values with each light. True by default.
 1. **Show Trend:** Add an extra layer of insight with a trend color. True by default.
-1. **Traffic Light Style:** Choose from one of: default, rounded, or side lights.
-1. **Sort Lights:** Organize your traffic lights in the order that makes sense to you:
+2. **Traffic Light Style:** Choose from one of: default, rounded, side lights, or dynamic.
+3. **Sort Lights:** Organize your traffic lights in the order that makes sense to you:
    - None: Keep data series order.
    - Ascending: Line them up from lowest to highest values.
    - Descending: Line them up from highest to lowest values.
-1. **Orientation:** Set the lights horizontally or stick to the default vertical layout.
+4. **Orientation:** Set the lights horizontally or stick to the default vertical layout.
 
 ## Troubleshooting / Help
 
