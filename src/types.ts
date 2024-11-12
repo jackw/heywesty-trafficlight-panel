@@ -6,6 +6,14 @@ export enum SortOptions {
   Desc = 'descending',
 }
 
+export type TrafficLightProps = {
+  colors: Colors[];
+  bgColor?: string;
+  emptyColor?: string;
+  onClick?: React.MouseEventHandler<SVGSVGElement>;
+  horizontal: boolean;
+};
+
 export interface TrafficLightOptions {
   minLightWidth: number;
   showValue: boolean;
