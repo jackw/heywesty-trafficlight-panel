@@ -19,5 +19,3 @@ jobs:
         uses: actions/checkout@v4
 
       - uses: grafana/plugin-actions/bundle-size@jackw/bundle-size-action
-        with:
-          threshold: '0'
