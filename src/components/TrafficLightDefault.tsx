@@ -1,8 +1,16 @@
 import React from 'react';
 import { TEST_IDS } from '../constants';
-import { TrafficLightProps } from 'types';
+import { Colors } from 'types';
 
-export default function TrafficLightDefault({
+type TrafficLightProps = {
+  colors: Colors[];
+  bgColor?: string;
+  emptyColor?: string;
+  onClick?: React.MouseEventHandler<SVGSVGElement>;
+  horizontal: boolean;
+};
+
+export function TrafficLightDefault({
   colors = [],
   bgColor = 'grey',
   emptyColor = 'black',
