@@ -37,6 +37,28 @@ test('Panel displays a traffic light when thresholds are correctly set', async (
   await expect(trafficLightPanel.getByTestId(TEST_IDS.stop)).toBeVisible();
 });
 
+// test('should display series counter when "Show series counter" option is enabled', async ({
+//   panelEditPage,
+//   readProvisionedDataSource,
+//   page,
+//   selectors,
+//   grafanaVersion,
+// }) => {
+//   const ds = await readProvisionedDataSource({ fileName: 'datasources.yml' });
+//   await panelEditPage.datasource.set(ds.name);
+//   await panelEditPage.setVisualization('{{kebabToPascalKebab pluginName }}');
+//   await panelEditPage.collapseSection('{{kebabToPascalKebab pluginName }}');
+//   await expect(page.getByTestId('simple-panel-circle')).toBeVisible();
+//   const seriesCounterLabel = panelEditPage.getByGrafanaSelector(
+//     selectors.components.PanelEditor.OptionsPane.fieldLabel('{{kebabToPascalKebab pluginName }} Show series counter')
+//   );
+//   const switchField = gte(grafanaVersion, '11.4.0')
+//     ? seriesCounterLabel.getByRole('switch')
+//     : seriesCounterLabel.getByLabel('Toggle switch');
+//   await switchField.click({ force: true });
+//   await expect(page.getByTestId('simple-panel-series-counter')).toBeVisible();
+// });
+
 test('Panel options toggle values component correctly', async ({ panelEditPage, page, selectors, grafanaVersion }) => {
   await panelEditPage.setVisualization('Traffic Light');
   await page.getByRole('button', { name: /add Threshold/i }).click();
@@ -58,7 +80,7 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
     ? trendSwitchLabel.getByRole('switch')
     : trendSwitchLabel.getByLabel('Toggle switch');
 
-  await showTrendSwitch.uncheck();
+  await showTrendSwitch.click({ force: true });
 
   const noTrendColor = await getBackgroundColor(trafficLightValueContainer);
   await expect(noTrendColor).toBe('rgba(0, 0, 0, 0)');
@@ -66,12 +88,11 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
   const valueSwitchLabel = panelEditPage.getByGrafanaSelector(
     selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Show value')
   );
-
   const showValueSwitch = gte(grafanaVersion, '11.4.0')
     ? valueSwitchLabel.getByRole('switch')
     : valueSwitchLabel.getByLabel('Toggle switch');
 
-  await showValueSwitch.uncheck();
+  await showValueSwitch.click({ force: true });
   await expect(trafficLightPanelValue).not.toBeVisible();
 
   const legendSwitchLabel = panelEditPage.getByGrafanaSelector(
@@ -82,7 +103,8 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
     ? legendSwitchLabel.getByRole('switch')
     : legendSwitchLabel.getByLabel('Toggle switch');
 
-  await showLegendSwitch.uncheck();
+  await showLegendSwitch.click({ force: true });
+
   await expect(trafficLightPanelLegend).not.toBeVisible();
   await expect(trafficLightValueContainer).not.toBeVisible();
 });
