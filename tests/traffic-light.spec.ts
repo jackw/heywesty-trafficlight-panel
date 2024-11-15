@@ -37,28 +37,6 @@ test('Panel displays a traffic light when thresholds are correctly set', async (
   await expect(trafficLightPanel.getByTestId(TEST_IDS.stop)).toBeVisible();
 });
 
-// test('should display series counter when "Show series counter" option is enabled', async ({
-//   panelEditPage,
-//   readProvisionedDataSource,
-//   page,
-//   selectors,
-//   grafanaVersion,
-// }) => {
-//   const ds = await readProvisionedDataSource({ fileName: 'datasources.yml' });
-//   await panelEditPage.datasource.set(ds.name);
-//   await panelEditPage.setVisualization('{{kebabToPascalKebab pluginName }}');
-//   await panelEditPage.collapseSection('{{kebabToPascalKebab pluginName }}');
-//   await expect(page.getByTestId('simple-panel-circle')).toBeVisible();
-//   const seriesCounterLabel = panelEditPage.getByGrafanaSelector(
-//     selectors.components.PanelEditor.OptionsPane.fieldLabel('{{kebabToPascalKebab pluginName }} Show series counter')
-//   );
-//   const switchField = gte(grafanaVersion, '11.4.0')
-//     ? seriesCounterLabel.getByRole('switch')
-//     : seriesCounterLabel.getByLabel('Toggle switch');
-//   await switchField.click({ force: true });
-//   await expect(page.getByTestId('simple-panel-series-counter')).toBeVisible();
-// });
-
 test('Panel options toggle values component correctly', async ({ panelEditPage, page, selectors, grafanaVersion }) => {
   await panelEditPage.setVisualization('Traffic Light');
   await page.getByRole('button', { name: /add Threshold/i }).click();
