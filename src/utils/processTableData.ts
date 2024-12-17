@@ -1,7 +1,7 @@
 import { GrafanaTheme2, DataFrame, Field, FieldType, hasLinks } from '@grafana/data';
 import { getColors, validateThresholds } from './utils';
 import { DEFAULT_VALUES } from '../constants';
-import { LightsDataResultStatus, LightsDataResult, LightsDataValues } from 'types';
+import { LightsDataResultStatus, LightsDataResult } from 'types';
 
 export function processTableData(
   theme: GrafanaTheme2,
@@ -43,8 +43,13 @@ export function processTableData(
       // there is no trend when using table data
       trend: { color: 'transparent', value: 0 },
       hasLinks: hasLinks(numericField),
-      // numericField.getLinks doesn't match the type of DataLinksContextMenuProps :(
-      getLinks: numericField.getLinks as LightsDataValues['getLinks'],
+      // table data data links require a valueRowIndex
+      getLinks: () => {
+        if (numericField.getLinks) {
+          return numericField.getLinks({ calculatedValue: { text, numeric }, valueRowIndex: idx });
+        }
+        return [];
+      },
     };
   });
 
