@@ -54,7 +54,7 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
   const trendSwitchLabel = panelEditPage.getByGrafanaSelector(
     selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Show trend')
   );
-  const showTrendSwitch = gte(grafanaVersion, '11.4.0')
+  const showTrendSwitch = gte(grafanaVersion, '11.5.0')
     ? trendSwitchLabel.getByRole('switch')
     : trendSwitchLabel.getByLabel('Toggle switch');
 
@@ -66,7 +66,7 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
   const valueSwitchLabel = panelEditPage.getByGrafanaSelector(
     selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Show value')
   );
-  const showValueSwitch = gte(grafanaVersion, '11.4.0')
+  const showValueSwitch = gte(grafanaVersion, '11.5.0')
     ? valueSwitchLabel.getByRole('switch')
     : valueSwitchLabel.getByLabel('Toggle switch');
 
@@ -77,7 +77,7 @@ test('Panel options toggle values component correctly', async ({ panelEditPage, 
     selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Show legend')
   );
 
-  const showLegendSwitch = gte(grafanaVersion, '11.4.0')
+  const showLegendSwitch = gte(grafanaVersion, '11.5.0')
     ? legendSwitchLabel.getByRole('switch')
     : legendSwitchLabel.getByLabel('Toggle switch');
 
