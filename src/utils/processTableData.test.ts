@@ -150,7 +150,7 @@ describe('processTableData', () => {
           ],
           trend: { color: 'transparent', value: 0 },
           hasLinks: false,
-          getLinks: undefined,
+          getLinks: expect.any(Function),
         },
         {
           title: 'Exported Storage',
@@ -165,7 +165,7 @@ describe('processTableData', () => {
           ],
           trend: { color: 'transparent', value: 0 },
           hasLinks: false,
-          getLinks: undefined,
+          getLinks: expect.any(Function),
         },
       ],
     });
