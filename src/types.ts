@@ -57,7 +57,7 @@ export type LightsDataValues = {
     value: number;
   };
   hasLinks: boolean;
-  getLinks?: () => Array<LinkModel<any>>;
+  getLinks?: () => LinkModel[];
 };
 
 export type LightsDataResult = {
