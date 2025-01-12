@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.2
+
+- Chore: Bump @grafana/create-plugin configuration to 5.12.4
+
+## 0.5.1
+
+- Feat: Code split svgs for smaller initial bundle
+- Fix: Data links causing app to crash
+- Chore: Bump @grafana/create-plugin configuration to 5.10.0
+
 ## 0.5.0
 
 - Feat: Dynamic Lights style allowing any number of lights to be used
