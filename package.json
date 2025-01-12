@@ -1,6 +1,6 @@
 {
   "name": "trafficlight",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "React based traffic light panel for Grafana",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
