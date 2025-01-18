@@ -1,5 +1,6 @@
-import { LightsDataValues, SortOptions } from 'types';
-import { calculateRowsAndColumns, basicTrend, sortByValue } from './utils';
+import { LightsDataValues } from 'types';
+
+import { basicTrend, calculateRowsAndColumns, sortByValue } from './utils';
 
 describe('calculateRowsAndColumns', () => {
   it('should calculate the correct number of rows and columns', () => {
@@ -107,13 +108,13 @@ describe('sortByValue', () => {
   ];
 
   it('should sort by ascending numericValue', () => {
-    const sorted = sortByValue(data, SortOptions.Asc);
+    const sorted = sortByValue(data, 'ascending');
     const numericValues = sorted.map((item) => item.numericValue);
     expect(numericValues).toEqual([6, 8, 9, 91, 524, 532]);
   });
 
   it('should sort by descending numericValue', () => {
-    const sorted = sortByValue(data, SortOptions.Desc);
+    const sorted = sortByValue(data, 'descending');
     const numericValues = sorted.map((item) => item.numericValue);
     expect(numericValues).toEqual([532, 524, 91, 9, 8, 6]);
   });

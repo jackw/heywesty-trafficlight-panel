@@ -56,12 +56,12 @@ Getting started is as simple as adding the panel to your dashboard and tweaking 
 1. **Show Value:** Choose whether to display the numerical values with each light. True by default.
 1. **Show Legend:** Choose whether to display the numerical values with each light. True by default.
 1. **Show Trend:** Add an extra layer of insight with a trend color. True by default.
-2. **Traffic Light Style:** Choose from one of: default, rounded, side lights, or dynamic.
-3. **Sort Lights:** Organize your traffic lights in the order that makes sense to you:
+1. **Traffic Light Style:** Choose from one of: default, rounded, side lights, or dynamic.
+1. **Sort Lights:** Organize your traffic lights in the order that makes sense to you:
    - None: Keep data series order.
    - Ascending: Line them up from lowest to highest values.
    - Descending: Line them up from highest to lowest values.
-4. **Orientation:** Set the lights horizontally or stick to the default vertical layout.
+1. **Orientation:** Set the lights horizontally or stick to the default vertical layout.
 
 ## Troubleshooting / Help
 

@@ -64,6 +64,7 @@
       "id": 6,
       "options": {
         "horizontal": false,
+        "layoutMode": "grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "seriesCountSize": "sm",
@@ -76,6 +77,7 @@
         "style": "default",
         "text": "Default value of text input option"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -126,6 +128,7 @@
       "id": 11,
       "options": {
         "horizontal": false,
+        "layoutMode": "grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "seriesCountSize": "sm",
@@ -138,6 +141,7 @@
         "style": "rounded",
         "text": "Default value of text input option"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -188,6 +192,7 @@
       "id": 12,
       "options": {
         "horizontal": false,
+        "layoutMode": "grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "seriesCountSize": "sm",
@@ -200,6 +205,7 @@
         "style": "sidelights",
         "text": "Default value of text input option"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -250,6 +256,7 @@
       "id": 22,
       "options": {
         "horizontal": false,
+        "layoutMode": "grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "seriesCountSize": "sm",
@@ -262,6 +269,7 @@
         "style": "dynamic",
         "text": "Default value of text input option"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -312,6 +320,7 @@
       "id": 7,
       "options": {
         "horizontal": false,
+        "layoutMode": "grid",
         "minLightWidth": 100,
         "reverseColors": false,
         "seriesCountSize": "sm",
@@ -324,6 +333,7 @@
         "style": "default",
         "text": "Default value of text input option"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -377,15 +387,80 @@
       "id": 9,
       "options": {
         "horizontal": false,
+        "layoutMode": "row",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
         "showTrend": true,
         "showValue": true,
-        "singleRow": true,
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 20
+        }
+      ],
+      "title": "Traffic Light single row layout",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 24,
+      "options": {
+        "horizontal": false,
+        "layoutMode": "marquee",
+        "minLightWidth": 100,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -435,11 +510,12 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 30
       },
       "id": 15,
       "options": {
         "horizontal": true,
+        "layoutMode": "grid",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
@@ -449,6 +525,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -498,20 +575,21 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 30
       },
       "id": 18,
       "options": {
         "horizontal": true,
+        "layoutMode": "row",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
         "showTrend": true,
         "showValue": true,
-        "singleRow": true,
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -541,8 +619,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -561,7 +638,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 39
       },
       "id": 19,
       "options": {
@@ -604,8 +681,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -624,7 +700,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 39
       },
       "id": 20,
       "options": {
@@ -682,8 +758,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -702,7 +777,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 48
       },
       "id": 21,
       "options": {
@@ -751,8 +826,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -771,7 +845,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 48
       },
       "id": 23,
       "options": {
@@ -815,8 +889,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -831,7 +904,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 46
+        "y": 55
       },
       "id": 10,
       "options": {
@@ -863,8 +936,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -879,7 +951,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 46
+        "y": 55
       },
       "id": 13,
       "options": {
@@ -922,8 +994,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -938,7 +1009,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 46
+        "y": 55
       },
       "id": 14,
       "options": {
@@ -981,8 +1052,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "red",
@@ -1013,8 +1083,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-red",
-                      "value": null
+                      "color": "super-light-red"
                     },
                     {
                       "color": "red",
@@ -1041,8 +1110,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-orange",
-                      "value": null
+                      "color": "super-light-orange"
                     },
                     {
                       "color": "orange",
@@ -1069,8 +1137,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-yellow",
-                      "value": null
+                      "color": "super-light-yellow"
                     },
                     {
                       "color": "yellow",
@@ -1097,8 +1164,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-green",
-                      "value": null
+                      "color": "super-light-green"
                     },
                     {
                       "color": "green",
@@ -1125,8 +1191,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-blue",
-                      "value": null
+                      "color": "super-light-blue"
                     },
                     {
                       "color": "blue",
@@ -1153,8 +1218,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "super-light-purple",
-                      "value": null
+                      "color": "super-light-purple"
                     },
                     {
                       "color": "purple",
@@ -1175,7 +1239,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 54
+        "y": 63
       },
       "id": 16,
       "options": {
@@ -1230,8 +1294,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -1275,7 +1338,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 54
+        "y": 63
       },
       "id": 17,
       "options": {

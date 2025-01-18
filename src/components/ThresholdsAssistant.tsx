@@ -77,7 +77,7 @@ const getStyles = (theme: GrafanaTheme2) => ({
   label: css({
     display: 'flex',
     alignItems: 'center',
-    fontSize: theme.typography.bodySmall.fontSize
+    fontSize: theme.typography.bodySmall.fontSize,
   }),
   valid: css({
     backgroundColor: theme.colors.success.main,
