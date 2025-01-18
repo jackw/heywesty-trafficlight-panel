@@ -1,10 +1,11 @@
 import { GetFieldDisplayValuesOptions, LinkModel, ThresholdsConfig } from '@grafana/data';
 
-export enum SortOptions {
-  None = 'none',
-  Asc = 'ascending',
-  Desc = 'descending',
-}
+import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
+
+export type SortOption = (typeof SORT_OPTIONS)[keyof typeof SORT_OPTIONS];
+export type LayoutMode = (typeof LAYOUT_MODES)[keyof typeof LAYOUT_MODES];
+export type TrafficLightStyle = (typeof TRAFFIC_LIGHT_STYLES)[keyof typeof TRAFFIC_LIGHT_STYLES];
+export type LightsDataResultStatus = (typeof LIGHTS_DATA_RESULT_STATUSES)[keyof typeof LIGHTS_DATA_RESULT_STATUSES];
 
 export type TrafficLightProps = {
   colors: Colors[];
@@ -14,30 +15,23 @@ export type TrafficLightProps = {
   horizontal: boolean;
 };
 
+export interface TrafficLightFeedbackProps {
+  status: LightsDataResultStatus;
+  style: TrafficLightStyle;
+  invalidThresholds?: ThresholdsConfig;
+}
+
 export interface TrafficLightOptions {
   minLightWidth: number;
   showValue: boolean;
   showLegend: boolean;
   showTrend: boolean;
-  sortLights: SortOptions;
+  sortLights: SortOption;
   horizontal: boolean;
-  singleRow: boolean;
-  style: TrafficLightStyles;
+  singleRow?: boolean;
+  layoutMode: LayoutMode;
+  style: TrafficLightStyle;
   reverseColors: boolean;
-}
-
-export enum TrafficLightStyles {
-  Default = 'default',
-  Rounded = 'rounded',
-  SideLights = 'sidelights',
-  Dynamic = 'dynamic',
-}
-
-export enum LightsDataResultStatus {
-  unsupported = 'unsupported',
-  incorrectThresholds = 'incorrectThresholds',
-  nodata = 'nodata',
-  success = 'success',
 }
 
 export type Colors = {
@@ -66,7 +60,7 @@ export type LightsDataResult = {
   invalidThresholds?: ThresholdsConfig;
 };
 
-export type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions'> & {
-  sortLights: SortOptions;
+export type UseLightsData = Omit<GetFieldDisplayValuesOptions, 'reduceOptions' | 'theme'> & {
+  sortLights: SortOption;
   reverseColors: boolean;
 };

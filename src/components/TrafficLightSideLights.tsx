@@ -1,6 +1,7 @@
 import React from 'react';
-import { TEST_IDS } from '../constants';
 import { TrafficLightProps } from 'types';
+
+import { TEST_IDS } from '../constants';
 
 export default function TrafficLightSideLights({
   colors = [],

@@ -1,6 +1,7 @@
 import { DataFrame, FieldType, getActiveThreshold, ThresholdsConfig } from '@grafana/data';
 
-import { LightsDataValues, SortOptions } from '../types';
+import { SORT_OPTIONS } from '../constants';
+import { LightsDataValues, SortOption } from '../types';
 
 export function basicTrend(data?: number[]) {
   const diff: {
@@ -61,9 +62,9 @@ export function calculateRowsAndColumns(containerWidth: number, itemWidth: numbe
   return { rows, cols };
 }
 
-export function sortByValue(arr: LightsDataValues[], sortOrder: SortOptions): LightsDataValues[] {
+export function sortByValue(arr: LightsDataValues[], sortOrder: SortOption): LightsDataValues[] {
   return arr.sort((a, b) => {
-    if (sortOrder === SortOptions.Asc) {
+    if (sortOrder === SORT_OPTIONS.Asc) {
       return a.numericValue - b.numericValue;
     } else {
       return b.numericValue - a.numericValue;

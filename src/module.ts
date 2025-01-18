@@ -1,6 +1,8 @@
-import { PanelPlugin } from '@grafana/data';
-import { SortOptions, TrafficLightOptions, TrafficLightStyles } from './types';
+import { PanelModel, PanelPlugin } from '@grafana/data';
+
 import { TrafficLightPanel } from './components/TrafficLightPanel';
+import { LAYOUT_MODES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
+import { TrafficLightOptions } from './types';
 
 export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
   .useFieldConfig()
@@ -12,11 +14,14 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         description: 'Set the minimum traffic light width',
         defaultValue: 100,
       })
-      .addBooleanSwitch({
-        path: 'singleRow',
-        name: 'Single row',
-        description: 'Place all lights in a single row',
-        defaultValue: false,
+      .addRadio({
+        path: 'layoutMode',
+        name: 'Layout',
+        description: 'Layout traffic lights in a grid, row, or marquee.',
+        defaultValue: 'Grid',
+        settings: {
+          options: createOptions(LAYOUT_MODES),
+        },
       })
       .addBooleanSwitch({
         path: 'reverseColors',
@@ -28,13 +33,9 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         path: 'sortLights',
         name: 'Sort lights',
         description: 'Sort lights based on values',
-        defaultValue: SortOptions.None,
+        defaultValue: 'None',
         settings: {
-          options: [
-            { value: SortOptions.None, label: 'None' },
-            { value: SortOptions.Asc, label: 'Ascending' },
-            { value: SortOptions.Desc, label: 'Descending' },
-          ],
+          options: createOptions(SORT_OPTIONS),
         },
       })
       .addBooleanSwitch({
@@ -61,12 +62,7 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         description: 'Choose the style for the traffic lights',
         defaultValue: 'default',
         settings: {
-          options: [
-            { value: TrafficLightStyles.Default, label: 'Default' },
-            { value: TrafficLightStyles.Rounded, label: 'Rounded' },
-            { value: TrafficLightStyles.SideLights, label: 'Side lights' },
-            { value: TrafficLightStyles.Dynamic, label: 'Dynamic' },
-          ],
+          options: createOptions(TRAFFIC_LIGHT_STYLES),
         },
       })
       .addBooleanSwitch({
@@ -75,4 +71,20 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         description: 'Change the orientation of the traffic lights',
         defaultValue: false,
       });
+  })
+  .setMigrationHandler(trafficLightMigrationHandler);
+
+function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptions>): Partial<TrafficLightOptions> {
+  if (panel.options.singleRow) {
+    panel.options.layoutMode = LAYOUT_MODES.Row;
+    delete panel.options.singleRow;
+  }
+  return panel.options;
+}
+
+function createOptions(Obj: Record<string, string>): Array<{ value: string; label: string }> {
+  return Object.values(Obj).map((value) => {
+    const [first, ...rest] = value;
+    return { value, label: `${first.toUpperCase()}${rest.join('')}` };
   });
+}

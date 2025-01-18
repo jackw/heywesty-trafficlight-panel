@@ -1,7 +1,8 @@
-import { GrafanaTheme2, DataFrame, Field, FieldType, hasLinks } from '@grafana/data';
+import { DataFrame, Field, FieldType, GrafanaTheme2, hasLinks } from '@grafana/data';
+import { LightsDataResult, LightsDataResultStatus } from 'types';
+
+import { DEFAULT_VALUES, LIGHTS_DATA_RESULT_STATUSES } from '../constants';
 import { getColors, validateThresholds } from './utils';
-import { DEFAULT_VALUES } from '../constants';
-import { LightsDataResultStatus, LightsDataResult } from 'types';
 
 export function processTableData(
   theme: GrafanaTheme2,
@@ -12,7 +13,7 @@ export function processTableData(
     return DEFAULT_VALUES;
   }
 
-  let status = LightsDataResultStatus.nodata;
+  let status: LightsDataResultStatus = LIGHTS_DATA_RESULT_STATUSES.NoData;
   let invalidThresholds;
   const numericField = data![0].fields.find((f: Field) => f.type === FieldType.number);
   const stringField = data![0].fields.find((f: Field) => f.type === FieldType.string);
@@ -27,10 +28,10 @@ export function processTableData(
     const title = stringField.values.toArray()[idx];
     const colors = getColors(value, reverseColors, theme.visualization.getColorByName, numericField.config.thresholds);
     if (!thresholdsValid) {
-      status = LightsDataResultStatus.incorrectThresholds;
+      status = LIGHTS_DATA_RESULT_STATUSES.IncorrectThresholds;
       invalidThresholds = numericField.config.thresholds;
     } else {
-      status = LightsDataResultStatus.success;
+      status = LIGHTS_DATA_RESULT_STATUSES.Success;
     }
 
     return {

@@ -1,6 +1,7 @@
 import { createTheme, FieldType, ThresholdsMode } from '@grafana/data';
-import { processTimeSeriesData } from './processTimeSeriesData';
+
 import { DEFAULT_VALUES } from '../constants';
+import { processTimeSeriesData } from './processTimeSeriesData';
 
 describe('processTimeSeriesData', () => {
   it('should return default values when empty timeseries data is passed in', () => {

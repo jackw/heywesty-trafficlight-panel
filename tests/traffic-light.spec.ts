@@ -1,7 +1,8 @@
-import { test, expect } from '@grafana/plugin-e2e';
-import { TEST_IDS } from '../src/constants';
+import { expect, test } from '@grafana/plugin-e2e';
 import { Locator } from '@playwright/test';
 import { gte } from 'semver';
+
+import { TEST_IDS } from '../src/constants';
 
 test.describe.configure({ mode: 'parallel' });
 
