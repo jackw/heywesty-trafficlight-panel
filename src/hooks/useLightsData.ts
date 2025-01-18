@@ -1,19 +1,23 @@
-import { DEFAULT_VALUES } from '../constants';
+import { useTheme2 } from '@grafana/ui';
 import { useMemo } from 'react';
-import { LightsDataResult, LightsDataResultStatus, SortOptions, UseLightsData } from 'types';
+import { LightsDataResult, UseLightsData } from 'types';
 import { processTableData } from 'utils/processTableData';
 import { processTimeSeriesData } from 'utils/processTimeSeriesData';
 import { isSupported, isTimeSeries, noData, sortByValue } from 'utils/utils';
 
+import { DEFAULT_VALUES, LIGHTS_DATA_RESULT_STATUSES, SORT_OPTIONS } from '../constants';
+
 export function useLightsData(options: UseLightsData): LightsDataResult {
-  const { theme, data, fieldConfig, replaceVariables, timeZone, sortLights, reverseColors } = options;
+  const { data, fieldConfig, replaceVariables, timeZone, sortLights, reverseColors } = options;
+  const theme = useTheme2();
+
   return useMemo(() => {
     if (noData(data)) {
       return DEFAULT_VALUES;
     }
 
     if (!isSupported(data)) {
-      return {...DEFAULT_VALUES, status: LightsDataResultStatus.unsupported};
+      return { ...DEFAULT_VALUES, status: LIGHTS_DATA_RESULT_STATUSES.Unsupported };
     }
 
     // Support for both time series and table data.
@@ -22,7 +26,7 @@ export function useLightsData(options: UseLightsData): LightsDataResult {
       : processTableData(theme, data, reverseColors);
 
     return {
-      values: sortLights === SortOptions.None ? values : sortByValue(values, sortLights),
+      values: sortLights === SORT_OPTIONS.None ? values : sortByValue(values, sortLights),
       invalidThresholds,
       status,
     };

@@ -1,7 +1,8 @@
-import { GrafanaTheme2, DataFrame, InterpolateFunction, getFieldDisplayValues, FieldConfigSource } from '@grafana/data';
-import { validateThresholds, basicTrend, getTrendColor, getColors } from './utils';
-import { LightsDataResultStatus, LightsDataResult } from '../types';
-import { DEFAULT_VALUES } from '../constants';
+import { DataFrame, FieldConfigSource, getFieldDisplayValues, GrafanaTheme2, InterpolateFunction } from '@grafana/data';
+
+import { DEFAULT_VALUES, LIGHTS_DATA_RESULT_STATUSES } from '../constants';
+import { LightsDataResult, LightsDataResultStatus } from '../types';
+import { basicTrend, getColors, getTrendColor, validateThresholds } from './utils';
 
 export function processTimeSeriesData(
   fieldConfig: FieldConfigSource<any>,
@@ -15,7 +16,7 @@ export function processTimeSeriesData(
     return DEFAULT_VALUES;
   }
 
-  let status = LightsDataResultStatus.nodata;
+  let status: LightsDataResultStatus = LIGHTS_DATA_RESULT_STATUSES.NoData;
   let invalidThresholds;
   const fieldDisplayValues = getFieldDisplayValues({
     fieldConfig: fieldConfig,
@@ -43,10 +44,10 @@ export function processTimeSeriesData(
     const trendColor = theme.visualization.getColorByName(getTrendColor(trendValue));
 
     if (!thresholdsValid) {
-      status = LightsDataResultStatus.incorrectThresholds;
+      status = LIGHTS_DATA_RESULT_STATUSES.IncorrectThresholds;
       invalidThresholds = displayValue.field.thresholds;
     } else {
-      status = LightsDataResultStatus.success;
+      status = LIGHTS_DATA_RESULT_STATUSES.Success;
     }
 
     return {
