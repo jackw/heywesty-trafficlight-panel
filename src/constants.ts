@@ -1,4 +1,4 @@
-import { LightsDataResultStatus, LightsDataValues } from './types';
+import { LightsDataValues } from './types';
 
 export const TEST_IDS = {
   go: 'traffic-light-go',
@@ -20,8 +20,33 @@ const EMPTY_VALUE: LightsDataValues = {
   hasLinks: false,
 };
 
+export const LIGHTS_DATA_RESULT_STATUSES = {
+  Unsupported: 'unsupported',
+  IncorrectThresholds: 'incorrectThresholds',
+  NoData: 'nodata',
+  Success: 'success',
+} as const;
+
 export const DEFAULT_VALUES = {
   values: [EMPTY_VALUE],
-  status: LightsDataResultStatus.nodata,
+  status: LIGHTS_DATA_RESULT_STATUSES.NoData,
   invalidThresholds: undefined,
 };
+
+export const SORT_OPTIONS = {
+  None: 'none',
+  Asc: 'ascending',
+  Desc: 'descending',
+} as const;
+
+export const LAYOUT_MODES = {
+  Grid: 'grid',
+  Row: 'row',
+} as const;
+
+export const TRAFFIC_LIGHT_STYLES = {
+  Default: 'default',
+  Rounded: 'rounded',
+  SideLights: 'sidelights',
+  Dynamic: 'dynamic',
+} as const;
