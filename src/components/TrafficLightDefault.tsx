@@ -19,7 +19,7 @@ export default function TrafficLightDefault({
       onClick={onClick}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
-        <path fill={emptyColor} d="M52 57.095h168v398H52z" />
+        <path fill={"emptyColor"} d="M52 57.095h168v398H52z" />
         <path
           fill={bgColor}
           fillRule="evenodd"
