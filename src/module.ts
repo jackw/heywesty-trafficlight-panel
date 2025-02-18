@@ -88,34 +88,3 @@ function createOptions(Obj: Record<string, string>): Array<{ value: string; labe
     return { value, label: `${first.toUpperCase()}${rest.join('')}` };
   });
 }
-
-console.log(1);
-
-if (module.hot) {
-  console.log('🔥 HMR is enabled for plugin!');
-  console.log('📌 Webpack HMR Status:', module.hot.status());
-  module.hot.accept((err) => {
-    console.log('🔄 Plugin updated via HMR!');
-    if (err) {
-      console.error('HMR Accept Error:', err);
-    }
-  });
-
-  module.hot.addStatusHandler((status) => {
-    if (status === 'apply') {
-      console.log('🔁 Applying HMR update...');
-      fetch('http://localhost:5173/__plugin_reload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'cors',
-        body: JSON.stringify({
-          file: 'http://localhost:8080/heywesty-trafficlight-panel/0.5.2/public/plugins/heywesty-trafficlight-panel/module.js',
-        }),
-      });
-    }
-  });
-
-  module.hot.dispose(() => {
-    console.log('♻️ Cleaning up before applying HMR update...');
-  });
-}

@@ -15,11 +15,12 @@ import { SubresourceIntegrityPlugin } from 'webpack-subresource-integrity';
 import { type Configuration, BannerPlugin } from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
-// import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import { BuildModeWebpackPlugin } from './BuildModeWebpackPlugin';
 import { DIST_DIR, SOURCE_DIR } from './constants';
 import { getCPConfigVersion, getEntries, getPackageJson, getPluginJson, hasReadme, isWSL } from './utils';
+import { transform } from 'lodash';
 
 const pluginJson = getPluginJson();
 const cpVersion = getCPConfigVersion();
@@ -143,6 +144,11 @@ const config = async (env): Promise<Configuration> => {
                   decorators: false,
                   dynamicImport: true,
                 },
+                // transform: {
+                //   react: {
+                //     refresh: env.development,
+                //   },
+                // },
               },
             },
           },
@@ -206,6 +212,7 @@ const config = async (env): Promise<Configuration> => {
 
     plugins: [
       new BuildModeWebpackPlugin(),
+      new ReactRefreshWebpackPlugin(),
       // virtualPublicPath,
       // Insert create plugin version information into the bundle
       new BannerPlugin({
