@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/css';
+import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
@@ -7,6 +7,7 @@ import { calculateRowsAndColumns } from 'utils/utils';
 import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TEST_IDS } from '../constants';
 import { LayoutMode, TrafficLightFeedbackProps, TrafficLightOptions } from '../types';
 import { TrafficLight } from './TrafficLight';
+import TrafficLightMarquee from './TrafficLightMarquee';
 
 const LazyTrafficLightFeedback = lazy(() => import('./TrafficLightFeedback'));
 
@@ -46,45 +47,6 @@ export function TrafficLightPanel({
     return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
   }
 
-  if (layoutMode === LAYOUT_MODES.Marquee) {
-    return (
-      <div
-        style={{
-          width,
-          height,
-        }}
-        className={css({
-          display: 'flex',
-          height: '100%',
-          minHeight: '100%',
-          overflow: 'hidden',
-          ':hover > div': {
-            animationPlayState: 'paused',
-          },
-        })}
-        data-testid={TEST_IDS.trafficLight}
-      >
-        {['marquee-container-a', 'marquee-container-b'].map((key) => (
-          <div key={key} className={containerStyle}>
-            {values.map((light) => (
-              <TrafficLight
-                key={light.title}
-                light={light}
-                style={style}
-                showLegend={showLegend}
-                showTrend={showTrend}
-                showValue={showValue}
-                horizontal={horizontal}
-                layoutMode={layoutMode}
-                minLightWidth={minLightWidth}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div
       style={{
@@ -93,21 +55,25 @@ export function TrafficLightPanel({
       }}
       data-testid={TEST_IDS.trafficLight}
     >
-      <div className={containerStyle}>
-        {values.map((light) => (
-          <TrafficLight
-            key={light.title}
-            light={light}
-            style={style}
-            showLegend={showLegend}
-            showTrend={showTrend}
-            showValue={showValue}
-            horizontal={horizontal}
-            layoutMode={layoutMode}
-            minLightWidth={minLightWidth}
-          />
-        ))}
-      </div>
+      {layoutMode === LAYOUT_MODES.Marquee ? (
+        <TrafficLightMarquee options={options} values={values} />
+      ) : (
+        <div className={containerStyle}>
+          {values.map((light) => (
+            <TrafficLight
+              key={light.title}
+              light={light}
+              trafficLightStyle={style}
+              showLegend={showLegend}
+              showTrend={showTrend}
+              showValue={showValue}
+              horizontal={horizontal}
+              layoutMode={layoutMode}
+              minLightWidth={minLightWidth}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -126,41 +92,23 @@ function getStyles({
   const columnCSS = `repeat(${cols}, minmax(${minLightWidth}px, 1fr))`;
   const rowsCSS = `repeat(${rows},  ${100 / rows}%)`;
 
-  if (layoutMode === LAYOUT_MODES.Row) {
+  if (layoutMode === LAYOUT_MODES.Grid) {
     return css({
-      display: 'flex',
-      height: '100%',
+      display: 'grid',
+      alignContent: 'start',
+      gridTemplateColumns: columnCSS,
+      gridTemplateRows: rowsCSS,
+      justifyContent: 'center',
       minHeight: '100%',
-      overflowX: 'auto',
-    });
-  }
-
-  if (layoutMode === LAYOUT_MODES.Marquee) {
-    return css({
-      display: 'flex',
       height: '100%',
-      minHeight: '100%',
-      animation: `${marqueeAnimation} ${minLightWidth / 5}s linear infinite`,
+      boxSizing: 'border-box',
     });
   }
 
   return css({
-    display: 'grid',
-    alignContent: 'start',
-    gridTemplateColumns: columnCSS,
-    gridTemplateRows: rowsCSS,
-    justifyContent: 'center',
-    minHeight: '100%',
+    display: 'flex',
     height: '100%',
-    boxSizing: 'border-box',
+    minHeight: '100%',
+    overflowX: LAYOUT_MODES.Marquee ? 'hidden' : 'auto',
   });
 }
-
-const marqueeAnimation = keyframes`
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;

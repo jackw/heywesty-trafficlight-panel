@@ -10,7 +10,7 @@ import { TrafficLightValue } from './TrafficLightValue';
 
 export function TrafficLight({
   light,
-  style,
+  trafficLightStyle,
   showLegend,
   showValue,
   showTrend,
@@ -19,7 +19,7 @@ export function TrafficLight({
   layoutMode,
 }: {
   light: LightsDataValues;
-  style: TrafficLightStyle;
+  trafficLightStyle: TrafficLightStyle;
   showLegend: boolean;
   showValue: boolean;
   showTrend: boolean;
@@ -27,7 +27,7 @@ export function TrafficLight({
   minLightWidth: number;
   layoutMode: LayoutMode;
 }) {
-  const Component = TrafficLightsComponentMap[style];
+  const Component = TrafficLightsComponentMap[trafficLightStyle];
   const theme = useTheme2();
   const itemStyles = getStyles({ theme, minLightWidth, layoutMode });
   const bgColor = theme.isDark ? theme.colors.background.secondary : '#C5C5C8';
@@ -85,5 +85,6 @@ function getStyles({
     gap: theme.spacing(),
     padding: theme.spacing(0.5),
     minWidth: minLightWidth,
+    height: '100%',
   });
 }

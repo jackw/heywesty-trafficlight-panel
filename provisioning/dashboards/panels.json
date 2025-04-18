@@ -57,7 +57,7 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -121,8 +121,8 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 3,
-        "x": 3,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 11,
@@ -186,7 +186,7 @@
       "gridPos": {
         "h": 12,
         "w": 4,
-        "x": 6,
+        "x": 8,
         "y": 0
       },
       "id": 12,
@@ -249,8 +249,8 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 3,
-        "x": 10,
+        "w": 4,
+        "x": 12,
         "y": 0
       },
       "id": 22,
@@ -290,6 +290,70 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "#73BF69",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 24,
+      "options": {
+        "horizontal": false,
+        "layoutMode": "marquee",
+        "minLightWidth": 200,
+        "reverseColors": false,
+        "showLegend": true,
+        "showTrend": true,
+        "showValue": true,
+        "sortLights": "none",
+        "style": "default"
+      },
+      "pluginVersion": "0.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P814D78962B0F8AC2"
+          },
+          "refId": "A",
+          "scenarioId": "random_walk",
+          "seriesCount": 10
+        }
+      ],
+      "title": "Traffic Light marquee layout",
+      "type": "heywesty-trafficlight-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P814D78962B0F8AC2"
+      },
+      "fieldConfig": {
+        "defaults": {
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -314,8 +378,8 @@
       "gridPos": {
         "h": 12,
         "w": 11,
-        "x": 13,
-        "y": 0
+        "x": 0,
+        "y": 12
       },
       "id": 7,
       "options": {
@@ -379,9 +443,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
+        "h": 12,
+        "w": 13,
+        "x": 11,
         "y": 12
       },
       "id": 9,
@@ -444,73 +508,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 21
-      },
-      "id": 24,
-      "options": {
-        "horizontal": false,
-        "layoutMode": "marquee",
-        "minLightWidth": 100,
-        "reverseColors": false,
-        "showLegend": true,
-        "showTrend": true,
-        "showValue": true,
-        "sortLights": "none",
-        "style": "default"
-      },
-      "pluginVersion": "0.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "testdata",
-            "uid": "P814D78962B0F8AC2"
-          },
-          "refId": "A",
-          "scenarioId": "random_walk",
-          "seriesCount": 20
-        }
-      ],
-      "title": "Traffic Light single row layout",
-      "type": "heywesty-trafficlight-panel"
-    },
-    {
-      "datasource": {
-        "type": "testdata",
-        "uid": "P814D78962B0F8AC2"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "#73BF69",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 24
       },
       "id": 15,
       "options": {
@@ -575,7 +575,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 24
       },
       "id": 18,
       "options": {
@@ -619,7 +619,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -638,11 +639,12 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 33
       },
       "id": 19,
       "options": {
         "horizontal": false,
+        "layoutMode": "Grid",
         "minLightWidth": 100,
         "reverseColors": true,
         "showLegend": true,
@@ -652,6 +654,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -681,7 +684,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -700,20 +704,21 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 33
       },
       "id": 20,
       "options": {
         "horizontal": false,
+        "layoutMode": "row",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
         "showTrend": true,
         "showValue": true,
-        "singleRow": true,
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "csvContent": "time, value\n100000000, 1",
@@ -758,7 +763,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -777,20 +783,21 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 48
+        "y": 42
       },
       "id": 21,
       "options": {
         "horizontal": false,
+        "layoutMode": "row",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
         "showTrend": true,
         "showValue": true,
-        "singleRow": true,
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "csvContent": "\"Name\",\"Value\"\n\"Blob Storage\", 1\n\"Exported Storage\", 4\n\"Hangfire\", 3\n\"Imported Storage\", 5\n\"SQL server db\", 1",
@@ -826,7 +833,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -845,11 +853,12 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 48
+        "y": 42
       },
       "id": 23,
       "options": {
         "horizontal": false,
+        "layoutMode": "Grid",
         "minLightWidth": 100,
         "reverseColors": false,
         "showLegend": true,
@@ -859,6 +868,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "alias": "",
@@ -889,7 +899,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -904,11 +915,12 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 55
+        "y": 49
       },
       "id": 10,
       "options": {
         "horizontal": false,
+        "layoutMode": "Grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "showLegend": true,
@@ -918,6 +930,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "title": "Traffic Light incorrect thresholds",
       "type": "heywesty-trafficlight-panel"
     },
@@ -936,7 +949,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -951,11 +965,12 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 55
+        "y": 49
       },
       "id": 13,
       "options": {
         "horizontal": false,
+        "layoutMode": "Grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "showLegend": true,
@@ -965,6 +980,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "datasource": {
@@ -994,7 +1010,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1009,11 +1026,12 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 55
+        "y": 49
       },
       "id": 14,
       "options": {
         "horizontal": false,
+        "layoutMode": "Grid",
         "minLightWidth": 75,
         "reverseColors": false,
         "showLegend": true,
@@ -1023,6 +1041,7 @@
         "sortLights": "none",
         "style": "default"
       },
+      "pluginVersion": "0.5.2",
       "targets": [
         {
           "csvContent": "time, value\n10000000000, 'a'",
@@ -1239,7 +1258,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 63
+        "y": 57
       },
       "id": 16,
       "options": {
@@ -1338,7 +1357,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 63
+        "y": 57
       },
       "id": 17,
       "options": {

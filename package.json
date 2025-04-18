@@ -77,6 +77,8 @@
     "@grafana/runtime": "^11.3.2",
     "@grafana/schema": "^11.3.2",
     "@grafana/ui": "^11.3.2",
+    "@react-hook/resize-observer": "^2.0.2",
+    "motion": "^12.6.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tslib": "2.5.3"
