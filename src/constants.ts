@@ -42,7 +42,6 @@ export const SORT_OPTIONS = {
 export const LAYOUT_MODES = {
   Grid: 'grid',
   Row: 'row',
-  Marquee: 'marquee',
 } as const;
 
 export const TRAFFIC_LIGHT_STYLES = {
