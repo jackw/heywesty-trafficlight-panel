@@ -69,21 +69,21 @@ function getStyles({
   minLightWidth: number;
   theme: GrafanaTheme2;
 }) {
-  if (layoutMode === LAYOUT_MODES.Grid) {
+  if (layoutMode === LAYOUT_MODES.Row) {
     return css({
-      display: 'grid',
-      gridTemplateRows: '1fr max-content',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
       gap: theme.spacing(),
       padding: theme.spacing(0.5),
+      minWidth: minLightWidth,
     });
   }
 
   return css({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: 'grid',
+    gridTemplateRows: '1fr max-content',
     gap: theme.spacing(),
     padding: theme.spacing(0.5),
-    minWidth: minLightWidth,
   });
 }

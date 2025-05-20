@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/css';
+import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
@@ -44,45 +44,6 @@ export function TrafficLightPanel({
 
   if (status !== LIGHTS_DATA_RESULT_STATUSES.Success) {
     return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
-  }
-
-  if (layoutMode === LAYOUT_MODES.Marquee) {
-    return (
-      <div
-        style={{
-          width,
-          height,
-        }}
-        className={css({
-          display: 'flex',
-          height: '100%',
-          minHeight: '100%',
-          overflow: 'hidden',
-          ':hover > div': {
-            animationPlayState: 'paused',
-          },
-        })}
-        data-testid={TEST_IDS.trafficLight}
-      >
-        {['marquee-container-a', 'marquee-container-b'].map((key) => (
-          <div key={key} className={containerStyle}>
-            {values.map((light) => (
-              <TrafficLight
-                key={light.title}
-                light={light}
-                style={style}
-                showLegend={showLegend}
-                showTrend={showTrend}
-                showValue={showValue}
-                horizontal={horizontal}
-                layoutMode={layoutMode}
-                minLightWidth={minLightWidth}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-    );
   }
 
   return (
@@ -135,15 +96,6 @@ function getStyles({
     });
   }
 
-  if (layoutMode === LAYOUT_MODES.Marquee) {
-    return css({
-      display: 'flex',
-      height: '100%',
-      minHeight: '100%',
-      animation: `${marqueeAnimation} ${minLightWidth / 5}s linear infinite`,
-    });
-  }
-
   return css({
     display: 'grid',
     alignContent: 'start',
@@ -155,12 +107,3 @@ function getStyles({
     boxSizing: 'border-box',
   });
 }
-
-const marqueeAnimation = keyframes`
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
