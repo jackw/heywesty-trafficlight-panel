@@ -2,16 +2,11 @@ version: '3.0'
 
 services:
   grafana:
-    container_name: 'heywesty-trafficlight-panel'
     build:
-      context: ./.config
       args:
-        grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
         grafana_version: ${GRAFANA_VERSION:-9.5.3}
     environment:
       - GF_INSTALL_PLUGINS=snuids-trafficlights-panel
-    ports:
-      - 3000:3000/tcp
-    volumes:
-      - ./dist:/var/lib/grafana/plugins/heywesty-trafficlight-panel
-      - ./provisioning:/etc/grafana/provisioning
+    extends:
+      file: .config/docker-compose-base.yaml
+      service: grafana
