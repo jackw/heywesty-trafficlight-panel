@@ -13,32 +13,46 @@ import ReplaceInFileWebpackPlugin from 'replace-in-file-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { SubresourceIntegrityPlugin } from 'webpack-subresource-integrity';
 import { type Configuration, BannerPlugin } from 'webpack';
-import LiveReloadPlugin from 'webpack-livereload-plugin';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import { BuildModeWebpackPlugin } from './BuildModeWebpackPlugin';
 import { DIST_DIR, SOURCE_DIR } from './constants';
 import { getCPConfigVersion, getEntries, getPackageJson, getPluginJson, hasReadme, isWSL } from './utils';
+import { transform } from 'lodash';
 
 const pluginJson = getPluginJson();
 const cpVersion = getCPConfigVersion();
 
-const virtualPublicPath = new VirtualModulesPlugin({
-  'node_modules/grafana-public-path.js': `
-import amdMetaModule from 'amd-module';
-
-__webpack_public_path__ =
-  amdMetaModule && amdMetaModule.uri
-    ? amdMetaModule.uri.slice(0, amdMetaModule.uri.lastIndexOf('/') + 1)
-    : 'public/plugins/${pluginJson.id}/';
-`,
-});
-
-export type Env = {
-  [key: string]: true | string | Env;
+const devServer: DevServerConfiguration = {
+  hot: true,
+  liveReload: false,
+  port: 8080,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+  client: {
+    overlay: false,
+  },
+  historyApiFallback: true,
+  devMiddleware: {
+    publicPath: `/${pluginJson.id}/0.5.2/public/plugins/${pluginJson.id}`,
+  },
 };
 
-const config = async (env: Env): Promise<Configuration> => {
+// const virtualPublicPath = new VirtualModulesPlugin({
+//   'node_modules/grafana-public-path.js': `
+// import amdMetaModule from 'amd-module';
+
+// __webpack_public_path__ =
+//   amdMetaModule && amdMetaModule.uri
+//     ? amdMetaModule.uri.slice(0, amdMetaModule.uri.lastIndexOf('/') + 1)
+//     : 'public/plugins/${pluginJson.id}/';
+// `,
+// });
+
+const config = async (env): Promise<Configuration> => {
   const baseConfig: Configuration = {
     cache: {
       type: 'filesystem',
@@ -49,7 +63,7 @@ const config = async (env: Env): Promise<Configuration> => {
 
     context: path.join(process.cwd(), SOURCE_DIR),
 
-    devtool: env.production ? 'source-map' : 'eval-source-map',
+    // devtool: env.production ? 'source-map' : 'eval-source-map',
 
     entry: await getEntries(),
 
@@ -75,17 +89,17 @@ const config = async (env: Env): Promise<Configuration> => {
       'react-router-dom',
       'd3',
       'angular',
-      /^@grafana\/ui/i,
-      /^@grafana\/runtime/i,
-      /^@grafana\/data/i,
+      '@grafana/ui',
+      '@grafana/runtime',
+      '@grafana/data',
 
       // Mark legacy SDK imports as external if their name starts with the "grafana/" prefix
       ({ request }, callback) => {
         const prefix = 'grafana/';
-        const hasPrefix = (request: string) => request.indexOf(prefix) === 0;
-        const stripPrefix = (request: string) => request.substr(prefix.length);
+        const hasPrefix = (request) => request.indexOf(prefix) === 0;
+        const stripPrefix = (request) => request.substr(prefix.length);
 
-        if (request && hasPrefix(request)) {
+        if (hasPrefix(request)) {
           return callback(undefined, stripPrefix(request));
         }
 
@@ -103,17 +117,17 @@ const config = async (env: Env): Promise<Configuration> => {
     module: {
       rules: [
         // This must come first in the rules array otherwise it breaks sourcemaps.
-        {
-          test: /src\/(?:.*\/)?module\.tsx?$/,
-          use: [
-            {
-              loader: 'imports-loader',
-              options: {
-                imports: `side-effects grafana-public-path`,
-              },
-            },
-          ],
-        },
+        // {
+        //   test: /src\/(?:.*\/)?module\.tsx?$/,
+        //   use: [
+        //     {
+        //       loader: 'imports-loader',
+        //       options: {
+        //         imports: `side-effects grafana-public-path`,
+        //       },
+        //     },
+        //   ],
+        // },
         {
           exclude: /(node_modules)/,
           test: /\.[tj]sx?$/,
@@ -130,6 +144,11 @@ const config = async (env: Env): Promise<Configuration> => {
                   decorators: false,
                   dynamicImport: true,
                 },
+                // transform: {
+                //   react: {
+                //     refresh: env.development,
+                //   },
+                // },
               },
             },
           },
@@ -161,6 +180,7 @@ const config = async (env: Env): Promise<Configuration> => {
 
     optimization: {
       minimize: Boolean(env.production),
+      // runtimeChunk: 'single',
       minimizer: [
         new TerserPlugin({
           terserOptions: {
@@ -192,7 +212,8 @@ const config = async (env: Env): Promise<Configuration> => {
 
     plugins: [
       new BuildModeWebpackPlugin(),
-      virtualPublicPath,
+      new ReactRefreshWebpackPlugin(),
+      // virtualPublicPath,
       // Insert create plugin version information into the bundle
       new BannerPlugin({
         banner: '/* [create-plugin] version: ' + cpVersion + ' */',
@@ -243,7 +264,7 @@ const config = async (env: Env): Promise<Configuration> => {
       }),
       ...(env.development
         ? [
-            new LiveReloadPlugin(),
+            // new LiveReloadPlugin(),
             new ForkTsCheckerWebpackPlugin({
               async: Boolean(env.development),
               issue: {
@@ -272,6 +293,10 @@ const config = async (env: Env): Promise<Configuration> => {
       poll: 3000,
       ignored: /node_modules/,
     };
+  }
+
+  if (env.development) {
+    baseConfig.devServer = devServer;
   }
 
   return baseConfig;
