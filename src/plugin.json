@@ -26,6 +26,10 @@
       {
         "name": "License",
         "url": "https://github.com/jackw/heywesty-trafficlight-panel/blob/main/LICENSE"
+      },
+      {
+        "name": "Sponsor",
+        "url": "https://github.com/sponsors/jackw"
       }
     ],
     "screenshots": [
