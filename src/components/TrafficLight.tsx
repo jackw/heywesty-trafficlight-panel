@@ -4,7 +4,7 @@ import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 import React from 'react';
 
 import { LAYOUT_MODES } from '../constants';
-import { LayoutMode, LightsDataValues, TrafficLightStyle } from '../types';
+import { CustomColorOptions, LayoutMode, LightsDataValues, TrafficLightStyle } from '../types';
 import { TrafficLightsComponentMap } from './TrafficLightStylesLazy';
 import { TrafficLightValue } from './TrafficLightValue';
 
@@ -17,6 +17,7 @@ export function TrafficLight({
   horizontal,
   minLightWidth,
   layoutMode,
+  customColors,
 }: {
   light: LightsDataValues;
   style: TrafficLightStyle;
@@ -26,12 +27,18 @@ export function TrafficLight({
   horizontal: boolean;
   minLightWidth: number;
   layoutMode: LayoutMode;
+  customColors?: CustomColorOptions;
 }) {
   const Component = TrafficLightsComponentMap[style];
   const theme = useTheme2();
   const itemStyles = getStyles({ theme, minLightWidth, layoutMode });
-  const bgColor = theme.isDark ? theme.colors.background.secondary : '#C5C5C8';
-  const emptyColor = theme.isDark ? theme.colors.background.primary : '#AAAAAF';
+
+  // Use custom colors if enabled, otherwise fall back to theme-based defaults
+  const bgColor = getBackgroundColor(customColors, theme);
+  const emptyColor = getEmptyLightColor(customColors, theme);
+
+  console.warn('bgColor', bgColor);
+  console.warn('emptyColor', emptyColor);
   return (
     <div key={light.title} className={itemStyles}>
       {light.hasLinks && light.getLinks !== undefined ? (
@@ -58,6 +65,24 @@ export function TrafficLight({
       />
     </div>
   );
+}
+
+function getBackgroundColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
+  if (customColors?.enabled) {
+    return theme.isDark
+      ? theme.visualization.getColorByName(customColors.darkBackgroundColor)
+      : theme.visualization.getColorByName(customColors.lightBackgroundColor);
+  }
+  return theme.isDark ? theme.colors.background.secondary : '#C5C5C8';
+}
+
+function getEmptyLightColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
+  if (customColors?.enabled) {
+    return theme.isDark
+      ? theme.visualization.getColorByName(customColors.darkEmptyColor)
+      : theme.visualization.getColorByName(customColors.lightEmptyColor);
+  }
+  return theme.isDark ? theme.colors.background.primary : '#AAAAAF';
 }
 
 function getStyles({

@@ -21,6 +21,14 @@ export interface TrafficLightFeedbackProps {
   invalidThresholds?: ThresholdsConfig;
 }
 
+export interface CustomColorOptions {
+  enabled: boolean;
+  lightBackgroundColor: string;
+  darkBackgroundColor: string;
+  lightEmptyColor: string;
+  darkEmptyColor: string;
+}
+
 export interface TrafficLightOptions {
   minLightWidth: number;
   showValue: boolean;
@@ -32,6 +40,7 @@ export interface TrafficLightOptions {
   layoutMode: LayoutMode;
   style: TrafficLightStyle;
   reverseColors: boolean;
+  customColors: CustomColorOptions;
 }
 
 export type Colors = {
