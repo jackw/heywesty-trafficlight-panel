@@ -36,6 +36,9 @@ export function TrafficLight({
   // Use custom colors if enabled, otherwise fall back to theme-based defaults
   const bgColor = getBackgroundColor(customColors, theme);
   const emptyColor = getEmptyLightColor(customColors, theme);
+
+  console.warn('bgColor', bgColor);
+  console.warn('emptyColor', emptyColor);
   return (
     <div key={light.title} className={itemStyles}>
       {light.hasLinks && light.getLinks !== undefined ? (
@@ -66,14 +69,18 @@ export function TrafficLight({
 
 function getBackgroundColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
   if (customColors?.enabled) {
-    return theme.isDark ? customColors.darkBackgroundColor : customColors.lightBackgroundColor;
+    return theme.isDark
+      ? theme.visualization.getColorByName(customColors.darkBackgroundColor)
+      : theme.visualization.getColorByName(customColors.lightBackgroundColor);
   }
   return theme.isDark ? theme.colors.background.secondary : '#C5C5C8';
 }
 
 function getEmptyLightColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
   if (customColors?.enabled) {
-    return theme.isDark ? customColors.darkEmptyColor : customColors.lightEmptyColor;
+    return theme.isDark
+      ? theme.visualization.getColorByName(customColors.darkEmptyColor)
+      : theme.visualization.getColorByName(customColors.lightEmptyColor);
   }
   return theme.isDark ? theme.colors.background.primary : '#AAAAAF';
 }
