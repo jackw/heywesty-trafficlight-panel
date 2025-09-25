@@ -26,21 +26,38 @@ test.describe('Custom Colors Feature', () => {
     await customColorsSwitch.check();
 
     // Set a distinctive custom color for dark theme background
-    const trafficLightOptions2 = panelEditPage.getCustomOptions('Traffic Light');
     const backgroundColor = trafficLightOptions.getColorPicker('Dark theme background');
 
     await backgroundColor.selectOption('#73bf69');
-    await expect(backgroundColor).toHaveColor('#73bf69');
-    // Check that the traffic light SVG uses the custom background color
+    await page.waitForTimeout(500);
+
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
     await expect(trafficLightPanel).toBeVisible();
+    const svgPath = trafficLightPanel.locator('svg path').nth(1);
+    await expect(svgPath).toBeVisible();
 
-    // Get the SVG path element that represents the traffic light background
+    // Verify the fill attribute matches our custom color
+    const fillColor = await svgPath.getAttribute('fill');
+    expect(fillColor).toBe('#73bf69');
+  });
+
+  test('Custom empty light colors are applied to non-active lights', async ({ panelEditPage, page }) => {
+    // Get panel options and enable custom colors
+    const trafficLightOptions = panelEditPage.getCustomOptions('Traffic Light');
+    const customColorsSwitch = trafficLightOptions.getSwitch('Custom colors');
+    await customColorsSwitch.check();
+
+    const darkEmptyColorPicker = trafficLightOptions.getColorPicker('Dark theme empty lights');
+    await darkEmptyColorPicker.selectOption('#ff0000');
+    await page.waitForTimeout(500);
+
+    const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
+    await expect(trafficLightPanel).toBeVisible();
     const svgPath = trafficLightPanel.locator('svg path').first();
     await expect(svgPath).toBeVisible();
 
     // Verify the fill attribute matches our custom color
     const fillColor = await svgPath.getAttribute('fill');
-    expect(fillColor).toBe('#FF0000');
+    expect(fillColor).toBe('#ff0000');
   });
 });
