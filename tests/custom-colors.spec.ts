@@ -26,10 +26,10 @@ test.describe('Custom Colors Feature', () => {
     await customColorsSwitch.check();
 
     // Set a distinctive custom color for dark theme background
-    const backgroundColor = trafficLightOptions.getColorPicker('Dark theme background');
+    const backgroundColorPicker = trafficLightOptions.getColorPicker('Dark theme background');
 
-    await backgroundColor.selectOption('#73bf69');
-    await page.waitForTimeout(500);
+    await backgroundColorPicker.selectOption('#73bf69');
+    await expect(backgroundColorPicker.locator().getByText('#73bf69')).toBeVisible();
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
     await expect(trafficLightPanel).toBeVisible();
@@ -49,7 +49,7 @@ test.describe('Custom Colors Feature', () => {
 
     const darkEmptyColorPicker = trafficLightOptions.getColorPicker('Dark theme empty lights');
     await darkEmptyColorPicker.selectOption('#ff0000');
-    await page.waitForTimeout(500);
+    await expect(darkEmptyColorPicker.locator().getByText('#ff0000')).toBeVisible();
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
     await expect(trafficLightPanel).toBeVisible();

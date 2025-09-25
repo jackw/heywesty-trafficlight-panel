@@ -78,13 +78,6 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         defaultValue: false,
       })
       .addColorPicker({
-        path: 'customColors.lightBackgroundColor',
-        name: 'Light theme background',
-        description: 'Traffic light background color for light theme',
-        defaultValue: '#C5C5C8',
-        showIf: (config) => config.customColors?.enabled,
-      })
-      .addColorPicker({
         path: 'customColors.darkBackgroundColor',
         name: 'Dark theme background',
         description: 'Traffic light background color for dark theme',
@@ -92,17 +85,24 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         showIf: (config) => config.customColors?.enabled,
       })
       .addColorPicker({
-        path: 'customColors.lightEmptyColor',
-        name: 'Light theme empty lights',
-        description: 'Empty light color for light theme',
-        defaultValue: '#AAAAAF',
-        showIf: (config) => config.customColors?.enabled,
-      })
-      .addColorPicker({
         path: 'customColors.darkEmptyColor',
         name: 'Dark theme empty lights',
         description: 'Empty light color for dark theme',
         defaultValue: '#1e2229',
+        showIf: (config) => config.customColors?.enabled,
+      })
+      .addColorPicker({
+        path: 'customColors.lightBackgroundColor',
+        name: 'Light theme background',
+        description: 'Traffic light background color for light theme',
+        defaultValue: '#C5C5C8',
+        showIf: (config) => config.customColors?.enabled,
+      })
+      .addColorPicker({
+        path: 'customColors.lightEmptyColor',
+        name: 'Light theme empty lights',
+        description: 'Empty light color for light theme',
+        defaultValue: '#AAAAAF',
         showIf: (config) => config.customColors?.enabled,
       });
   })
