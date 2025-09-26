@@ -37,8 +37,6 @@ export function TrafficLight({
   const bgColor = getBackgroundColor(customColors, theme);
   const emptyColor = getEmptyLightColor(customColors, theme);
 
-  console.warn('bgColor', bgColor);
-  console.warn('emptyColor', emptyColor);
   return (
     <div key={light.title} className={itemStyles}>
       {light.hasLinks && light.getLinks !== undefined ? (
