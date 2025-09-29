@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  build:
+    name: Build, lint and unit tests
+    runs-on: ubuntu-latest
+    env:
+      GRAFANA_ACCESS_POLICY_TOKEN: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect package manager
+        id: node-pm
+        uses: grafana/plugin-actions/package-manager-detect@jackw/pm-detect
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: ${{ steps.node-pm.outputs.name }}
+
+      - name: Install dependencies
+        run: ${{ steps.node-pm.outputs.frozenInstall }}
+
+      - name: Install playwright browsers
+        run: ${{ steps.node-pm.outputs.exec }} playwright install
+
+      - name: Check types
+        run: ${{ steps.node-pm.outputs.run }} typecheck
+      - name: Lint
+        run: ${{ steps.node-pm.outputs.run }} lint
+      - name: Unit tests
+        run: ${{ steps.node-pm.outputs.run }} test:ci
+
+      - name: Build frontend
+        run: |
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            ${{ steps.node-pm.outputs.run }} build:stats
+          else
+            ${{ steps.node-pm.outputs.run }} build
+          fi
+
+      - name: Sign plugin
+        run: npm run sign
+        if: ${{ env.GRAFANA_ACCESS_POLICY_TOKEN != '' }}
