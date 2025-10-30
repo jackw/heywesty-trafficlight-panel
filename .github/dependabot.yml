@@ -7,9 +7,11 @@ updates:
       interval: 'weekly'
     cooldown:
       default-days: 5
+      exclude:
+        - '@grafana/plugin-e2e'
     open-pull-requests-limit: 5
     commit-message:
-      prefix: 'chore(deps)'
+      prefix: 'chore'
       include: 'scope'
     labels:
       - 'dependencies'
@@ -62,5 +64,5 @@ updates:
       - dependency-name: "github.com/grafana/grafana-plugin-sdk-go"
         dependency-type: "all"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore"
       include: "scope"
