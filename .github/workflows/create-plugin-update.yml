@@ -15,7 +15,7 @@ on:
 #   pull-requests: write
 
 jobs:
-  release:
+  update:
     runs-on: ubuntu-latest
     steps:
       - uses: grafana/plugin-actions/create-plugin-update@main
