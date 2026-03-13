@@ -23,10 +23,10 @@ export interface TrafficLightFeedbackProps {
 
 export interface CustomColorOptions {
   enabled: boolean;
-  lightBackgroundColor: string;
-  darkBackgroundColor: string;
-  lightEmptyColor: string;
-  darkEmptyColor: string;
+  lightBackgroundColor?: string;
+  darkBackgroundColor?: string;
+  lightEmptyColor?: string;
+  darkEmptyColor?: string;
 }
 
 export interface TrafficLightOptions {
