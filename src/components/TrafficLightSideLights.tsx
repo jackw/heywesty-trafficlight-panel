@@ -17,6 +17,7 @@ export default function TrafficLightSideLights({
       viewBox={horizontal ? '0 0 512 272' : '0 0 272 512'}
       style={{ height: '100%', width: '100%' }}
       onClick={onClick}
+      data-testid={TEST_IDS.styleSidelights}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
         {colors[2]?.active && (

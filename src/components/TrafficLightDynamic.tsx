@@ -2,6 +2,8 @@ import React from 'react';
 import { TrafficLightProps } from 'types';
 import { clamp } from 'utils/utils';
 
+import { TEST_IDS } from '../constants';
+
 export default function TrafficLightDynamic({
   colors = [],
   bgColor = 'grey',
@@ -24,6 +26,7 @@ export default function TrafficLightDynamic({
       viewBox={horizontal ? '0 0 512 272' : '0 0 272 512'}
       style={{ height: '100%', width: '100%' }}
       onClick={onClick}
+      data-testid={TEST_IDS.styleDynamic}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
         <path

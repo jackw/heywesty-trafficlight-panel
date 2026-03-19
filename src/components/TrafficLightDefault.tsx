@@ -17,6 +17,7 @@ export default function TrafficLightDefault({
       viewBox={horizontal ? '0 0 512 272' : '0 0 272 512'}
       style={{ height: '100%', width: '100%' }}
       onClick={onClick}
+      data-testid={TEST_IDS.styleDefault}
     >
       <g transform={horizontal ? 'rotate(-90 0 0)' : undefined} style={{ transformOrigin: '25% center' }}>
         <path fill={emptyColor} d="M52 57.095h168v398H52z" />
