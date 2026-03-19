@@ -9,6 +9,10 @@ export const TEST_IDS = {
   trafficLightValue: 'heywesty-traffic-light-value',
   trafficLightLegend: 'heywesty-traffic-light-legend',
   feedbackMsgContainer: 'heywesty-feedback-msg-container',
+  styleDefault: 'traffic-light-style-default',
+  styleRounded: 'traffic-light-style-rounded',
+  styleSidelights: 'traffic-light-style-sidelights',
+  styleDynamic: 'traffic-light-style-dynamic',
 };
 
 const EMPTY_VALUE: LightsDataValues = {
