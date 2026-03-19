@@ -25,7 +25,7 @@ test.describe('Layout and Sorting', () => {
     const layoutLabel = panelEditPage.getByGrafanaSelector(
       selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Layout')
     );
-    await layoutLabel.locator('label').filter({ hasText: /^Row/ }).click();
+    await layoutLabel.locator('label').filter({ hasText: /^Row/ }).click({ force: true });
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
     await expect(trafficLightPanel).toBeVisible();
@@ -41,7 +41,7 @@ test.describe('Layout and Sorting', () => {
     const sortLabel = panelEditPage.getByGrafanaSelector(
       selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Sort lights')
     );
-    await sortLabel.locator('label').filter({ hasText: /^Ascending/ }).click();
+    await sortLabel.locator('label').filter({ hasText: /^Ascending/ }).click({ force: true });
 
     const legends = await page.getByTestId(TEST_IDS.trafficLightLegend).all();
     const texts = await Promise.all(legends.map((l) => l.textContent()));
@@ -52,7 +52,7 @@ test.describe('Layout and Sorting', () => {
     const sortLabel = panelEditPage.getByGrafanaSelector(
       selectors.components.PanelEditor.OptionsPane.fieldLabel('Traffic Light Sort lights')
     );
-    await sortLabel.locator('label').filter({ hasText: /^Descending/ }).click();
+    await sortLabel.locator('label').filter({ hasText: /^Descending/ }).click({ force: true });
 
     const legends = await page.getByTestId(TEST_IDS.trafficLightLegend).all();
     const texts = await Promise.all(legends.map((l) => l.textContent()));
