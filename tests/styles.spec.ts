@@ -19,34 +19,33 @@ test.describe('Traffic Light Styles', () => {
     await panelEditPage.refreshPanel();
   });
 
-  test('Rounded style renders traffic light', async ({ panelEditPage, page }) => {
-    const trafficLightOptions = panelEditPage.getCustomOptions('Traffic Light');
-    await trafficLightOptions.getSelect('Traffic light style').selectOption('Rounded');
-    await panelEditPage.refreshPanel();
-
+  test('Default style renders the correct SVG', async ({ page }) => {
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
-    await expect(trafficLightPanel).toBeVisible();
-    await expect(trafficLightPanel.getByTestId(TEST_IDS.go)).toBeVisible();
+    await expect(trafficLightPanel.getByTestId(TEST_IDS.styleDefault)).toBeVisible();
   });
 
-  test('Sidelights style renders traffic light', async ({ panelEditPage, page }) => {
-    const trafficLightOptions = panelEditPage.getCustomOptions('Traffic Light');
-    await trafficLightOptions.getSelect('Traffic light style').selectOption('Sidelights');
+  test('Rounded style renders the correct SVG', async ({ panelEditPage, page }) => {
+    await panelEditPage.getCustomOptions('Traffic Light').getSelect('Traffic light style').selectOption('Rounded');
     await panelEditPage.refreshPanel();
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
-    await expect(trafficLightPanel).toBeVisible();
-    await expect(trafficLightPanel.getByTestId(TEST_IDS.go)).toBeVisible();
+    await expect(trafficLightPanel.getByTestId(TEST_IDS.styleRounded)).toBeVisible();
   });
 
-  test('Dynamic style renders traffic light', async ({ panelEditPage, page }) => {
-    const trafficLightOptions = panelEditPage.getCustomOptions('Traffic Light');
-    await trafficLightOptions.getSelect('Traffic light style').selectOption('Dynamic');
+  test('Sidelights style renders the correct SVG', async ({ panelEditPage, page }) => {
+    await panelEditPage.getCustomOptions('Traffic Light').getSelect('Traffic light style').selectOption('Sidelights');
     await panelEditPage.refreshPanel();
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
-    await expect(trafficLightPanel).toBeVisible();
-    await expect(trafficLightPanel.locator('svg')).toBeVisible();
+    await expect(trafficLightPanel.getByTestId(TEST_IDS.styleSidelights)).toBeVisible();
+  });
+
+  test('Dynamic style renders the correct SVG', async ({ panelEditPage, page }) => {
+    await panelEditPage.getCustomOptions('Traffic Light').getSelect('Traffic light style').selectOption('Dynamic');
+    await panelEditPage.refreshPanel();
+
+    const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
+    await expect(trafficLightPanel.getByTestId(TEST_IDS.styleDynamic)).toBeVisible();
   });
 
   test('Horizontal orientation changes SVG aspect ratio', async ({ panelEditPage, page, selectors, grafanaVersion }) => {
@@ -59,8 +58,7 @@ test.describe('Traffic Light Styles', () => {
 
     await horizontalSwitch.click({ force: true });
 
-    const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
-    const svg = trafficLightPanel.locator('svg').first();
+    const svg = page.getByTestId(TEST_IDS.trafficLight).getByTestId(TEST_IDS.styleDefault);
     await expect(svg).toHaveAttribute('viewBox', '0 0 512 272');
 
     await horizontalSwitch.click({ force: true });
