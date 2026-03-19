@@ -14,10 +14,7 @@ test.describe('Layout and Sorting', () => {
     await page.keyboard.press('Enter');
     await page.waitForFunction(() => (window as any).monaco);
     await panelEditPage.getByGrafanaSelector(selectors.components.CodeEditor.container).click();
-    await page.keyboard.insertText(`"Name","Value"
-"Item A", 100
-"Item B", 10
-"Item C", 50`);
+    await page.keyboard.insertText(`"Name","Value"\n"Item A",100\n"Item B",10\n"Item C",50`);
     await panelEditPage.refreshPanel();
   });
 
@@ -31,10 +28,8 @@ test.describe('Layout and Sorting', () => {
     await expect(trafficLightPanel).toBeVisible();
 
     const innerContainer = trafficLightPanel.locator('> div').first();
-    const display = await innerContainer.evaluate((el) => window.getComputedStyle(el).display);
-    const overflowX = await innerContainer.evaluate((el) => window.getComputedStyle(el).overflowX);
-    expect(display).toBe('flex');
-    expect(overflowX).toBe('auto');
+    await expect(innerContainer).toHaveCSS('display', 'flex');
+    await expect(innerContainer).toHaveCSS('overflow-x', 'auto');
   });
 
   test('Sort ascending orders lights lowest to highest', async ({ panelEditPage, page, selectors }) => {
@@ -43,9 +38,7 @@ test.describe('Layout and Sorting', () => {
     );
     await sortLabel.locator('label').filter({ hasText: /^Ascending/ }).click({ force: true });
 
-    const legends = await page.getByTestId(TEST_IDS.trafficLightLegend).all();
-    const texts = await Promise.all(legends.map((l) => l.textContent()));
-    expect(texts).toEqual(['Item B', 'Item C', 'Item A']);
+    await expect(page.getByTestId(TEST_IDS.trafficLightLegend)).toHaveText(['Item B', 'Item C', 'Item A']);
   });
 
   test('Sort descending orders lights highest to lowest', async ({ panelEditPage, page, selectors }) => {
@@ -54,9 +47,7 @@ test.describe('Layout and Sorting', () => {
     );
     await sortLabel.locator('label').filter({ hasText: /^Descending/ }).click({ force: true });
 
-    const legends = await page.getByTestId(TEST_IDS.trafficLightLegend).all();
-    const texts = await Promise.all(legends.map((l) => l.textContent()));
-    expect(texts).toEqual(['Item A', 'Item C', 'Item B']);
+    await expect(page.getByTestId(TEST_IDS.trafficLightLegend)).toHaveText(['Item A', 'Item C', 'Item B']);
   });
 
   test('Reverse colors swaps light states', async ({ panelEditPage, page, selectors, grafanaVersion }) => {

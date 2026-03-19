@@ -60,12 +60,11 @@ test.describe('Traffic Light Styles', () => {
     await horizontalSwitch.click({ force: true });
 
     const trafficLightPanel = page.getByTestId(TEST_IDS.trafficLight);
-    const horizontalViewBox = await trafficLightPanel.locator('svg').first().getAttribute('viewBox');
-    expect(horizontalViewBox).toBe('0 0 512 272');
+    const svg = trafficLightPanel.locator('svg').first();
+    await expect(svg).toHaveAttribute('viewBox', '0 0 512 272');
 
     await horizontalSwitch.click({ force: true });
 
-    const verticalViewBox = await trafficLightPanel.locator('svg').first().getAttribute('viewBox');
-    expect(verticalViewBox).toBe('0 0 272 512');
+    await expect(svg).toHaveAttribute('viewBox', '0 0 272 512');
   });
 });
