@@ -104,7 +104,7 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
   })
   .setMigrationHandler(trafficLightMigrationHandler);
 
-function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptions>): Partial<TrafficLightOptions> {
+export function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptions>): Partial<TrafficLightOptions> {
   const options = { ...panel.options };
 
   if (options.singleRow) {
