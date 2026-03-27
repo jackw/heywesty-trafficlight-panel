@@ -49,7 +49,7 @@ describe('trafficLightMigrationHandler', () => {
       expect(result.customColors).toEqual({ enabled: false });
     });
 
-    it('also strips non-default color values when customColors is disabled', () => {
+    it('preserves non-default color values when customColors is disabled', () => {
       const panel = makePanel({
         customColors: {
           enabled: false,
@@ -60,7 +60,11 @@ describe('trafficLightMigrationHandler', () => {
 
       const result = trafficLightMigrationHandler(panel);
 
-      expect(result.customColors).toEqual({ enabled: false });
+      expect(result.customColors).toEqual({
+        enabled: false,
+        darkBackgroundColor: '#ff0000',
+        lightBackgroundColor: '#00ff00',
+      });
     });
 
     it('preserves color values when customColors is enabled', () => {

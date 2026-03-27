@@ -1,7 +1,7 @@
 import { PanelModel, PanelPlugin } from '@grafana/data';
 
 import { TrafficLightPanel } from './components/TrafficLightPanel';
-import { LAYOUT_MODES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
+import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
 import { TrafficLightOptions } from './types';
 
 export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
@@ -115,10 +115,19 @@ export function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptio
   // Clean up persisted default color values when custom colors are disabled
   if (options.customColors && !options.customColors.enabled) {
     options.customColors = { ...options.customColors };
-    delete options.customColors.darkBackgroundColor;
-    delete options.customColors.darkEmptyColor;
-    delete options.customColors.lightBackgroundColor;
-    delete options.customColors.lightEmptyColor;
+    // Only remove values that match the default custom colors to avoid wiping user-configured colors
+    if (options.customColors.darkBackgroundColor === DEFAULT_CUSTOM_COLORS.darkBackground) {
+      delete options.customColors.darkBackgroundColor;
+    }
+    if (options.customColors.darkEmptyColor === DEFAULT_CUSTOM_COLORS.darkEmpty) {
+      delete options.customColors.darkEmptyColor;
+    }
+    if (options.customColors.lightBackgroundColor === DEFAULT_CUSTOM_COLORS.lightBackground) {
+      delete options.customColors.lightBackgroundColor;
+    }
+    if (options.customColors.lightEmptyColor === DEFAULT_CUSTOM_COLORS.lightEmpty) {
+      delete options.customColors.lightEmptyColor;
+    }
   }
 
   return options;
