@@ -3,7 +3,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 import React from 'react';
 
-import { LAYOUT_MODES } from '../constants';
+import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES } from '../constants';
 import { CustomColorOptions, LayoutMode, LightsDataValues, TrafficLightStyle } from '../types';
 import { TrafficLightsComponentMap } from './TrafficLightStylesLazy';
 import { TrafficLightValue } from './TrafficLightValue';
@@ -67,20 +67,22 @@ export function TrafficLight({
 
 function getBackgroundColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
   if (customColors?.enabled) {
-    return theme.isDark
-      ? theme.visualization.getColorByName(customColors.darkBackgroundColor)
-      : theme.visualization.getColorByName(customColors.lightBackgroundColor);
+    const color = theme.isDark
+      ? customColors.darkBackgroundColor ?? DEFAULT_CUSTOM_COLORS.darkBackground
+      : customColors.lightBackgroundColor ?? DEFAULT_CUSTOM_COLORS.lightBackground;
+    return theme.visualization.getColorByName(color);
   }
-  return theme.isDark ? theme.colors.background.secondary : '#C5C5C8';
+  return theme.isDark ? theme.colors.background.secondary : DEFAULT_CUSTOM_COLORS.lightBackground;
 }
 
 function getEmptyLightColor(customColors: CustomColorOptions | undefined, theme: GrafanaTheme2): string {
   if (customColors?.enabled) {
-    return theme.isDark
-      ? theme.visualization.getColorByName(customColors.darkEmptyColor)
-      : theme.visualization.getColorByName(customColors.lightEmptyColor);
+    const color = theme.isDark
+      ? customColors.darkEmptyColor ?? DEFAULT_CUSTOM_COLORS.darkEmpty
+      : customColors.lightEmptyColor ?? DEFAULT_CUSTOM_COLORS.lightEmpty;
+    return theme.visualization.getColorByName(color);
   }
-  return theme.isDark ? theme.colors.background.primary : '#AAAAAF';
+  return theme.isDark ? theme.colors.background.primary : DEFAULT_CUSTOM_COLORS.lightEmpty;
 }
 
 function getStyles({

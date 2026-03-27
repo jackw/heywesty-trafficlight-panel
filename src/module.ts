@@ -1,7 +1,7 @@
 import { PanelModel, PanelPlugin } from '@grafana/data';
 
 import { TrafficLightPanel } from './components/TrafficLightPanel';
-import { LAYOUT_MODES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
+import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES, SORT_OPTIONS, TRAFFIC_LIGHT_STYLES } from './constants';
 import { TrafficLightOptions } from './types';
 
 export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
@@ -81,39 +81,56 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
         path: 'customColors.darkBackgroundColor',
         name: 'Dark theme background',
         description: 'Traffic light background color for dark theme',
-        defaultValue: '#2d3640',
         showIf: (config) => config.customColors?.enabled,
       })
       .addColorPicker({
         path: 'customColors.darkEmptyColor',
         name: 'Dark theme empty lights',
         description: 'Empty light color for dark theme',
-        defaultValue: '#1e2229',
         showIf: (config) => config.customColors?.enabled,
       })
       .addColorPicker({
         path: 'customColors.lightBackgroundColor',
         name: 'Light theme background',
         description: 'Traffic light background color for light theme',
-        defaultValue: '#C5C5C8',
         showIf: (config) => config.customColors?.enabled,
       })
       .addColorPicker({
         path: 'customColors.lightEmptyColor',
         name: 'Light theme empty lights',
         description: 'Empty light color for light theme',
-        defaultValue: '#AAAAAF',
         showIf: (config) => config.customColors?.enabled,
       });
   })
   .setMigrationHandler(trafficLightMigrationHandler);
 
-function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptions>): Partial<TrafficLightOptions> {
-  if (panel.options.singleRow) {
-    panel.options.layoutMode = LAYOUT_MODES.Row;
-    delete panel.options.singleRow;
+export function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptions>): Partial<TrafficLightOptions> {
+  const options = { ...panel.options };
+
+  if (options.singleRow) {
+    options.layoutMode = LAYOUT_MODES.Row;
+    delete options.singleRow;
   }
-  return panel.options;
+
+  // Clean up persisted default color values when custom colors are disabled
+  if (options.customColors && !options.customColors.enabled) {
+    options.customColors = { ...options.customColors };
+    // Only remove values that match the default custom colors to avoid wiping user-configured colors
+    if (options.customColors.darkBackgroundColor === DEFAULT_CUSTOM_COLORS.darkBackground) {
+      delete options.customColors.darkBackgroundColor;
+    }
+    if (options.customColors.darkEmptyColor === DEFAULT_CUSTOM_COLORS.darkEmpty) {
+      delete options.customColors.darkEmptyColor;
+    }
+    if (options.customColors.lightBackgroundColor === DEFAULT_CUSTOM_COLORS.lightBackground) {
+      delete options.customColors.lightBackgroundColor;
+    }
+    if (options.customColors.lightEmptyColor === DEFAULT_CUSTOM_COLORS.lightEmpty) {
+      delete options.customColors.lightEmptyColor;
+    }
+  }
+
+  return options;
 }
 
 function createOptions(Obj: Record<string, string>): Array<{ value: string; label: string }> {

@@ -54,3 +54,10 @@ export const TRAFFIC_LIGHT_STYLES = {
   SideLights: 'sidelights',
   Dynamic: 'dynamic',
 } as const;
+
+export const DEFAULT_CUSTOM_COLORS = {
+  darkBackground: '#2d3640',
+  darkEmpty: '#1e2229',
+  lightBackground: '#C5C5C8',
+  lightEmpty: '#AAAAAF',
+} as const;
