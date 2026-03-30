@@ -3,10 +3,12 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
 import React from 'react';
 
-import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES } from '../constants';
+import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES, TRAFFIC_LIGHT_STYLES } from '../constants';
 import { CustomColorOptions, LayoutMode, LightsDataValues, TrafficLightStyle } from '../types';
 import { TrafficLightsComponentMap } from './TrafficLightStylesLazy';
 import { TrafficLightValue } from './TrafficLightValue';
+
+type PerLightStyle = Exclude<TrafficLightStyle, typeof TRAFFIC_LIGHT_STYLES.StackLight>;
 
 export function TrafficLight({
   light,
@@ -20,7 +22,7 @@ export function TrafficLight({
   customColors,
 }: {
   light: LightsDataValues;
-  style: TrafficLightStyle;
+  style: PerLightStyle;
   showLegend: boolean;
   showValue: boolean;
   showTrend: boolean;

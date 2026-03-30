@@ -4,11 +4,12 @@ import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
 import { calculateRowsAndColumns } from 'utils/utils';
 
-import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TEST_IDS } from '../constants';
+import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TRAFFIC_LIGHT_STYLES, TEST_IDS } from '../constants';
 import { LayoutMode, TrafficLightFeedbackProps, TrafficLightOptions } from '../types';
 import { TrafficLight } from './TrafficLight';
 
 const LazyTrafficLightFeedback = lazy(() => import('./TrafficLightFeedback'));
+const LazyTrafficLightStackLight = lazy(() => import('./TrafficLightStackLight'));
 
 const TrafficLightFeedback = (props: TrafficLightFeedbackProps) => (
   <Suspense fallback={null}>
@@ -54,6 +55,16 @@ export function TrafficLightPanel({
 
   if (status !== LIGHTS_DATA_RESULT_STATUSES.Success) {
     return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
+  }
+
+  if (style === TRAFFIC_LIGHT_STYLES.StackLight) {
+    return (
+      <div style={{ width, height }} data-testid={TEST_IDS.trafficLight}>
+        <Suspense fallback={null}>
+          <LazyTrafficLightStackLight values={values} customColors={customColors} horizontal={horizontal} />
+        </Suspense>
+      </div>
+    );
   }
 
   return (
