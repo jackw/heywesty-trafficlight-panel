@@ -53,11 +53,10 @@ export function TrafficLightPanel({
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
   const containerStyle = getStyles({ rows, cols, layoutMode, minLightWidth });
 
-  if (status !== LIGHTS_DATA_RESULT_STATUSES.Success) {
-    return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
-  }
-
   if (style === TRAFFIC_LIGHT_STYLES.StackLight) {
+    if (status === LIGHTS_DATA_RESULT_STATUSES.NoData || status === LIGHTS_DATA_RESULT_STATUSES.Unsupported) {
+      return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
+    }
     return (
       <div style={{ width, height }} data-testid={TEST_IDS.trafficLight}>
         <Suspense fallback={null}>
@@ -65,6 +64,10 @@ export function TrafficLightPanel({
         </Suspense>
       </div>
     );
+  }
+
+  if (status !== LIGHTS_DATA_RESULT_STATUSES.Success) {
+    return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
   }
 
   return (

@@ -45,7 +45,10 @@ export default function TrafficLightStackLight({
         />
 
         {values.map((value, index) => {
-          const segmentColor = value.colors.find((c) => c.active)?.color ?? emptyColor;
+          const activeIndex = value.colors.findIndex((c) => c.active);
+          // colors[0] is always the base threshold (−∞); any higher index means a trigger threshold is active
+          const isOn = activeIndex > 0;
+          const segmentColor = isOn ? (value.colors[activeIndex]?.color ?? emptyColor) : emptyColor;
 
           return (
             <g key={index}>
@@ -56,7 +59,7 @@ export default function TrafficLightStackLight({
                 height={height}
                 rx="8"
                 fill={segmentColor}
-                style={{ filter: `drop-shadow(0 0 16px ${segmentColor})` }}
+                style={isOn ? { filter: `drop-shadow(0 0 16px ${segmentColor})` } : {}}
               />
             </g>
           );
