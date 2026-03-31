@@ -1,6 +1,7 @@
 import { GrafanaTheme2 } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import React from 'react';
+
 import { DEFAULT_CUSTOM_COLORS, TEST_IDS } from '../constants';
 import { CustomColorOptions, LightsDataValues } from '../types';
 import { clamp } from '../utils/utils';
@@ -48,7 +49,7 @@ export default function TrafficLightStackLight({
           const activeIndex = value.colors.findIndex((c) => c.active);
           // colors[0] is always the base threshold (−∞); any higher index means a trigger threshold is active
           const isOn = activeIndex > 0;
-          const segmentColor = isOn ? (value.colors[activeIndex]?.color ?? emptyColor) : emptyColor;
+          const segmentColor = isOn ? value.colors[activeIndex]?.color ?? emptyColor : emptyColor;
 
           return (
             <g key={index}>

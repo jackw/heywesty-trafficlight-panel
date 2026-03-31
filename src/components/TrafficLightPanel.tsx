@@ -2,10 +2,10 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
-import { calculateRowsAndColumns } from 'utils/utils';
 
-import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TRAFFIC_LIGHT_STYLES, TEST_IDS } from '../constants';
+import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TEST_IDS, TRAFFIC_LIGHT_STYLES } from '../constants';
 import { LayoutMode, TrafficLightFeedbackProps, TrafficLightOptions } from '../types';
+import { calculateRowsAndColumns } from '../utils/utils';
 import { TrafficLight } from './TrafficLight';
 
 const LazyTrafficLightFeedback = lazy(() => import('./TrafficLightFeedback'));
