@@ -19,7 +19,7 @@ Grafana >=9.5.3
 - **Value Display:** Option to show or hide the values associated with each light.
 - **Legend Display:** Option to show or hide the legend (query name) associated with each light.
 - **Trend Display:** Show or hide the trend color to provide an additional layer of information.
-- **Traffic Light Style:** Pick a style of traffic light. If you want a custom number of lights use dynamic.
+- **Traffic Light Style:** Pick a style of traffic light. Dynamic lets you set any number of lights using thresholds. Stack light renders one segment per data field, with each segment independently on or off.
 - **Orientation Flexibility:** Choose between a vertical or horizontal layout for the traffic lights.
 
 ## Installation
@@ -34,7 +34,7 @@ This plugin can be installed using one of the following methods:
 
 The traffic light panel uses the built in Grafana thresholds to assign lights to values.
 
-1. **Choose a traffic light style:** In the panel settings, select a light style. Dynamic allows you to add any number of lights based on the threshold settings. All other light styles require 3 thresholds to be set.
+1. **Choose a traffic light style:** In the panel settings, select a light style. Dynamic allows you to add any number of lights based on threshold settings. Stack light uses one data field per segment — each segment is on or off based on whether its field's value crosses a threshold. All other styles require at least three thresholds.
 2. **Define Thresholds:** In the panel settings, define thresholds that categorize your data. A basic thresholds example for a traffic light looks like:
 
    <img width="300px" src="https://raw.githubusercontent.com/jackw/heywesty-trafficlight-panel/main/docs/thresholds-example.png" />
@@ -54,9 +54,9 @@ Getting started is as simple as adding the panel to your dashboard and tweaking 
 1. **Single Row View:** By default each light will flow in an auto grid layout. This can be controlled by adjusting the minimum light width. Enable this if you'd prefer to keep all lights on one row.
 1. **Reverse Light Color:** Due to Grafana auto sorting thresholds, this option caters for situations where the "base" threshold should be considered "go" and the highest threshold should be considered "stop".
 1. **Show Value:** Choose whether to display the numerical values with each light. True by default.
-1. **Show Legend:** Choose whether to display the numerical values with each light. True by default.
+1. **Show Legend:** Choose whether to display the query name (legend) with each light. True by default.
 1. **Show Trend:** Add an extra layer of insight with a trend color. True by default.
-1. **Traffic Light Style:** Choose from one of: default, rounded, side lights, or dynamic.
+1. **Traffic Light Style:** Choose from one of: default, rounded, side lights, dynamic, or stack light.
 1. **Sort Lights:** Organize your traffic lights in the order that makes sense to you:
    - None: Keep data series order.
    - Ascending: Line them up from lowest to highest values.
@@ -75,4 +75,4 @@ The plugin supports any data source that returns data frame(s) containing one nu
 
 ### Thresholds are incorrectly set.
 
-Thresholds need to be set for the plugin to operate. Please see [usage](#usage) section above. Thresholds must contain `base` and two other values. One for each light.
+Thresholds need to be set for the plugin to operate. Refer to the [usage](#usage) section above. Most styles require a base threshold plus at least two others (one per light). Stack light requires only a base threshold and one trigger threshold per field.

@@ -2,13 +2,14 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
-import { calculateRowsAndColumns } from 'utils/utils';
 
-import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TEST_IDS } from '../constants';
+import { LAYOUT_MODES, LIGHTS_DATA_RESULT_STATUSES, TEST_IDS, TRAFFIC_LIGHT_STYLES } from '../constants';
 import { LayoutMode, TrafficLightFeedbackProps, TrafficLightOptions } from '../types';
+import { calculateRowsAndColumns } from '../utils/utils';
 import { TrafficLight } from './TrafficLight';
 
 const LazyTrafficLightFeedback = lazy(() => import('./TrafficLightFeedback'));
+const LazyTrafficLightStackLight = lazy(() => import('./TrafficLightStackLight'));
 
 const TrafficLightFeedback = (props: TrafficLightFeedbackProps) => (
   <Suspense fallback={null}>
@@ -51,6 +52,19 @@ export function TrafficLightPanel({
 
   const { rows, cols } = calculateRowsAndColumns(width, minLightWidth, values.length);
   const containerStyle = getStyles({ rows, cols, layoutMode, minLightWidth });
+
+  if (style === TRAFFIC_LIGHT_STYLES.StackLight) {
+    if (status === LIGHTS_DATA_RESULT_STATUSES.NoData || status === LIGHTS_DATA_RESULT_STATUSES.Unsupported) {
+      return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
+    }
+    return (
+      <div style={{ width, height }} data-testid={TEST_IDS.trafficLight}>
+        <Suspense fallback={null}>
+          <LazyTrafficLightStackLight values={values} customColors={customColors} horizontal={horizontal} />
+        </Suspense>
+      </div>
+    );
+  }
 
   if (status !== LIGHTS_DATA_RESULT_STATUSES.Success) {
     return <TrafficLightFeedback status={status} invalidThresholds={invalidThresholds} style={style} />;
