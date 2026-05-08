@@ -13,6 +13,7 @@ export const TEST_IDS = {
   styleRounded: 'traffic-light-style-rounded',
   styleSidelights: 'traffic-light-style-sidelights',
   styleDynamic: 'traffic-light-style-dynamic',
+  styleStackLight: 'traffic-light-style-stacklight',
 };
 
 const EMPTY_VALUE: LightsDataValues = {
@@ -53,6 +54,7 @@ export const TRAFFIC_LIGHT_STYLES = {
   Rounded: 'rounded',
   SideLights: 'sidelights',
   Dynamic: 'dynamic',
+  StackLight: 'stacklight',
 } as const;
 
 export const DEFAULT_CUSTOM_COLORS = {
