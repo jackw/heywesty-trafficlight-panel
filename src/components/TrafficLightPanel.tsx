@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
+import { Button } from '@mui/material';
 import { useLightsData } from 'hooks/useLightsData';
 import React, { lazy, Suspense } from 'react';
 import { calculateRowsAndColumns } from 'utils/utils';

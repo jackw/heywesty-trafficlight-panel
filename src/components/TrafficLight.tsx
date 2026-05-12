@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 import { DataLinksContextMenu, useTheme2 } from '@grafana/ui';
+import * as mui from '@mui/material';
 import React from 'react';
 
 import { DEFAULT_CUSTOM_COLORS, LAYOUT_MODES } from '../constants';
@@ -61,6 +62,7 @@ export function TrafficLight({
         light={light}
         theme={theme}
       />
+      <mui.Button>Look ma a button!</mui.Button>
     </div>
   );
 }
