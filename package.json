@@ -17,7 +17,7 @@
   "author": "Heywesty",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.29.6",
+    "@babel/core": "^8.0.1",
     "@grafana/eslint-config": "^8.2.0",
     "@grafana/plugin-e2e": "^3.10.0",
     "@grafana/sign-plugin": "^3.2.2",
