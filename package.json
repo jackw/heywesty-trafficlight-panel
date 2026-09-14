@@ -47,7 +47,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-webpack-plugin": "^5.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "glob": "^10.2.7",
+    "glob": "^13.0.6",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "^5.0.0",
     "jest": "^30.4.2",
