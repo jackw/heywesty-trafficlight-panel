@@ -50,6 +50,7 @@
     "glob": "^13.0.6",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "^5.0.0",
+    "intersection-observer": "^0.12.2",
     "jest": "^30.5.2",
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^30.5.2",

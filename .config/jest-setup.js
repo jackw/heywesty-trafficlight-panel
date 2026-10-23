@@ -7,6 +7,7 @@
 
 import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
+import 'intersection-observer';
 
 import { TextDecoder, TextEncoder } from 'util';
 
