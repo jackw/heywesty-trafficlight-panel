@@ -1,6 +1,6 @@
-import { createTheme, FieldType, ThresholdsMode } from '@grafana/data';
+import { createTheme, FieldType, ThresholdsMode, toDataFrame } from '@grafana/data';
 
-import { DEFAULT_VALUES } from '../constants';
+import { DEFAULT_VALUES, LIGHTS_DATA_RESULT_STATUSES } from '../constants';
 import { processTimeSeriesData } from './processTimeSeriesData';
 
 describe('processTimeSeriesData', () => {
@@ -197,5 +197,48 @@ describe('processTimeSeriesData', () => {
         },
       ],
     });
+  });
+
+  it('should return incorrect thresholds status when any series has fewer than 3 threshold steps', () => {
+    const validThresholds = {
+      mode: ThresholdsMode.Absolute,
+      steps: [
+        { value: -Infinity, color: 'red' },
+        { value: 33, color: '#EAB839' },
+        { value: 66, color: 'green' },
+      ],
+    };
+    const invalidThresholds = {
+      mode: ThresholdsMode.Absolute,
+      steps: [
+        { value: -Infinity, color: 'red' },
+        { value: 50, color: 'green' },
+      ],
+    };
+    const fieldConfig = { defaults: { thresholds: validThresholds }, overrides: [] };
+    const theme = createTheme();
+    const replaceVariables = (value: string) => {
+      return value;
+    };
+    const timeField = { name: 'time', type: FieldType.time, values: [1, 2] };
+    const dataFrames = [
+      toDataFrame({
+        fields: [
+          timeField,
+          { name: 'A', type: FieldType.number, values: [10, 20], config: { thresholds: invalidThresholds } },
+        ],
+      }),
+      toDataFrame({
+        fields: [
+          timeField,
+          { name: 'B', type: FieldType.number, values: [10, 20], config: { thresholds: validThresholds } },
+        ],
+      }),
+    ];
+
+    const result = processTimeSeriesData(fieldConfig, theme, dataFrames, replaceVariables, 'UTC', false);
+
+    expect(result.status).toBe(LIGHTS_DATA_RESULT_STATUSES.IncorrectThresholds);
+    expect(result.invalidThresholds).toEqual(invalidThresholds);
   });
 });

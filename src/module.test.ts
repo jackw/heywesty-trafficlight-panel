@@ -24,6 +24,12 @@ describe('trafficLightMigrationHandler', () => {
       expect('singleRow' in result).toBe(false);
     });
 
+    it('converts the legacy Grid layoutMode default to grid', () => {
+      const panel = makePanel({ layoutMode: 'Grid' as TrafficLightOptions['layoutMode'] });
+      const result = trafficLightMigrationHandler(panel);
+      expect(result.layoutMode).toBe(LAYOUT_MODES.Grid);
+    });
+
     it('does not mutate the original panel options', () => {
       const options = { singleRow: true };
       const panel = makePanel(options);
