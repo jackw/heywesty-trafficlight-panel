@@ -6,6 +6,8 @@
  */
 
 import '@testing-library/jest-dom';
+import 'jest-canvas-mock';
+import 'intersection-observer';
 
 import { TextDecoder, TextEncoder } from 'util';
 
@@ -25,5 +27,3 @@ Object.defineProperty(global, 'matchMedia', {
     dispatchEvent: jest.fn(),
   }),
 });
-
-HTMLCanvasElement.prototype.getContext = () => {};
