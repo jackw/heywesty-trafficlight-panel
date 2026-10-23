@@ -1,6 +1,6 @@
 ---
 title: Examples
-description: 'Worked examples of the Traffic Light panel.'
+description: 'Copy worked dashboard JSON examples for the Traffic Light panel, including grid and row layouts, threshold overrides, and table data, all using the TestData data source.'
 sidebar_position: 4
 ---
 
@@ -56,7 +56,7 @@ This panel shows one traffic light for a random walk series. The top light is re
 
 ### Grid layout
 
-This variation shows ten series in a grid. Each light is at least 100 pixels wide, and the panel fits as many lights in each row as its width allows.
+This variation shows 10 series in a grid. Each traffic light is at least 100 pixels wide, and the panel spreads the traffic lights evenly across the rows.
 
 ```json
 {
@@ -162,7 +162,6 @@ This variation gives each of six series its own color scheme. Field overrides se
         "mode": "percentage",
         "steps": [
           { "color": "red", "value": null },
-          { "color": "red", "value": 0 },
           { "color": "#EAB839", "value": 50 },
           { "color": "#73BF69", "value": 80 }
         ]

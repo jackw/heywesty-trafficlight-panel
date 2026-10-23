@@ -1,16 +1,16 @@
 # Traffic Light documentation
 
-This folder is the documentation for **Traffic Light**. It's published on the Documentation tab of
+This folder is the documentation for **Traffic Light**. Grafana publishes it on the **Documentation** tab of
 `grafana.com/grafana/plugins/heywesty-trafficlight-panel/` with each plugin release. This README isn't published.
 
-To learn how plugin docs work and how to write them, read the
-[Add documentation to your plugin](https://grafana.com/developers/plugin-tools/how-to-guides/plugin-docs) guide.
+To learn how plugin docs work and how to write them, refer to
+[Add documentation to your plugin](https://grafana.com/developers/plugin-tools/how-to-guides/plugin-docs).
 
-## Next steps
+## Update the docs
 
-1. Write the pages. Each section has a note that says what belongs there. **Or** let an AI agent draft them from your source code and README: commit your changes, then run `npx -y @grafana/create-plugin@latest add docs-content`. Review its work either way.
-2. Add screenshots, videos and figures where they help readers. Save them inside this folder, for example in `img/`, and link to them with a relative path. `docs:validate` checks their formats and sizes.
-3. Run `npm run docs:serve` to preview the docs. It also lists every section left to fill.
+1. Edit the pages in this folder when the plugin's options or behavior change.
+1. Save screenshots, videos, and figures in `img/` and link to them with a relative path. `npm run docs:validate` checks their formats and sizes.
+1. Run `npm run docs:serve` to preview the docs.
 
 ## Commands
 
