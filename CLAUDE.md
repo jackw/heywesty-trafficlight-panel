@@ -103,3 +103,7 @@ Uses `@emotion/css` for dynamic styles. Theme colors come from `useTheme2()` / `
 - **Unit tests**: jest + `@testing-library/react`, files alongside source with `.test.ts(x)` suffix
 - **E2E tests**: Playwright + `@grafana/plugin-e2e` in `tests/`, requires Grafana running via `npm run server`
 - Test IDs for DOM queries are centralized in `TEST_IDS` in `constants.ts`
+
+## Project knowledge
+
+This repository contains a **Grafana plugin**. You must Read @./.config/AGENTS/instructions.md before doing changes.
