@@ -4,23 +4,16 @@ description: 'Where to start and what to read next in the Traffic Light docs.'
 sidebar_position: 1
 ---
 
-<!-- section-brief
-Fill this in: Write a short orientation for someone who already has Traffic Light installed and landed here from the Documentation tab. One or two sentences on what this section covers and how it's organized. Do not restate what the plugin does, its feature list, or its requirements - that's the README's job on the Overview tab, and this reader has already seen it there. Do not list every page in this folder either - the sidebar already does that; use prose to say what to read first and why.
--->
+These docs explain how to set up the Traffic Light panel after you add it to a dashboard. They cover the data the panel reads, its options and thresholds, worked examples and fixes for common problems.
 
 ## Recommended path
 
-<!-- section-brief
-Fill this in: Give a short, ordered reading path for someone new to Traffic Light - two or three sentences, not a repeat of the sidebar. Point out the one or two pages most people need first and why, e.g. "Start with **Data formats** to shape your query results, then **Options** to configure the panel."
--->
+Start with [Configure thresholds](./options.md#configure-thresholds), because the panel shows no lights until the thresholds have at least three steps. Then read [Data formats](./data-formats.md) to shape your query results, and [Examples](./examples.md) for panels you can paste into a dashboard.
 
 ## Common tasks
 
+- [Set up thresholds so the lights turn on](./options.md#configure-thresholds)
 - [Shape your query results for Traffic Light](./data-formats.md)
-- [Configure panel and field options](./options.md)
-- [See worked dashboard.json examples](./examples.md)
-- [Fix a panel that isn't rendering correctly](./troubleshooting.md)
-
-<!-- section-brief
-Fill this in: Keep the list above and adapt it to Traffic Light's actual entry points - add, remove or reword tasks so each one matches a real job a user comes here to do. If you remove a page, remove its task too. This is a curated set of jobs, not a mechanical list of every file in this folder.
--->
+- [Configure the layout, style and colors of the lights](./options.md)
+- [Copy a dashboard JSON example](./examples.md)
+- [Fix a panel that shows a message instead of lights](./troubleshooting.md)

@@ -4,50 +4,92 @@ description: 'Reference for Traffic Light panel options.'
 sidebar_position: 3
 ---
 
-To change these options, edit the panel and use the options pane.
-
-<!-- section-brief
-Fill this in: Reference the options Traffic Light exposes in the panel editor. Cover both the custom options the panel adds (via `setPanelOptions` in source) and the standard field options it enables (via `useFieldConfig`). Skip the sections below that don't apply to this panel - if there's no Standard field options block, no Tooltip and legend section etc., remove those headings entirely rather than leaving an empty brief.
-
-Do not redocument the framework-level standard options themselves (Min, Max, Unit, etc.) - Grafana's own docs cover those. The Standard field options section lists which ones are enabled, nothing more.
--->
+To change these options, edit the panel and use the options pane. The panel adds its own options in the **Traffic Light** section and uses the standard field options, including thresholds, to color the lights.
 
 ## Panel options
 
-<!-- section-brief
-Fill this in: Emit a markdown table with these columns - one row per option registered through `setPanelOptions` in `src/module.ts`. Match the Grafana built-in panel docs style: https://grafana.com/docs/grafana/latest/visualizations/panels-visualizations/visualizations/logs/#logs-options
+| Option                    | Type         | Default                                                         | Description                                       |
+| ------------------------- | ------------ | --------------------------------------------------------------- | ------------------------------------------------- |
+| Minimum light width       | Number       | `100`                                                           | Set the minimum traffic light width               |
+| Layout                    | Radio        | `Grid`                                                          | Layout traffic lights in a grid, row, or marquee. |
+| Reverse light colors      | Toggle       | Off                                                             | Reverse the order of the light colors             |
+| Sort lights               | Radio        | No option selected. The panel sorts lights in descending order. | Sort lights based on values                       |
+| Show value                | Toggle       | On                                                              | Show or hide the value                            |
+| Show legend               | Toggle       | On                                                              | Show or hide the legend (query name)              |
+| Show trend                | Toggle       | On                                                              | Show or hide the trend color                      |
+| Traffic light style       | Select       | `Default`                                                       | Choose the style for the traffic lights           |
+| Horizontal traffic lights | Toggle       | Off                                                             | Change the orientation of the traffic lights      |
+| Custom colors             | Toggle       | Off                                                             | Enable custom background and empty light colors.  |
+| Dark theme background     | Color picker | `#2d3640`                                                       | Traffic light background color for dark theme     |
+| Dark theme empty lights   | Color picker | `#1e2229`                                                       | Empty light color for dark theme                  |
+| Light theme background    | Color picker | `#C5C5C8`                                                       | Traffic light background color for light theme    |
+| Light theme empty lights  | Color picker | `#AAAAAF`                                                       | Empty light color for light theme                 |
 
-| Option | Type | Default | Description |
-| ------ | ---- | ------- | ----------- |
+The four color pickers appear only when **Custom colors** is on. Each one applies to the matching Grafana theme.
 
-- _Option_: the `name` value from the `setPanelOptions` `.add*({...})` call, verbatim.
-- _Type_: a short label for the editor the option uses, derived from the builder method (`addBooleanSwitch` → Toggle, `addSelect` → Select, `addNumberInput` → Number, `addFieldNamePicker` → Field picker). For a custom editor, name what it is, such as Color picker, rather than writing Custom.
-- _Default_: the value a reader sees in the panel editor, rendered as inline code. Resolve enum members, constants and translation calls to that value - `ClockMode.time` becomes `Time`. Keep the source expression only when it can't be resolved. When there is no default but the code falls back to a value while the option is unset, give that fallback value. Leave the cell empty only when there is neither. When the default matches none of the values the option offers, such as a different case, give what the panel actually does with it.
-- _Description_: the `description` value, verbatim. If the verbatim text causes a `docs:validate` warning, reword it as little as possible and keep its meaning. When source has none, write one short sentence describing what the option does, based on how the panel code uses it. Don't guess beyond what the code shows.
+### Layout
 
-If the panel does not call `setPanelOptions`, remove this section entirely.
--->
+- **Grid** places the lights in a grid. The panel fits as many lights in each row as the panel width allows, with each light at least **Minimum light width** wide.
+- **Row** places all lights in one row. If the lights don't fit, the row scrolls horizontally.
+
+### Sort lights
+
+- **None** keeps the order of the series or table rows.
+- **Ascending** orders lights from the lowest value to the highest.
+- **Descending** orders lights from the highest value to the lowest.
+
+### Traffic light style
+
+![Traffic lights in the Default, Rounded, Sidelights and Dynamic styles](./img/traffic-lights.png)
+
+- **Default**, **Rounded** and **Sidelights** draw a traffic light with three lights.
+- **Dynamic** draws one light for each threshold step, so you can use more than three lights.
+
+### Value, legend and trend
+
+Below each light, the panel shows the legend and the value. **Show legend** shows the display name of the series, or the string value of the table row. **Show trend** colors the background of this area green when the values go up and red when they go down. Table data has no trend. For how the panel computes the trend, refer to [Field mapping](./data-formats.md#field-mapping).
 
 ## Standard field options
 
 For what each standard option does, refer to [Configure standard options](https://grafana.com/docs/grafana/latest/panels-visualizations/configure-standard-options/).
 
-<!-- section-brief
-Fill this in: A bulleted list of the standard field options this panel enables - the entries from `useFieldConfig({ standardOptions: [...] })` in `src/module.ts`. If the panel calls `useFieldConfig()` or `useFieldConfig({})` without a `standardOptions` key, document this as "all standard options are enabled" and list the standard set.
+All standard options are enabled:
 
-If the panel does not call `useFieldConfig` at all, remove this section entirely, including the link above.
--->
+- Unit
+- Min
+- Max
+- Decimals
+- Display name
+- Color scheme
+- No value
+- Value mappings
+- Thresholds
+- Data links
 
-## Custom field options
+If you add data links, click a light to open a menu with the links. For more information, refer to [Configure data links](https://grafana.com/docs/grafana/latest/panels-visualizations/configure-data-links/).
 
-<!-- section-brief
-Fill this in: A table with the same shape as Panel options (Option / Type / Default / Description) but for the per-field overrides registered via `useFieldConfig({ useCustomConfig: builder => ... })`. These appear under the Overrides picker in the panel editor.
+## Configure thresholds
 
-If the panel does not register custom field options, remove this section entirely.
--->
+The panel uses thresholds to decide which light turns on. Each threshold step is one light, and its color is the color of that light.
 
-## Tooltip and legend options
+![The Thresholds section of the panel editor with a red base step, an orange step at 33 and a green step at 66](./img/thresholds-example.png)
 
-<!-- section-brief
-Fill this in: Describe the tooltip and legend options Traffic Light exposes: hover behavior, the fields the tooltip shows and its formatting, and legend placement, values and calculations. Most of these already appear in the Panel options table above when they're registered via `setPanelOptions` with `category: ['Tooltip']` or `category: ['Legend']`, so use this section only for narrative context that doesn't fit in a table row. Remove this section if there is nothing extra to say beyond the table.
--->
+To set up the thresholds:
+
+1. In the panel editor, find the **Thresholds** section.
+1. Make sure there are at least three steps, including **Base**. Click **Add threshold** to add a step.
+1. Set a color for each step.
+
+If there are fewer than three steps, the **Default**, **Rounded** and **Sidelights** styles show an **Invalid thresholds** message instead of the lights. The **Dynamic** style shows nothing.
+
+The panel compares the value with the step values directly, so **Percentage** mode works the same way as **Absolute** mode.
+
+### How steps map to lights
+
+- **Default**, **Rounded** and **Sidelights** use the first three steps. **Base** is the top light, the second step is the middle light and the third step is the bottom light. If the value falls in a fourth or later step, none of the lights turns on.
+- **Dynamic** draws one light for each step, with **Base** at the top.
+
+Grafana sorts threshold steps from lowest to highest. If the highest step means "stop" and the base step means "go", turn on **Reverse light colors** to reverse the order of the lights.
+
+> [!TIP]
+> To give some lights a different color scheme, add a field override that sets **Thresholds** for those fields. With the **Dynamic** style, overrides can also give each light a different number of steps. For an example, refer to [Threshold overrides](./examples.md#threshold-overrides).
