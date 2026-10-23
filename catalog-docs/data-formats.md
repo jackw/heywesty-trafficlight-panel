@@ -1,6 +1,6 @@
 ---
 title: Data formats
-description: 'Learn which time series and table data shapes the Traffic Light panel accepts, how it maps fields to lights, and how to reshape query results that do not match.'
+description: 'Learn which time series and table data the Traffic Light panel accepts, how it maps fields to lights, and how to reshape query results that do not match.'
 sidebar_position: 2
 ---
 

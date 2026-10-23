@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: 'Learn how to set up the Traffic Light panel for Grafana, including the data it reads, its options and thresholds, worked examples, and fixes for common problems.'
+description: 'Learn how to set up the Traffic Light panel for Grafana: the data it reads, its options and thresholds, worked examples, and fixes for common problems.'
 sidebar_position: 1
 ---
 
