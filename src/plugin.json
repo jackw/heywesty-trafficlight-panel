@@ -56,5 +56,6 @@
   "dependencies": {
     "grafanaDependency": ">=9.5.3",
     "plugins": []
-  }
+  },
+  "docsPath": "catalog-docs"
 }
