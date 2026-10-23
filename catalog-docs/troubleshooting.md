@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: 'Troubleshoot the Traffic Light panel.'
+description: 'Fix common Traffic Light panel problems, such as invalid thresholds, empty panels, no data, unsupported data formats, and lights that do not turn on.'
 sidebar_position: 5
 ---
 
@@ -22,18 +22,19 @@ The thresholds have fewer than three steps. The **Dynamic** style needs at least
 
 To fix this, add threshold steps until there are at least three, as described in [Panel shows "Invalid thresholds"](#panel-shows-invalid-thresholds).
 
-## Panel shows "The query returned no data."
+## Panel shows "The query returned no data"
 
 The panel shows **The query returned no data.** instead of the lights.
 
 The likely causes are:
 
 - The query returns no data frames. Check that the data source returns data for the query and the time range.
+- The query returns a table with no rows.
 - The query returns table data with a number field but no string field. The panel needs a string field to name each light. Add a string column to the query, or use a transformation to add one.
 
-To show a light when there is no data, set **No value** in the **Standard options** to a number. The panel then shows one light for that number.
+To show a traffic light when there is no data, set **No value** in the **Standard options** to a number, such as `0`. The panel then shows one traffic light for that number. If **No value** isn't a number, the panel ignores it. The thresholds still need at least three steps.
 
-## Panel shows "This data format is unsupported."
+## Panel shows "This data format is unsupported"
 
 The panel shows **This data format is unsupported.** instead of the lights.
 
@@ -43,7 +44,7 @@ At least one data frame from the query has no number field. Each frame needs a n
 
 The traffic light shows, but none of its lights turns on.
 
-With the **Default**, **Rounded** and **Sidelights** styles, the panel uses only the first three threshold steps. If the value falls in a fourth or later step, no light turns on. Remove the extra steps, or use the **Dynamic** style to show one light for each step.
+With the **Default**, **Rounded**, and **Sidelights** styles, the panel uses only the first three threshold steps. If the value falls in a fourth or later step, no light turns on. Remove the extra steps, or use the **Dynamic** style to show one light for each step.
 
 ## Get more detail about an error
 
@@ -61,7 +62,7 @@ If this page doesn't solve your problem:
 
 When you report an issue, include:
 
-- The Grafana and plugin versions.
-- The error message, with sensitive information removed.
-- The steps to reproduce the issue.
-- The panel options and a sample of the data it shows, with sensitive information removed.
+- The Grafana and plugin versions
+- The error message, with sensitive information removed
+- The steps to reproduce the issue
+- The panel options and a sample of the data it shows, with sensitive information removed
