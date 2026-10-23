@@ -1,6 +1,6 @@
 ---
 title: Examples
-description: 'Copy worked dashboard JSON examples for the Traffic Light panel, including grid and row layouts, threshold overrides, and table data, all using the TestData data source.'
+description: 'Dashboard JSON examples for the Traffic Light panel, including grid and row layouts, threshold overrides, and table data, using the TestData data source.'
 sidebar_position: 4
 ---
 
