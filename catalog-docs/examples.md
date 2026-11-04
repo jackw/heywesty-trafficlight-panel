@@ -94,7 +94,7 @@ This variation shows 10 series in a grid. Each traffic light is at least 100 pix
 }
 ```
 
-![Ten traffic lights in two rows of five, each with its series name, value and trend color](./img/traffic-lights-grid-layout.png)
+![Ten traffic lights in two rows of five, each with its series name, value and trend color](../src/img/screenshots/traffic-lights-grid-layout.png)
 
 ### Single row layout
 
@@ -137,7 +137,7 @@ This variation shows 20 series in one row. The row scrolls horizontally when the
 }
 ```
 
-![Traffic lights in a single row that continues past the right edge of the panel](./img/traffic-lights-single-row.png)
+![Traffic lights in a single row that continues past the right edge of the panel](../src/img/screenshots/traffic-lights-single-row.png)
 
 ### Threshold overrides
 
@@ -278,7 +278,7 @@ This variation gives each of six series its own color scheme. Field overrides se
 }
 ```
 
-![Six traffic lights, each lit in a different color family: red, orange, yellow, green, blue and purple](./img/traffic-lights-threshold-overrides.png)
+![Six traffic lights, each lit in a different color family: red, orange, yellow, green, blue and purple](../src/img/screenshots/traffic-lights-threshold-overrides.png)
 
 ### Table data
 
