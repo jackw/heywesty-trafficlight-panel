@@ -17,8 +17,8 @@ export const plugin = new PanelPlugin<TrafficLightOptions>(TrafficLightPanel)
       .addRadio({
         path: 'layoutMode',
         name: 'Layout',
-        description: 'Layout traffic lights in a grid, row, or marquee.',
-        defaultValue: 'Grid',
+        description: 'Lay out traffic lights in a grid or a row.',
+        defaultValue: 'grid',
         settings: {
           options: createOptions(LAYOUT_MODES),
         },
@@ -110,6 +110,11 @@ export function trafficLightMigrationHandler(panel: PanelModel<TrafficLightOptio
   if (options.singleRow) {
     options.layoutMode = LAYOUT_MODES.Row;
     delete options.singleRow;
+  }
+
+  // Earlier versions persisted an invalid 'Grid' default for layoutMode
+  if ((options.layoutMode as string) === 'Grid') {
+    options.layoutMode = LAYOUT_MODES.Grid;
   }
 
   // Clean up persisted default color values when custom colors are disabled
