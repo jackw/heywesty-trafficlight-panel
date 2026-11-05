@@ -42,7 +42,7 @@ On a new panel, no option is selected and the panel sorts lights in descending o
 
 ### Traffic light style
 
-![Traffic lights in the Default, Rounded, Sidelights and Dynamic styles](./img/traffic-lights.png)
+![Traffic lights in the Default, Rounded, Sidelights and Dynamic styles](../src/img/screenshots/traffic-lights.png)
 
 - **Default**, **Rounded**, and **Sidelights** draw a traffic light with three lights.
 - **Dynamic** draws one light for each threshold step, so you can use more than three lights.

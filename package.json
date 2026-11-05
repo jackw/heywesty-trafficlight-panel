@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@grafana/eslint-config": "^10.0.0",
-    "@grafana/plugin-docs-cli": "^0.8.0",
+    "@grafana/plugin-docs-cli": "^0.14.0",
     "@grafana/plugin-e2e": "^3.10.0",
     "@grafana/sign-plugin": "^4.0.0",
     "@grafana/tsconfig": "^2.2.0",
