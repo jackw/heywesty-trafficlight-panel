@@ -46,7 +46,8 @@ export function processTimeSeriesData(
     if (!thresholdsValid) {
       status = LIGHTS_DATA_RESULT_STATUSES.IncorrectThresholds;
       invalidThresholds = displayValue.field.thresholds;
-    } else {
+    } else if (status !== LIGHTS_DATA_RESULT_STATUSES.IncorrectThresholds) {
+      // Don't let a later valid series hide an earlier series with invalid thresholds
       status = LIGHTS_DATA_RESULT_STATUSES.Success;
     }
 
